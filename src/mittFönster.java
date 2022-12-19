@@ -49,6 +49,11 @@ public class mittFönster extends javax.swing.JFrame {
         });
 
         jButton2.setText("Avbryt");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Username:");
 
@@ -98,7 +103,8 @@ public class mittFönster extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+        String username = jTextField2.getText();  // get the username from the text field
+        char[] password = jPasswordField1.getPassword();  // get the password from the password field
         
         
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -106,6 +112,10 @@ public class mittFönster extends javax.swing.JFrame {
     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jPasswordField1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
