@@ -5,17 +5,25 @@ package klasser;
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import oru.inf.InfDB;
+import oru.inf.InfException;
+
 /**
  *
  * @author theosohlman
  */
 public class mittFönster extends javax.swing.JFrame {
-
+    
+    private static InfDB idb;
     /**
      * Creates new form mittFönster
      */
     public mittFönster() {
         initComponents();
+        
     }
 
     /**
@@ -27,39 +35,34 @@ public class mittFönster extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jButton2 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        btnLogin = new javax.swing.JButton();
+        btnCancel = new javax.swing.JButton();
+        lblUser = new javax.swing.JLabel();
+        lblPass = new javax.swing.JLabel();
+        txtUsername = new javax.swing.JTextField();
+        txtPassword = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Login");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnLogin.setText("Login");
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnLoginActionPerformed(evt);
             }
         });
 
-        jPasswordField1.setText("jPasswordField1");
-        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
+        btnCancel.setText("Cancel");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordField1ActionPerformed(evt);
+                btnCancelActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Avbryt");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
+        lblUser.setText("Username:");
 
-        jLabel1.setText("Username:");
+        lblPass.setText("Password:");
 
-        jLabel2.setText("Password:");
+        txtPassword.setText("jPasswordField1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -68,18 +71,18 @@ public class mittFönster extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1)
+                    .addComponent(btnLogin)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton2)
+                        .addComponent(btnCancel)
                         .addGap(165, 165, 165))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1))
+                            .addComponent(lblPass)
+                            .addComponent(lblUser))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPasswordField1, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-                            .addComponent(jTextField2))
+                            .addComponent(txtUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                            .addComponent(txtPassword))
                         .addGap(29, 29, 29)))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
@@ -88,34 +91,39 @@ public class mittFönster extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(16, 16, 16)
+                    .addComponent(lblPass)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                    .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCancel))
                 .addGap(17, 17, 17))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String username = jTextField2.getText();  // get the username from the text field
-        char[] password = jPasswordField1.getPassword();  // get the password from the password field
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        //String username = txtUsername.getText();  // get the username from the text field
+        //char[] password = txtPassword.getPassword();  // get the password from the password field
+        String answer = "";
+        try{
+        String question = "select Namn from Agent where Namn like 'Agent O';";
+        answer = idb.fetchSingle(question);
+        }
+        catch(InfException e){
+            JOptionPane.showMessageDialog(null, "Something went wrong!");
+        }
+        JOptionPane.showMessageDialog(null, answer);
+    }//GEN-LAST:event_btnLoginActionPerformed
 
-    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordField1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnCancelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -143,7 +151,16 @@ public class mittFönster extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(mittFönster.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        
+        try 
+        {
+            idb = new InfDB("mibdb","3306", "mibdba", "mibkey");
+        }
+        catch (InfException ex)
+        {
+            Logger.getLogger(Koppling.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -153,11 +170,11 @@ public class mittFönster extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnLogin;
+    private javax.swing.JLabel lblPass;
+    private javax.swing.JLabel lblUser;
+    private javax.swing.JPasswordField txtPassword;
+    private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 }
