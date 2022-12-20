@@ -6,6 +6,8 @@ package klasser;
  */
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -108,18 +110,47 @@ public class mittFönster extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        //String username = txtUsername.getText();  // get the username from the text field
-        //char[] password = txtPassword.getPassword();  // get the password from the password field
-        ArrayList<String> agentNamn = new ArrayList<String>();
+        /*
+        ArrayList<String> agentName = new ArrayList<String>();
         try{
-        String question = "select Namn from Agent;";
-        agentNamn = idb.fetchColumn(question);
+        String question1 = "select Namn from Agent;";
+        agentName= idb.fetchColumn(question1);
         }
         catch(InfException e){
             JOptionPane.showMessageDialog(null, "Something went wrong!");
         }
-        JOptionPane.showMessageDialog(null, agentNamn);
+        //JOptionPane.showMessageDialog(null, agentNamn);
+        ArrayList<Character> agentPass = new ArrayList<Character>();
+        try{
+        String question2 = "select Losenord from Agent;";
+        agentPass = idb.fetchColumn(question2);
+        }
+        catch(InfException e){
+            JOptionPane.showMessageDialog(null, "Something went wrong!");
+        }
+        if(agentPass.contains(txtPassword.getText())){
+            
+        }
+        */
         
+        ArrayList<HashMap<String,String>> rows = new ArrayList<HashMap<String,String>>();
+        try{
+            String question = "select Namn, Losenord from Agent;";
+            rows = idb.fetchRows(question);
+        }
+        catch(InfException e){
+            JOptionPane.showMessageDialog(null, "Something went wrong!");
+        }
+        boolean notIn = true;
+        for(int i = 0; i < rows.size(); i++){
+            if((rows.get(i).containsValue(txtUsername.getText())) && (rows.get(i).containsValue(txtPassword.getText()))){
+                JOptionPane.showMessageDialog(null, "Login successful!");
+                notIn = false;
+            }
+        }
+        if(notIn){
+                JOptionPane.showMessageDialog(null, "Access denied!\nInvalid username or password.");
+        }
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
