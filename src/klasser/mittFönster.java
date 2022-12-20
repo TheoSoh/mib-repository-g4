@@ -141,14 +141,18 @@ public class mittFönster extends javax.swing.JFrame {
         catch(InfException e){
             JOptionPane.showMessageDialog(null, "Something went wrong!");
         }
-        boolean notIn = true;
-        for(int i = 0; i < rows.size(); i++){
-            if((rows.get(i).containsValue(txtUsername.getText())) && (rows.get(i).containsValue(txtPassword.getText()))){
+        boolean In = false;
+        int i = 0;
+        while(i < rows.size()){
+            HashMap<String,String> namnAndLosenord = rows.get(i);
+            if((namnAndLosenord.containsValue(txtUsername.getText())) && (namnAndLosenord.containsValue(txtPassword.getText()))){
                 JOptionPane.showMessageDialog(null, "Login successful!");
-                notIn = false;
+                In = true;
+                break;
             }
+            i++;
         }
-        if(notIn){
+        if(!In){
                 JOptionPane.showMessageDialog(null, "Access denied!\nInvalid username or password.");
         }
     }//GEN-LAST:event_btnLoginActionPerformed
