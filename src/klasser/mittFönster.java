@@ -5,6 +5,7 @@ package klasser;
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -23,7 +24,6 @@ public class mittFönster extends javax.swing.JFrame {
      */
     public mittFönster() {
         initComponents();
-        
     }
 
     /**
@@ -110,15 +110,16 @@ public class mittFönster extends javax.swing.JFrame {
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         //String username = txtUsername.getText();  // get the username from the text field
         //char[] password = txtPassword.getPassword();  // get the password from the password field
-        String answer = "";
+        ArrayList<String> agentNamn = new ArrayList<String>();
         try{
-        String question = "select Namn from Agent where Namn like 'Agent O';";
-        answer = idb.fetchSingle(question);
+        String question = "select Namn from Agent;";
+        agentNamn = idb.fetchColumn(question);
         }
         catch(InfException e){
             JOptionPane.showMessageDialog(null, "Something went wrong!");
         }
-        JOptionPane.showMessageDialog(null, answer);
+        JOptionPane.showMessageDialog(null, agentNamn);
+        
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
