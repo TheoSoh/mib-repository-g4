@@ -27,6 +27,6 @@ public class Start {
         {
             Logger.getLogger(Start.class.getName()).log(Level.SEVERE, null, ex);
         }
-        new mittFönster().setVisible(true);
+        new mittFönster(idb).setVisible(true);
     }
 }

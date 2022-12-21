@@ -23,16 +23,9 @@ public class mittFönster extends javax.swing.JFrame {
     /**
      * Creates new form mittFönster
      */
-    public mittFönster() {
+    public mittFönster(InfDB idb) {
         initComponents();
-        try 
-        {
-            idb = new InfDB("mibdb","3306", "mibdba", "mibkey");
-        }
-        catch (InfException ex)
-        {
-            Logger.getLogger(Start.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        this.idb = idb;
     }
 
     /**
@@ -125,29 +118,6 @@ public class mittFönster extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        /*
-        ArrayList<String> agentName = new ArrayList<String>();
-        try{
-        String question1 = "select Namn from Agent;";
-        agentName= idb.fetchColumn(question1);
-        }
-        catch(InfException e){
-            JOptionPane.showMessageDialog(null, "Something went wrong!");
-        }
-        //JOptionPane.showMessageDialog(null, agentNamn);
-        ArrayList<Character> agentPass = new ArrayList<Character>();
-        try{
-        String question2 = "select Losenord from Agent;";
-        agentPass = idb.fetchColumn(question2);
-        }
-        catch(InfException e){
-            JOptionPane.showMessageDialog(null, "Something went wrong!");
-        }
-        if(agentPass.contains(txtPassword.getText())){
-            
-        }
-        */
-        
         ArrayList<HashMap<String,String>> rows = new ArrayList<HashMap<String,String>>();
         try{
             String question = "select Namn, Losenord from Agent;";
@@ -156,11 +126,13 @@ public class mittFönster extends javax.swing.JFrame {
         catch(InfException e){
             JOptionPane.showMessageDialog(null, "Something went wrong!");
         }
+        
         boolean in = false;
         int i = 0;
+        
         while(i < rows.size()){
-            HashMap<String,String> namnAndLosenord = rows.get(i);
-            if((namnAndLosenord.containsValue(txtUsername.getText())) && (namnAndLosenord.containsValue(txtPassword.getText()))){
+            HashMap<String,String> nameAndPass = rows.get(i);
+            if((nameAndPass.containsValue(txtUsername.getText())) && (nameAndPass.containsValue(txtPassword.getText()))){
                 JOptionPane.showMessageDialog(null, "Login successful!");
                 in = true;
                 break;
