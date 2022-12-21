@@ -23,7 +23,6 @@ public class mittFönster extends javax.swing.JFrame {
      */
     public mittFönster() {
         initComponents();
-        new mittFönster().setVisible(true);
     }
 
     /**
