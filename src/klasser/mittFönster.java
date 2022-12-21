@@ -38,11 +38,11 @@ public class mittFönster extends javax.swing.JFrame {
     private void initComponents() {
 
         btnLogin = new javax.swing.JButton();
-        btnCancel = new javax.swing.JButton();
         lblUser = new javax.swing.JLabel();
         lblPass = new javax.swing.JLabel();
         txtUsername = new javax.swing.JTextField();
         txtPassword = new javax.swing.JPasswordField();
+        andraLosen = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -53,18 +53,18 @@ public class mittFönster extends javax.swing.JFrame {
             }
         });
 
-        btnCancel.setText("Cancel");
-        btnCancel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelActionPerformed(evt);
-            }
-        });
-
         lblUser.setText("Username:");
 
         lblPass.setText("Password:");
 
         txtPassword.setText("jPasswordField1");
+
+        andraLosen.setText("Change password");
+        andraLosen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                andraLosenActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -73,10 +73,6 @@ public class mittFönster extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnLogin)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnCancel)
-                        .addGap(165, 165, 165))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblPass)
@@ -85,7 +81,11 @@ public class mittFönster extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
                             .addComponent(txtPassword))
-                        .addGap(29, 29, 29)))
+                        .addGap(29, 29, 29))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(andraLosen)
+                        .addGap(27, 27, 27)
+                        .addComponent(btnLogin)))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -102,7 +102,7 @@ public class mittFönster extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCancel))
+                    .addComponent(andraLosen))
                 .addGap(17, 17, 17))
         );
 
@@ -157,9 +157,10 @@ public class mittFönster extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
-    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnCancelActionPerformed
+    private void andraLosenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_andraLosenActionPerformed
+        
+        
+    }//GEN-LAST:event_andraLosenActionPerformed
 
     /**
      * @param args the command line arguments
@@ -206,7 +207,7 @@ public class mittFönster extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCancel;
+    private javax.swing.JButton andraLosen;
     private javax.swing.JButton btnLogin;
     private javax.swing.JLabel lblPass;
     private javax.swing.JLabel lblUser;
