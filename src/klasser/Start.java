@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package klasser;
 
 import java.util.logging.Level;
@@ -7,10 +11,10 @@ import oru.inf.InfException;
 
 /**
  *
- * @author Grupp4
+ * @author theosohlman
  */
-public class Koppling 
-{
+public class Start {
+    
     private static InfDB idb;
     
     public static void main(String[] args) throws InfException 
@@ -21,7 +25,7 @@ public class Koppling
         }
         catch (InfException ex)
         {
-            Logger.getLogger(Koppling.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Start.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
