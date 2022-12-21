@@ -7,6 +7,8 @@ package klasser;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
@@ -23,6 +25,14 @@ public class mittFönster extends javax.swing.JFrame {
      */
     public mittFönster() {
         initComponents();
+        try 
+        {
+            idb = new InfDB("mibdb","3306", "mibdba", "mibkey");
+        }
+        catch (InfException ex)
+        {
+            Logger.getLogger(Start.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
