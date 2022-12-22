@@ -15,7 +15,8 @@ import oru.inf.InfException;
  */
 public class LoginPage extends javax.swing.JFrame {
     
-    private static InfDB idb;
+    private InfDB idb;
+    private String chosenLoginAs;
     /**
      * Creates new form mittFönster
      */
@@ -70,7 +71,12 @@ public class LoginPage extends javax.swing.JFrame {
 
         lblLoginAs.setText("Login as:");
 
-        cmbLoginAs.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbLoginAs.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Agent", "Alien"}));
+        cmbLoginAs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbLoginAsActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -129,17 +135,34 @@ public class LoginPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        if(txtUsername.getText().isEmpty()) {
+        if((txtUsername.getText().isEmpty()) || (txtPassword.getText().isEmpty())) {
             lblLoginFail.setText("Please enter a username and password!");
         }
-        else {
+        else if (chosenLoginAs.equals("Agent")) {
             try {
-                String username = txtUsername.getText();
-                String password = txtPassword.getText();
-                String question = "select Losenord from Agent where Namn = '" + username + "';";
-                String sqlAnswer = idb.fetchSingle(question);
-                if(password.equals(sqlAnswer)) {
-                    lblLoginFail.setText("Du loggade in!");
+                String agentUsername = txtUsername.getText();
+                String agentPassword = txtPassword.getText();
+                String agentQuestion = "select Losenord from Agent where Namn = '" + agentUsername + "';";
+                String sqlAgentAnswer = idb.fetchSingle(agentQuestion);
+                if(agentPassword.equals(sqlAgentAnswer)) {
+                    lblLoginFail.setText("Du loggade in som Agent!");
+                }
+                else {
+                    lblLoginFail.setText("Invalid username or password!");
+                }
+            }
+            catch(InfException ex) {
+                JOptionPane.showMessageDialog(null, "Something went wrong!");
+            }
+        }
+        else if (chosenLoginAs.equals("Alien")) {
+            try {
+                String alienUsername = txtUsername.getText();
+                String alienPassword = txtPassword.getText();
+                String alienQuestion = "select Losenord from Alien where Namn = '" + alienUsername + "';";
+                String sqlAlienAnswer = idb.fetchSingle(alienQuestion);
+                if(alienPassword.equals(sqlAlienAnswer)) {
+                    lblLoginFail.setText("Du loggade in som Alien!");
                 }
                 else {
                     lblLoginFail.setText("Invalid username or password!");
@@ -156,6 +179,10 @@ public class LoginPage extends javax.swing.JFrame {
         
     }//GEN-LAST:event_andraLosenActionPerformed
 
+    private void cmbLoginAsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbLoginAsActionPerformed
+        chosenLoginAs = cmbLoginAs.getSelectedItem().toString();
+    }//GEN-LAST:event_cmbLoginAsActionPerformed
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton andraLosen;
     private javax.swing.JButton btnLogin;
