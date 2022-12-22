@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package klasser;
+package mib.klasser;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -11,7 +11,7 @@ import oru.inf.InfException;
 
 /**
  *
- * @author theosohlman
+ * @author Grupp4
  */
 public class Start {
     
@@ -27,6 +27,6 @@ public class Start {
         {
             Logger.getLogger(Start.class.getName()).log(Level.SEVERE, null, ex);
         }
-        new mittFönster(idb).setVisible(true);
+        new LoginPage(idb).setVisible(true);
     }
 }
