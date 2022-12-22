@@ -4,17 +4,22 @@
  */
 package mib.klasser;
 
+import javax.swing.JOptionPane;
+import oru.inf.InfDB;
+import oru.inf.InfException;
+
 /**
  *
  * @author jonathandroh
  */
 public class ChangePasswordPage extends javax.swing.JFrame {
-
+    private InfDB idb;
     /**
      * Creates new form ChangePasswordPage
      */
-    public ChangePasswordPage() {
+    public ChangePasswordPage(InfDB idb) {
         initComponents();
+        this.idb = idb;
     }
 
     /**
@@ -46,6 +51,11 @@ public class ChangePasswordPage extends javax.swing.JFrame {
         lblNewPassword.setText("New password:");
 
         btnChange.setText("Change");
+        btnChange.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChangeActionPerformed(evt);
+            }
+        });
 
         btnCancel.setText("Cancel");
 
@@ -125,40 +135,29 @@ public class ChangePasswordPage extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+    private void btnChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeActionPerformed
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
+            String agentUsername = txtUsername.getText();
+            String agentOldPassword = txtOldPassword.getText();
+            String agentNewPassword = txtNewPassword.getText();
+            String agentQuestion = "UPDATE Agent SET Losenord = '" + agentNewPassword + "' ;
+            String sqlAgentAnswer = idb.fetchSingle(agentQuestion);
+            if(agentPassword.equals(sqlAgentAnswer)) {
+                lblLoginFail.setText("Du loggade in som Agent!");
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ChangePasswordPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ChangePasswordPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ChangePasswordPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ChangePasswordPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            else {
+                lblLoginFail.setText("Invalid username or password!");
+            }
         }
-        //</editor-fold>
+        catch(InfException ex) {
+            JOptionPane.showMessageDialog(null, "Something went wrong!");
+        }
+    }//GEN-LAST:event_btnChangeActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ChangePasswordPage().setVisible(true);
-            }
-        });
-    }
+  
+           
+        
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;

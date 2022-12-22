@@ -69,6 +69,8 @@ public class LoginPage extends javax.swing.JFrame {
 
         lblRubrik.setText("Inloggning MIB");
 
+        lblLoginFail.setForeground(new java.awt.Color(255, 0, 0));
+
         lblLoginAs.setText("Login as:");
 
         cmbLoginAs.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Agent", "Alien"}));
