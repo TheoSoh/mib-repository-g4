@@ -155,7 +155,15 @@ public class mittFönster extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void andraLosenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_andraLosenActionPerformed
-        
+       
+        try{
+            String question = "UPDATE Agent SET Losenord";
+            idb.update(question);
+        }
+        catch(InfException e){
+            JOptionPane.showMessageDialog(null, "Something went wrong!");
+        }
+        if (Losenord = )
         
     }//GEN-LAST:event_andraLosenActionPerformed
 
