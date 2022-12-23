@@ -14,14 +14,17 @@ import oru.inf.InfException;
 public class AgentMenu extends javax.swing.JFrame {
     
     private InfDB idb;
+    private int agentId;
     
     
     /**
      * Creates new form agentMeny
      */
-    public AgentMenu(InfDB idb, int AgentID) {
+    public AgentMenu(InfDB idb, int agentId) {
         initComponents();
         this.idb = idb;
+        this.agentId = agentId;
+        lblAgentId.setText("Agent-id: " + agentId);
     }
 
     /**
@@ -47,6 +50,8 @@ public class AgentMenu extends javax.swing.JFrame {
         btnSearchInfoAlien = new javax.swing.JButton();
         lblSearchAreaBoss = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
+        lblInfo = new javax.swing.JLabel();
+        lblAgentId = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -128,12 +133,18 @@ public class AgentMenu extends javax.swing.JFrame {
             }
         });
 
+        lblInfo.setText("You're logged in as an Agent");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblAgentId, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(lblAgent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblAgentMeny, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -165,8 +176,13 @@ public class AgentMenu extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(lblAgentMeny)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblAgentMeny)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblInfo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblAgentId, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(33, 33, 33)
                 .addComponent(lblAgent)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -241,10 +257,12 @@ public class AgentMenu extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbShowForArea;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel lblAgent;
+    private javax.swing.JLabel lblAgentId;
     private javax.swing.JLabel lblAgentMeny;
     private javax.swing.JLabel lblAlienVal;
     private javax.swing.JLabel lblAliensByRace;
     private javax.swing.JLabel lblAliensInArea;
+    private javax.swing.JLabel lblInfo;
     private javax.swing.JLabel lblSearchAreaBoss;
     // End of variables declaration//GEN-END:variables
 }
