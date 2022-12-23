@@ -14,12 +14,14 @@ import oru.inf.InfException;
  */
 public class ChangePasswordPage extends javax.swing.JFrame {
     private InfDB idb;
+    private String chosenType;
     /**
      * Creates new form ChangePasswordPage
      */
     public ChangePasswordPage(InfDB idb) {
         initComponents();
         this.idb = idb;
+        addTypes();
     }
 
     /**
@@ -39,8 +41,10 @@ public class ChangePasswordPage extends javax.swing.JFrame {
         btnCancel = new javax.swing.JButton();
         txtNewPassword = new javax.swing.JPasswordField();
         txtOldPassword = new javax.swing.JPasswordField();
-        lblHeaderResetPass = new javax.swing.JLabel();
-        lblErrorMessege = new javax.swing.JLabel();
+        lblHeaderChangePassword = new javax.swing.JLabel();
+        lblErrorMessage = new javax.swing.JLabel();
+        lblChangeAs = new javax.swing.JLabel();
+        cmbChooseType = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,19 +62,28 @@ public class ChangePasswordPage extends javax.swing.JFrame {
         });
 
         btnCancel.setText("Cancel");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
 
-        txtNewPassword.setText("jPasswordField2");
+        lblHeaderChangePassword.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        lblHeaderChangePassword.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblHeaderChangePassword.setText("Change password");
+        lblHeaderChangePassword.setToolTipText("");
+        lblHeaderChangePassword.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
 
-        txtOldPassword.setText("jPasswordField1");
+        lblErrorMessage.setForeground(new java.awt.Color(255, 0, 0));
+        lblErrorMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        lblHeaderResetPass.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        lblHeaderResetPass.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblHeaderResetPass.setText("Reset password");
-        lblHeaderResetPass.setToolTipText("");
-        lblHeaderResetPass.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        lblChangeAs.setText("Type of account:");
 
-        lblErrorMessege.setForeground(new java.awt.Color(255, 0, 0));
-        lblErrorMessege.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        cmbChooseType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbChooseTypeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -78,39 +91,45 @@ public class ChangePasswordPage extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(85, 85, 85)
-                .addComponent(lblHeaderResetPass, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblHeaderChangePassword, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblErrorMessege, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblErrorMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(30, 30, 30))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(lblUsername, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                                .addComponent(lblOldPassword, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
-                            .addComponent(lblNewPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnCancel))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                            .addComponent(lblOldPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                            .addComponent(lblNewPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                            .addComponent(btnCancel)
+                            .addComponent(lblChangeAs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(34, 34, 34)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txtOldPassword, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-                                    .addComponent(txtUsername, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(btnChange)
                                     .addComponent(txtNewPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 30, Short.MAX_VALUE))))))
+                                .addGap(0, 30, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(txtOldPassword, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                                        .addComponent(txtUsername, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE))
+                                    .addComponent(cmbChooseType, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
-                .addComponent(lblHeaderResetPass, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(lblHeaderChangePassword, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblChangeAs)
+                    .addComponent(cmbChooseType, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblUsername)
@@ -124,7 +143,7 @@ public class ChangePasswordPage extends javax.swing.JFrame {
                     .addComponent(lblNewPassword)
                     .addComponent(txtNewPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
-                .addComponent(lblErrorMessege, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancel)
@@ -136,34 +155,82 @@ public class ChangePasswordPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeActionPerformed
-        try {
-            String agentUsername = txtUsername.getText();
-            String agentOldPassword = txtOldPassword.getText();
-            String agentNewPassword = txtNewPassword.getText();
-            String agentQuestion = "UPDATE Agent SET Losenord = '" + agentNewPassword + "' ;
-            String sqlAgentAnswer = idb.fetchSingle(agentQuestion);
-            if(agentPassword.equals(sqlAgentAnswer)) {
-                lblLoginFail.setText("Du loggade in som Agent!");
+        if((txtUsername.getText().isEmpty()) || (txtOldPassword.getText().isEmpty()) || (txtNewPassword.getText().isEmpty())) {
+            lblErrorMessage.setText("Please enter a username, old password and new password!");
+        }
+        else if(chosenType.equals("Agent")) {
+            try {
+                String agentUsername = txtUsername.getText();
+                String agentOldPassword = txtOldPassword.getText();
+                String agentNewPassword = txtNewPassword.getText();
+                String agentQuestion = "select Losenord from Agent where Namn = '" + agentUsername + "';";
+                String sqlAgentAnswer = idb.fetchSingle(agentQuestion);
+                if(agentOldPassword.equals(sqlAgentAnswer)) {
+                    try {
+                        String sqlAgentQuestion = "update Agent set Losenord = '" + agentNewPassword + "' where Namn = '" + agentUsername + "' and Losenord = '" + agentOldPassword + "';";
+                        idb.update(sqlAgentQuestion);
+                        
+                    }
+                    catch(InfException e) {
+                        JOptionPane.showMessageDialog(null, "Something went wrong!");
+                    }
+                }
+                else {
+                    lblErrorMessage.setText("Invalid username or password!");
+                }
             }
-            else {
-                lblLoginFail.setText("Invalid username or password!");
+            catch(InfException ex) {
+                JOptionPane.showMessageDialog(null, "Something went wrong!");
             }
         }
-        catch(InfException ex) {
-            JOptionPane.showMessageDialog(null, "Something went wrong!");
+        else if(chosenType.equals("Alien")) {
+            try {
+                String alienUsername = txtUsername.getText();
+                String alienOldPassword = txtOldPassword.getText();
+                String alienNewPassword = txtNewPassword.getText();
+                String alienQuestion = "select Losenord from Alien where Namn = '" + alienUsername + "';";
+                String sqlAlienAnswer = idb.fetchSingle(alienQuestion);
+                if(alienOldPassword.equals(sqlAlienAnswer)) {
+                    try {
+                        String sqlAlienQuestion = "update Alien set Losenord = '" + alienNewPassword + "' where Namn = '" + alienUsername + "' and Losenord = '" + alienOldPassword + "';";
+                        idb.update(sqlAlienQuestion);
+                    }
+                    catch(InfException e) {
+                        JOptionPane.showMessageDialog(null, "Something went wrong!");
+                    }
+                }
+                else {
+                    lblErrorMessage.setText("Invalid username or password!");
+                }
+            }
+            catch(InfException ex) {
+                JOptionPane.showMessageDialog(null, "Something went wrong!");
+            }
         }
     }//GEN-LAST:event_btnChangeActionPerformed
 
-  
-           
-        
-    
+    private void cmbChooseTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbChooseTypeActionPerformed
+        chosenType = cmbChooseType.getSelectedItem().toString();
+    }//GEN-LAST:event_cmbChooseTypeActionPerformed
 
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        
+    }//GEN-LAST:event_btnCancelActionPerformed
+    
+    private void addTypes() {
+        String agent = "Agent";
+        String alien = "Alien";
+        cmbChooseType.addItem(agent);
+        cmbChooseType.addItem(alien);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnChange;
-    private javax.swing.JLabel lblErrorMessege;
-    private javax.swing.JLabel lblHeaderResetPass;
+    private javax.swing.JComboBox<String> cmbChooseType;
+    private javax.swing.JLabel lblChangeAs;
+    private javax.swing.JLabel lblErrorMessage;
+    private javax.swing.JLabel lblHeaderChangePassword;
     private javax.swing.JLabel lblNewPassword;
     private javax.swing.JLabel lblOldPassword;
     private javax.swing.JLabel lblUsername;

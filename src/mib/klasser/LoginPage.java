@@ -23,6 +23,7 @@ public class LoginPage extends javax.swing.JFrame {
     public LoginPage(InfDB idb) {
         initComponents();
         this.idb = idb;
+        addLoginAs();
     }
 
     /**
@@ -39,7 +40,7 @@ public class LoginPage extends javax.swing.JFrame {
         lblPass = new javax.swing.JLabel();
         txtUsername = new javax.swing.JTextField();
         txtPassword = new javax.swing.JPasswordField();
-        andraLosen = new javax.swing.JButton();
+        btnChangePassword = new javax.swing.JButton();
         lblRubrik = new javax.swing.JLabel();
         lblLoginFail = new javax.swing.JLabel();
         lblLoginAs = new javax.swing.JLabel();
@@ -58,22 +59,20 @@ public class LoginPage extends javax.swing.JFrame {
 
         lblPass.setText("Password:");
 
-        txtPassword.setText("jPasswordField1");
-
-        andraLosen.setText("Change password");
-        andraLosen.addActionListener(new java.awt.event.ActionListener() {
+        btnChangePassword.setText("Change password");
+        btnChangePassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                andraLosenActionPerformed(evt);
+                btnChangePasswordActionPerformed(evt);
             }
         });
 
         lblRubrik.setText("Inloggning MIB");
 
         lblLoginFail.setForeground(new java.awt.Color(255, 0, 0));
+        lblLoginFail.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 
         lblLoginAs.setText("Login as:");
 
-        cmbLoginAs.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Agent", "Alien"}));
         cmbLoginAs.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbLoginAsActionPerformed(evt);
@@ -102,7 +101,7 @@ public class LoginPage extends javax.swing.JFrame {
                             .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
                             .addComponent(cmbLoginAs, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(andraLosen)
+                        .addComponent(btnChangePassword)
                         .addGap(27, 27, 27)
                         .addComponent(btnLogin)))
                 .addContainerGap(23, Short.MAX_VALUE))
@@ -114,22 +113,22 @@ public class LoginPage extends javax.swing.JFrame {
                 .addComponent(lblRubrik)
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmbLoginAs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblLoginAs))
+                    .addComponent(lblLoginAs)
+                    .addComponent(cmbLoginAs, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(txtUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
                     .addComponent(lblUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPass)
-                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(8, 8, 8)
                 .addComponent(lblLoginFail, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(andraLosen))
+                    .addComponent(btnChangePassword))
                 .addGap(17, 17, 17))
         );
 
@@ -176,17 +175,23 @@ public class LoginPage extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
-    private void andraLosenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_andraLosenActionPerformed
-        
-        
-    }//GEN-LAST:event_andraLosenActionPerformed
+    private void btnChangePasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangePasswordActionPerformed
+        new ChangePasswordPage(idb).setVisible(true);
+    }//GEN-LAST:event_btnChangePasswordActionPerformed
 
     private void cmbLoginAsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbLoginAsActionPerformed
         chosenLoginAs = cmbLoginAs.getSelectedItem().toString();
     }//GEN-LAST:event_cmbLoginAsActionPerformed
     
+    private void addLoginAs() {
+        String agent = "Agent";
+        String alien = "Alien";
+        cmbLoginAs.addItem(agent);
+        cmbLoginAs.addItem(alien);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton andraLosen;
+    private javax.swing.JButton btnChangePassword;
     private javax.swing.JButton btnLogin;
     private javax.swing.JComboBox<String> cmbLoginAs;
     private javax.swing.JLabel lblLoginAs;
