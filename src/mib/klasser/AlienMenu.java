@@ -11,20 +11,20 @@ import oru.inf.InfException;
  *
  * @author Grupp4
  */
-public class AdminMenu extends javax.swing.JFrame {
+public class AlienMenu extends javax.swing.JFrame {
     
     private InfDB idb;
-    private int agentId;
+    private int alienId;
     
     
     /**
      * Creates new form agentMeny
      */
-    public AdminMenu(InfDB idb, int agentId) {
+    public AlienMenu(InfDB idb, int alienId) {
         initComponents();
         this.idb = idb;
-        this.agentId = agentId;
-        lblAgentId.setText("Your Agent-id: " + agentId);
+        this.alienId = alienId;
+        lblAlienId.setText("Your Alien-id: " + alienId);
     }
 
     /**
@@ -36,7 +36,7 @@ public class AdminMenu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblAgentAdminHeader = new javax.swing.JLabel();
+        lblAlienHeader = new javax.swing.JLabel();
         btnNewAlien = new javax.swing.JButton();
         btnChangeInfo = new javax.swing.JButton();
         lblAlienVal = new javax.swing.JLabel();
@@ -50,13 +50,13 @@ public class AdminMenu extends javax.swing.JFrame {
         btnSearchInfoAlien = new javax.swing.JButton();
         lblSearchAreaBoss = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
-        lblAgentId = new javax.swing.JLabel();
+        lblAlienId = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        lblAgentAdminHeader.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-        lblAgentAdminHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblAgentAdminHeader.setText("MIB - Admin menu");
+        lblAlienHeader.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        lblAlienHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblAlienHeader.setText("MIB - Alien menu");
 
         btnNewAlien.setText("Add New Alien");
         btnNewAlien.addActionListener(new java.awt.event.ActionListener() {
@@ -133,7 +133,7 @@ public class AdminMenu extends javax.swing.JFrame {
             }
         });
 
-        lblAgentId.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
+        lblAlienId.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -168,19 +168,19 @@ public class AdminMenu extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(lblAgentId, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblAlienId, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(188, 188, 188)
-                        .addComponent(lblAgentAdminHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lblAlienHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addComponent(lblAgentAdminHeader)
+                .addComponent(lblAlienHeader)
                 .addGap(10, 10, 10)
-                .addComponent(lblAgentId, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblAlienId, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(8, 8, 8)
                 .addComponent(lblAgent)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -255,8 +255,8 @@ public class AdminMenu extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbShowForArea;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel lblAgent;
-    private javax.swing.JLabel lblAgentAdminHeader;
-    private javax.swing.JLabel lblAgentId;
+    private javax.swing.JLabel lblAlienHeader;
+    private javax.swing.JLabel lblAlienId;
     private javax.swing.JLabel lblAlienVal;
     private javax.swing.JLabel lblAliensByRace;
     private javax.swing.JLabel lblAliensInArea;

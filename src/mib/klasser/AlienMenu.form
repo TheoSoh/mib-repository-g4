@@ -60,11 +60,11 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="lblAgentId" min="-2" pref="167" max="-2" attributes="0"/>
+                      <Component id="lblAlienId" min="-2" pref="167" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="188" max="-2" attributes="0"/>
-                      <Component id="lblAgentAdminHeader" min="-2" pref="225" max="-2" attributes="0"/>
+                      <Component id="lblAlienHeader" min="-2" pref="225" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
@@ -75,9 +75,9 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-              <Component id="lblAgentAdminHeader" min="-2" max="-2" attributes="0"/>
+              <Component id="lblAlienHeader" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-              <Component id="lblAgentId" min="-2" pref="20" max="-2" attributes="0"/>
+              <Component id="lblAlienId" min="-2" pref="20" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
               <Component id="lblAgent" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -114,13 +114,13 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="lblAgentAdminHeader">
+    <Component class="javax.swing.JLabel" name="lblAlienHeader">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial" size="24" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="MIB - Admin menu"/>
+        <Property name="text" type="java.lang.String" value="MIB - Alien menu"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnNewAlien">
@@ -255,7 +255,7 @@
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblAgentId">
+    <Component class="javax.swing.JLabel" name="lblAlienId">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Helvetica Neue" size="15" style="0"/>

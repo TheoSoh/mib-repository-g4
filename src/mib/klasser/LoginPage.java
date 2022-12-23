@@ -67,8 +67,9 @@ public class LoginPage extends javax.swing.JFrame {
         });
 
         lblRubrik.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
-        lblRubrik.setText("Inloggning MIB");
+        lblRubrik.setText("MIB - Log in to gain access");
 
+        lblLoginFail.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
         lblLoginFail.setForeground(new java.awt.Color(255, 0, 0));
         lblLoginFail.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 
@@ -135,7 +136,12 @@ public class LoginPage extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    /**
+     * This method is called when pressing the "Login" button.
+     * It fetches values from the database and comparing it with the values that the user has entered.
+     * @param evt 
+     */
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         if((txtUsername.getText().isEmpty()) || (txtPassword.getText().isEmpty())) {
             lblLoginFail.setText("Please enter a username and password!");
@@ -157,9 +163,11 @@ public class LoginPage extends javax.swing.JFrame {
                         
                         if(adminAnswer.equals("N")) {
                             new AgentMenu(idb, agentId).setVisible(true);
+                            LoginPage.this.dispose();
                         }
                         else if(adminAnswer.equals("J")) {
-                            lblLoginFail.setText("Fixa en administratörs meny för fan!");
+                            new AgentMenu(idb, agentId).setVisible(true);
+                            LoginPage.this.dispose();
                         }
                     }
                     catch(InfException e) {
@@ -181,7 +189,12 @@ public class LoginPage extends javax.swing.JFrame {
                 String alienQuestion = "select Losenord from Alien where Namn = '" + alienUsername + "';";
                 String sqlAlienAnswer = idb.fetchSingle(alienQuestion);
                 if(alienPassword.equals(sqlAlienAnswer)) {
-                    lblLoginFail.setText("Du loggade in som Alien!");
+                    String sqlAlienIdQuestion = "select Alien_ID from Alien where Namn = '" + alienUsername + "' and Losenord = '" + alienPassword + "';";
+                    String alienIdAnswer = idb.fetchSingle(sqlAlienIdQuestion);
+                    int alienId = Integer.parseInt(alienIdAnswer);
+                    
+                    new AlienMenu(idb, alienId).setVisible(true);
+                    LoginPage.this.dispose();
                 }
                 else {
                     lblLoginFail.setText("Invalid username or password!");
@@ -194,6 +207,7 @@ public class LoginPage extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnChangePasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangePasswordActionPerformed
+        LoginPage.this.dispose();
         new ChangePasswordPage(idb).setVisible(true);
     }//GEN-LAST:event_btnChangePasswordActionPerformed
 
