@@ -59,7 +59,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
               <Component id="lblRubrik" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblLoginAs" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="cmbLoginAs" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
@@ -119,6 +119,9 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblRubrik">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Helvetica Neue" size="14" style="1"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Inloggning MIB"/>
       </Properties>
     </Component>

@@ -66,6 +66,7 @@ public class LoginPage extends javax.swing.JFrame {
             }
         });
 
+        lblRubrik.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         lblRubrik.setText("Inloggning MIB");
 
         lblLoginFail.setForeground(new java.awt.Color(255, 0, 0));
@@ -111,7 +112,7 @@ public class LoginPage extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(lblRubrik)
-                .addGap(20, 20, 20)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblLoginAs)
                     .addComponent(cmbLoginAs, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -146,7 +147,24 @@ public class LoginPage extends javax.swing.JFrame {
                 String agentQuestion = "select Losenord from Agent where Namn = '" + agentUsername + "';";
                 String sqlAgentAnswer = idb.fetchSingle(agentQuestion);
                 if(agentPassword.equals(sqlAgentAnswer)) {
-                    lblLoginFail.setText("Du loggade in som Agent!");
+                    try {
+                        String sqlAgentIdQuestion = "select Agent_ID from Agent where Namn = '" + agentUsername + "' and Losenord = '" + agentPassword + "';";
+                        String agentIdAnswer = idb.fetchSingle(sqlAgentIdQuestion);
+                        int agentId = Integer.parseInt(agentIdAnswer);
+                        
+                        String sqlAdminQuestion = "select Administrator from Agent where Namn = '" + agentUsername + "' and Losenord = '" + agentPassword + "';";
+                        String adminAnswer = idb.fetchSingle(sqlAdminQuestion);
+                        
+                        if(adminAnswer.equals("N")) {
+                            new AgentMenu(idb, agentId).setVisible(true);
+                        }
+                        else if(adminAnswer.equals("J")) {
+                            lblLoginFail.setText("Fixa en administratörs meny för fan!");
+                        }
+                    }
+                    catch(InfException e) {
+                        JOptionPane.showMessageDialog(null, "Internal database error!");
+                    }
                 }
                 else {
                     lblLoginFail.setText("Invalid username or password!");
