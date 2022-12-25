@@ -150,7 +150,7 @@ public class ChangePasswordPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeActionPerformed
-        if(Validation.checkEmptyFields(txtUsername, txtOldPassword)) {
+        if(Validation.checkEmptyFields(txtUsername, txtOldPassword, txtNewPassword)) {
             lblErrorMessage.setText("Please enter a username, old password and new password!");
         }
         else if(Validation.checkCmbBoxType(cmbChooseType)) {
@@ -192,6 +192,9 @@ public class ChangePasswordPage extends javax.swing.JFrame {
             catch(InfException ex) {
                 JOptionPane.showMessageDialog(null, "Internal database error!");
             }
+        }
+        else {
+            lblErrorMessage.setText("Unexpected error!");
         }
     }//GEN-LAST:event_btnChangeActionPerformed
 

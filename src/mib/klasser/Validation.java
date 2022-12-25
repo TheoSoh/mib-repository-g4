@@ -7,6 +7,7 @@ package mib.klasser;
 import javax.swing.JComboBox;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import oru.inf.InfDB;
 
 /**
  *
@@ -32,6 +33,25 @@ public class Validation {
     }
     
     /**
+     * Denna metod kontrollerar ifall rutorna som inkommer som parameter 
+     * är tomma. 
+     * Dvs. om någon utav rutorna är tomma, alltså har en tom sträng i sig, 
+     * då kommer metoden att returnera en boolean med värdet true.
+     * @param firstFieldToCheck
+     * @param secondFieldToCheck
+     * @param thirdFieldToCheck
+     * @return 
+     */
+    public static boolean checkEmptyFields(JTextField firstFieldToCheck, JPasswordField secondFieldToCheck, JPasswordField thirdFieldToCheck) {
+        boolean emptyTextField = false;
+        
+        if((firstFieldToCheck.getText().isEmpty()) || (secondFieldToCheck.getText().isEmpty()) || (thirdFieldToCheck.getText().isEmpty())) {
+            emptyTextField = true;
+        }
+        return emptyTextField;
+    }
+    
+    /**
      * Metoden kontrollerar det alternativ som är valt i combo lådan.
      * Ifall valet i combo lådan är "Alien" kommer metoden att returnera false,
      * och i annat fall har användaren valt "Agent" och då returnerar denna 
@@ -48,4 +68,6 @@ public class Validation {
         }
         return chosenIsAgent;
     }
+    
+    
 }
