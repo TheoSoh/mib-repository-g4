@@ -13,8 +13,9 @@ import oru.inf.InfException;
  * @author jonathandroh
  */
 public class ChangePasswordPage extends javax.swing.JFrame {
+    
     private InfDB idb;
-    private String chosenType;
+    
     /**
      * Creates new form ChangePasswordPage
      */
@@ -79,12 +80,6 @@ public class ChangePasswordPage extends javax.swing.JFrame {
         lblErrorMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         lblChangeAs.setText("Type of account:");
-
-        cmbChooseType.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbChooseTypeActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -155,10 +150,10 @@ public class ChangePasswordPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeActionPerformed
-        if((txtUsername.getText().isEmpty()) || (txtOldPassword.getText().isEmpty()) || (txtNewPassword.getText().isEmpty())) {
+        if(Validation.checkEmptyFields(txtUsername, txtOldPassword)) {
             lblErrorMessage.setText("Please enter a username, old password and new password!");
         }
-        else if(chosenType.equals("Agent")) {
+        else if(Validation.checkCmbBoxType(cmbChooseType)) {
             try {
                 String agentUsername = txtUsername.getText();
                 String agentOldPassword = txtOldPassword.getText();
@@ -166,52 +161,39 @@ public class ChangePasswordPage extends javax.swing.JFrame {
                 String agentQuestion = "select Losenord from Agent where Namn = '" + agentUsername + "';";
                 String sqlAgentAnswer = idb.fetchSingle(agentQuestion);
                 if(agentOldPassword.equals(sqlAgentAnswer)) {
-                    try {
-                        String sqlAgentQuestion = "update Agent set Losenord = '" + agentNewPassword + "' where Namn = '" + agentUsername + "' and Losenord = '" + agentOldPassword + "';";
-                        idb.update(sqlAgentQuestion);
-                        JOptionPane.showMessageDialog(null, "You've successfully changed\nyour password to: " + agentNewPassword);
-                    }
-                    catch(InfException e) {
-                        JOptionPane.showMessageDialog(null, "Something went wrong!");
-                    }
+                    String sqlAgentQuestion = "update Agent set Losenord = '" + agentNewPassword + "' where Namn = '" + agentUsername + "' and Losenord = '" + agentOldPassword + "';";
+                    idb.update(sqlAgentQuestion);
+                    JOptionPane.showMessageDialog(null, "You've successfully changed\nyour password to: " + agentNewPassword);
                 }
                 else {
                     lblErrorMessage.setText("Invalid username or password!");
                 }
             }
             catch(InfException ex) {
-                JOptionPane.showMessageDialog(null, "Something went wrong!");
+                JOptionPane.showMessageDialog(null, "Internal database error");
             }
         }
-        else if(chosenType.equals("Alien")) {
+        else if(!Validation.checkCmbBoxType(cmbChooseType)) {
             try {
                 String alienUsername = txtUsername.getText();
                 String alienOldPassword = txtOldPassword.getText();
                 String alienNewPassword = txtNewPassword.getText();
                 String alienQuestion = "select Losenord from Alien where Namn = '" + alienUsername + "';";
                 String sqlAlienAnswer = idb.fetchSingle(alienQuestion);
+                
                 if(alienOldPassword.equals(sqlAlienAnswer)) {
-                    try {
-                        String sqlAlienQuestion = "update Alien set Losenord = '" + alienNewPassword + "' where Namn = '" + alienUsername + "' and Losenord = '" + alienOldPassword + "';";
-                        idb.update(sqlAlienQuestion);
-                    }
-                    catch(InfException e) {
-                        JOptionPane.showMessageDialog(null, "Something went wrong!");
-                    }
+                    String sqlAlienQuestion = "update Alien set Losenord = '" + alienNewPassword + "' where Namn = '" + alienUsername + "' and Losenord = '" + alienOldPassword + "';";
+                    idb.update(sqlAlienQuestion);
                 }
                 else {
                     lblErrorMessage.setText("Invalid username or password!");
                 }
             }
             catch(InfException ex) {
-                JOptionPane.showMessageDialog(null, "Something went wrong!");
+                JOptionPane.showMessageDialog(null, "Internal database error!");
             }
         }
     }//GEN-LAST:event_btnChangeActionPerformed
-
-    private void cmbChooseTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbChooseTypeActionPerformed
-        chosenType = cmbChooseType.getSelectedItem().toString();
-    }//GEN-LAST:event_cmbChooseTypeActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         ChangePasswordPage.this.dispose();

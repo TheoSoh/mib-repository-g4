@@ -10,13 +10,15 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 
 /**
- *
+ * private String chosenLoginAs;
+ * chosenLoginAs.equals("Agent")
+ * chosenLoginAs = cmbLoginAs.getSelectedItem().toString();
  * @author Grupp4
  */
 public class LoginPage extends javax.swing.JFrame {
     
     private InfDB idb;
-    private String chosenLoginAs;
+    
     /**
      * Creates new form mittFönster
      */
@@ -74,12 +76,6 @@ public class LoginPage extends javax.swing.JFrame {
         lblLoginFail.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 
         lblLoginAs.setText("Login as:");
-
-        cmbLoginAs.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbLoginAsActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -143,10 +139,10 @@ public class LoginPage extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        if((txtUsername.getText().isEmpty()) || (txtPassword.getText().isEmpty())) {
+        if(Validation.checkEmptyFields(txtUsername, txtPassword)) {
             lblLoginFail.setText("Please enter a username and password!");
         }
-        else if (chosenLoginAs.equals("Agent")) {
+        else if (Validation.checkCmbBoxType(cmbLoginAs)) {
             try {
                 String agentUsername = txtUsername.getText();
                 String agentPassword = txtPassword.getText();
@@ -182,7 +178,7 @@ public class LoginPage extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Something went wrong!");
             }
         }
-        else if (chosenLoginAs.equals("Alien")) {
+        else if (!Validation.checkCmbBoxType(cmbLoginAs)) {
             try {
                 String alienUsername = txtUsername.getText();
                 String alienPassword = txtPassword.getText();
@@ -210,10 +206,6 @@ public class LoginPage extends javax.swing.JFrame {
         LoginPage.this.dispose();
         new ChangePasswordPage(idb).setVisible(true);
     }//GEN-LAST:event_btnChangePasswordActionPerformed
-
-    private void cmbLoginAsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbLoginAsActionPerformed
-        chosenLoginAs = cmbLoginAs.getSelectedItem().toString();
-    }//GEN-LAST:event_cmbLoginAsActionPerformed
     
     private void addLoginAs() {
         String agent = "Agent";
