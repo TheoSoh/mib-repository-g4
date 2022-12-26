@@ -5,6 +5,7 @@ package mib.klasser;
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
+import static java.lang.Integer.parseInt;
 import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
@@ -40,7 +41,7 @@ public class LoginPage extends javax.swing.JFrame {
         btnLogin = new javax.swing.JButton();
         lblUser = new javax.swing.JLabel();
         lblPass = new javax.swing.JLabel();
-        txtUsername = new javax.swing.JTextField();
+        txtId = new javax.swing.JTextField();
         txtPassword = new javax.swing.JPasswordField();
         btnChangePassword = new javax.swing.JButton();
         lblRubrik = new javax.swing.JLabel();
@@ -57,7 +58,7 @@ public class LoginPage extends javax.swing.JFrame {
             }
         });
 
-        lblUser.setText("Username:");
+        lblUser.setText("ID:");
 
         lblPass.setText("Password:");
 
@@ -95,7 +96,7 @@ public class LoginPage extends javax.swing.JFrame {
                                 .addComponent(lblPass, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtUsername)
+                            .addComponent(txtId)
                             .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
                             .addComponent(cmbLoginAs, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
@@ -115,7 +116,7 @@ public class LoginPage extends javax.swing.JFrame {
                     .addComponent(cmbLoginAs, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+                    .addComponent(txtId, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
                     .addComponent(lblUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -139,30 +140,27 @@ public class LoginPage extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        if(Validation.checkEmptyFields(txtUsername, txtPassword)) {
+        if(Validation.checkEmptyFields(txtId, txtPassword)) {
             lblLoginFail.setText("Please enter a username and password!");
         }
         else if (Validation.checkCmbBoxType(cmbLoginAs)) {
             try {
-                String agentUsername = txtUsername.getText();
+                String agentId = txtId.getText();
                 String agentPassword = txtPassword.getText();
-                String agentQuestion = "select Losenord from Agent where Namn = '" + agentUsername + "';";
+                String agentQuestion = "select Losenord from Agent where Agent_ID = '" + agentId + "';";
                 String sqlAgentAnswer = idb.fetchSingle(agentQuestion);
                 if(agentPassword.equals(sqlAgentAnswer)) {
                     try {
-                        String sqlAgentIdQuestion = "select Agent_ID from Agent where Namn = '" + agentUsername + "' and Losenord = '" + agentPassword + "';";
-                        String agentIdAnswer = idb.fetchSingle(sqlAgentIdQuestion);
-                        int agentId = Integer.parseInt(agentIdAnswer);
-                        
-                        String sqlAdminQuestion = "select Administrator from Agent where Namn = '" + agentUsername + "' and Losenord = '" + agentPassword + "';";
+                        String sqlAdminQuestion = "select Administrator from Agent where Agent_ID = '" + agentId + "' and Losenord = '" + agentPassword + "';";
                         String adminAnswer = idb.fetchSingle(sqlAdminQuestion);
+                        int agentIdInt = parseInt(agentId);
                         
                         if(adminAnswer.equals("N")) {
-                            new AgentMenu(idb, agentId).setVisible(true);
+                            new AgentMenu(idb, agentIdInt).setVisible(true);
                             LoginPage.this.dispose();
                         }
                         else if(adminAnswer.equals("J")) {
-                            new AdminMenu(idb, agentId).setVisible(true);
+                            new AdminMenu(idb, agentIdInt).setVisible(true);
                             LoginPage.this.dispose();
                         }
                     }
@@ -180,16 +178,14 @@ public class LoginPage extends javax.swing.JFrame {
         }
         else if (!Validation.checkCmbBoxType(cmbLoginAs)) {
             try {
-                String alienUsername = txtUsername.getText();
+                String alienId = txtId.getText();
                 String alienPassword = txtPassword.getText();
-                String alienQuestion = "select Losenord from Alien where Namn = '" + alienUsername + "';";
+                String alienQuestion = "select Losenord from Alien where Alien_ID = '" + alienId + "';";
                 String sqlAlienAnswer = idb.fetchSingle(alienQuestion);
                 if(alienPassword.equals(sqlAlienAnswer)) {
-                    String sqlAlienIdQuestion = "select Alien_ID from Alien where Namn = '" + alienUsername + "' and Losenord = '" + alienPassword + "';";
-                    String alienIdAnswer = idb.fetchSingle(sqlAlienIdQuestion);
-                    int alienId = Integer.parseInt(alienIdAnswer);
+                    int alienIdInt = Integer.parseInt(alienId);
                     
-                    new AlienMenu(idb, alienId).setVisible(true);
+                    new AlienMenu(idb, alienIdInt).setVisible(true);
                     LoginPage.this.dispose();
                 }
                 else {
@@ -223,7 +219,7 @@ public class LoginPage extends javax.swing.JFrame {
     private javax.swing.JLabel lblPass;
     private javax.swing.JLabel lblRubrik;
     private javax.swing.JLabel lblUser;
+    private javax.swing.JTextField txtId;
     private javax.swing.JPasswordField txtPassword;
-    private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 }

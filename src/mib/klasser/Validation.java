@@ -51,6 +51,15 @@ public class Validation {
         return emptyTextField;
     }
     
+    public static boolean checkEmptyFields(JTextField firstFieldToCheck, JTextField secondFieldToCheck, JTextField thirdFieldToCheck, JTextField fourthFieldToCheck, JTextField fifthFieldToCheck, JTextField sixthFieldToCheck) {
+        boolean emptyTextField = false;
+        
+        if((firstFieldToCheck.getText().isEmpty()) || (secondFieldToCheck.getText().isEmpty()) || (thirdFieldToCheck.getText().isEmpty()) || (fourthFieldToCheck.getText().isEmpty()) || (fifthFieldToCheck.getText().isEmpty()) || (sixthFieldToCheck.getText().isEmpty())) {
+            emptyTextField = true;
+        }
+        return emptyTextField;
+    }
+    
     /**
      * Metoden kontrollerar det alternativ som är valt i combo lådan.
      * Ifall valet i combo lådan är "Alien" kommer metoden att returnera false,
