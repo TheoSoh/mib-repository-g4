@@ -162,7 +162,7 @@ public class LoginPage extends javax.swing.JFrame {
                             LoginPage.this.dispose();
                         }
                         else if(adminAnswer.equals("J")) {
-                            new AgentMenu(idb, agentId).setVisible(true);
+                            new AdminMenu(idb, agentId).setVisible(true);
                             LoginPage.this.dispose();
                         }
                     }

@@ -4,7 +4,9 @@
  */
 package mib.klasser;
 
+import javax.swing.JOptionPane;
 import oru.inf.InfDB;
+import oru.inf.InfException;
 
 /**
  *
@@ -13,12 +15,14 @@ import oru.inf.InfDB;
 public class NewAlienPage extends javax.swing.JFrame {
     
     private InfDB idb;
+    private int agentId;
     /**
      * Creates new form NewAlienPage
      */
-    public NewAlienPage(InfDB idb) {
+    public NewAlienPage(InfDB idb, int agentId) {
         initComponents();
         this.idb = idb;
+        this.agentId = agentId;
     }
     
     
@@ -32,8 +36,8 @@ public class NewAlienPage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        lblNewAlienHeader = new javax.swing.JLabel();
+        btnRegister = new javax.swing.JButton();
         txtAlienId = new javax.swing.JTextField();
         txtRegistreringsDatum = new javax.swing.JTextField();
         txtLosenord = new javax.swing.JTextField();
@@ -41,35 +45,48 @@ public class NewAlienPage extends javax.swing.JFrame {
         txtTelefon = new javax.swing.JTextField();
         txtPlats = new javax.swing.JTextField();
         txtAnsvarigAgent = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        lblAlienId = new javax.swing.JLabel();
+        lblRegDate = new javax.swing.JLabel();
+        lblPassword = new javax.swing.JLabel();
+        lblName = new javax.swing.JLabel();
+        lblPhoneNumber = new javax.swing.JLabel();
+        lblArea = new javax.swing.JLabel();
+        lblAssignAgent = new javax.swing.JLabel();
+        btnCancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Register new alien");
+        lblNewAlienHeader.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        lblNewAlienHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNewAlienHeader.setText("Register new alien");
 
-        jButton1.setText("Register");
+        btnRegister.setText("Register");
+        btnRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegisterActionPerformed(evt);
+            }
+        });
 
-        jLabel2.setText("Alien-ID:");
+        lblAlienId.setText("Alien-ID:");
 
-        jLabel3.setText("Registrationdate:");
+        lblRegDate.setText("Registrationdate:");
 
-        jLabel4.setText("Password:");
+        lblPassword.setText("Password:");
 
-        jLabel5.setText("Name:");
+        lblName.setText("Name:");
 
-        jLabel6.setText("Phone number:");
+        lblPhoneNumber.setText("Phone number:");
 
-        jLabel7.setText("Area:");
+        lblArea.setText("Area:");
 
-        jLabel8.setText("Assign Agent-ID:");
+        lblAssignAgent.setText("Assign Agent-ID:");
+
+        btnCancel.setText("Cancel");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -77,31 +94,33 @@ public class NewAlienPage extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(160, 160, 160)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblNewAlienHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(46, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                .addContainerGap(41, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblAlienId, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblRegDate)
+                    .addComponent(lblPassword)
+                    .addComponent(lblName))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(txtAlienId, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
+                    .addComponent(txtRegistreringsDatum)
+                    .addComponent(txtLosenord)
+                    .addComponent(txtNamn))
+                .addGap(55, 55, 55)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                        .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(45, 45, 45))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtAlienId, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
-                            .addComponent(txtRegistreringsDatum)
-                            .addComponent(txtLosenord)
-                            .addComponent(txtNamn))
-                        .addGap(55, 55, 55)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel8))
+                            .addComponent(lblPhoneNumber)
+                            .addComponent(lblArea)
+                            .addComponent(lblAssignAgent))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(txtTelefon, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
@@ -113,47 +132,80 @@ public class NewAlienPage extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblNewAlienHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtAlienId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel6))
+                    .addComponent(lblAlienId)
+                    .addComponent(lblPhoneNumber))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtRegistreringsDatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPlats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel7))
+                    .addComponent(lblRegDate)
+                    .addComponent(lblArea))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtAnsvarigAgent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel8))
+                    .addComponent(lblPassword)
+                    .addComponent(lblAssignAgent))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
+                    .addComponent(lblName))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRegister)
+                    .addComponent(btnCancel))
                 .addGap(35, 35, 35))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        NewAlienPage.this.dispose();
+        checkAdminStatus();
+        if(checkAdminStatus()) {
+            new AdminMenu(idb, agentId).setVisible(true);
+        }
+        else {
+            new AgentMenu(idb, agentId).setVisible(true);
+        }
+    }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
+        
+    }//GEN-LAST:event_btnRegisterActionPerformed
+    
+    private boolean checkAdminStatus() {
+        boolean isAdmin = false;
+        try {
+            String sqlQuestion = "select Administrator from Agent where Agent_ID = '" + agentId + "';";
+            String result = idb.fetchSingle(sqlQuestion);
+            if(result.equals("J")) {
+                isAdmin = true;
+            }
+        }
+        catch(InfException e) {
+            JOptionPane.showMessageDialog(null, "Internal database error!");
+        }
+        return isAdmin;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
+    private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnRegister;
+    private javax.swing.JLabel lblAlienId;
+    private javax.swing.JLabel lblArea;
+    private javax.swing.JLabel lblAssignAgent;
+    private javax.swing.JLabel lblName;
+    private javax.swing.JLabel lblNewAlienHeader;
+    private javax.swing.JLabel lblPassword;
+    private javax.swing.JLabel lblPhoneNumber;
+    private javax.swing.JLabel lblRegDate;
     private javax.swing.JTextField txtAlienId;
     private javax.swing.JTextField txtAnsvarigAgent;
     private javax.swing.JTextField txtLosenord;

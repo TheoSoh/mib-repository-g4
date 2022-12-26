@@ -214,7 +214,8 @@ public class AgentMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNewAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewAlienActionPerformed
-        // TODO add your handling code here:
+        AgentMenu.this.dispose();
+        new NewAlienPage(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnNewAlienActionPerformed
 
     private void btnChangeInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeInfoActionPerformed

@@ -10,7 +10,7 @@ import javax.swing.JTextField;
 import oru.inf.InfDB;
 
 /**
- *
+ * 
  * @author Grupp4
  */
 public class Validation {
@@ -68,6 +68,5 @@ public class Validation {
         }
         return chosenIsAgent;
     }
-    
     
 }
