@@ -163,7 +163,7 @@ public class CommunicationFrame extends javax.swing.JFrame {
                 String transferTechnology = txtTransferTech.getText();
                 String sqlQuestion = "insert into Kommunikation values (" + equipmentId + ", '" + transferTechnology + "');";
                 idb.insert(sqlQuestion);
-                String sqlSecondQuestion = "insert into Utrsutning values (" + equipmentId + ", '" + description + "');";
+                String sqlSecondQuestion = "insert into Utrustning values (" + equipmentId + ", '" + description + "');";
                 idb.insert(sqlSecondQuestion);
                 lblText.setText("Successful register!");
                 lblErrorText.setText("");

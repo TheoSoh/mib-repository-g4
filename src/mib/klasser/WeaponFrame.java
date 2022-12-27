@@ -165,7 +165,7 @@ public class WeaponFrame extends javax.swing.JFrame {
                 String caliber = txtCaliber.getText();
                 String sqlQuestion = "insert into Kommunikation values (" + equipmentId + ", '" + caliber + "');";
                 idb.insert(sqlQuestion);
-                String sqlSecondQuestion = "insert into Utrsutning values (" + equipmentId + ", '" + description + "');";
+                String sqlSecondQuestion = "insert into Utrustning values (" + equipmentId + ", '" + description + "');";
                 idb.insert(sqlSecondQuestion);
                 lblText.setText("Successful register!");
                 lblErrorText.setText("");
