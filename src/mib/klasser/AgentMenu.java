@@ -239,7 +239,8 @@ public class AgentMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSearchInfoAlienActionPerformed
 
     private void btnAddEquipmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddEquipmentActionPerformed
-        // TODO add your handling code here:
+        AgentMenu.this.dispose();
+        new EquipmentMenu(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnAddEquipmentActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed

@@ -5,15 +5,20 @@
 package mib.klasser;
 
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import oru.inf.InfDB;
+import oru.inf.InfException;
 
 /**
  * 
  * @author Grupp4
  */
 public class Validation {
+    
+    
+  
     
     /**
      * Denna metod kontrollerar ifall en textruta och lösenordsruta som är tomma.
@@ -59,7 +64,23 @@ public class Validation {
         }
         return emptyTextField;
     }
+    public static boolean checkEmptyTxtFields(JTextField firstFieldToCheck,JTextField secondFieldToCheck) {
+        boolean emptyTextField = false;
+        
+        if((firstFieldToCheck.getText().isEmpty()) || (secondFieldToCheck.getText().isEmpty()))  {
+            emptyTextField = true;
+        }
+        return emptyTextField;
+    } 
     
+    public static boolean checkEmptyTxtFields(JTextField firstFieldToCheck,JTextField secondFieldToCheck,JTextField thirdFieldToCheck) {
+        boolean emptyTextField = false;
+        
+        if((firstFieldToCheck.getText().isEmpty()) || (secondFieldToCheck.getText().isEmpty()) || (thirdFieldToCheck.getText().isEmpty()))  {
+            emptyTextField = true;
+        }
+        return emptyTextField;
+    }
     /**
      * Metoden kontrollerar det alternativ som är valt i combo lådan.
      * Ifall valet i combo lådan är "Alien" kommer metoden att returnera false,
@@ -77,5 +98,6 @@ public class Validation {
         }
         return chosenIsAgent;
     }
+    
     
 }
