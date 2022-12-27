@@ -4,17 +4,24 @@
  */
 package mib.klasser;
 
+import static java.lang.Integer.parseInt;
+import oru.inf.InfDB;
+import oru.inf.InfException;
+
 /**
  *
  * @author Mansa
  */
 public class WeaponFrame extends javax.swing.JFrame {
-
+    private InfDB idb;
+    private int agentId;
     /**
      * Creates new form TechnologyFrame
      */
-    public WeaponFrame() {
+    public WeaponFrame(InfDB idb, int agentId) {
         initComponents();
+        this.idb = idb;
+        this.agentId = agentId;
     }
 
     /**
@@ -27,7 +34,7 @@ public class WeaponFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jTextField1 = new javax.swing.JTextField();
-        lblAddNewWeapon = new javax.swing.JLabel();
+        lblAddNewWeaponHeader = new javax.swing.JLabel();
         lblDescription = new javax.swing.JLabel();
         lblCaliber = new javax.swing.JLabel();
         lblEquipmentId = new javax.swing.JLabel();
@@ -37,14 +44,15 @@ public class WeaponFrame extends javax.swing.JFrame {
         btnAdd = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         lblErrorText = new javax.swing.JLabel();
+        lblText = new javax.swing.JLabel();
 
         jTextField1.setText("jTextField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        lblAddNewWeapon.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblAddNewWeapon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblAddNewWeapon.setText("Add New Weapon");
+        lblAddNewWeaponHeader.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblAddNewWeaponHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblAddNewWeaponHeader.setText("Add New Weapon");
 
         lblDescription.setText("Description:");
 
@@ -52,32 +60,30 @@ public class WeaponFrame extends javax.swing.JFrame {
 
         lblEquipmentId.setText("Equipment-ID:");
 
-        txtEquipmentId.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtEquipmentIdActionPerformed(evt);
-            }
-        });
-
-        txtCaliber.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCaliberActionPerformed(evt);
-            }
-        });
-
-        txtDescription.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDescriptionActionPerformed(evt);
-            }
-        });
-
         btnAdd.setText("Add");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
 
         btnCancel.setText("Cancel");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
+
+        lblErrorText.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(113, 113, 113)
+                .addComponent(lblAddNewWeaponHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -87,67 +93,89 @@ public class WeaponFrame extends javax.swing.JFrame {
                                 .addComponent(lblEquipmentId)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(txtEquipmentId, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblCaliber, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblDescription, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(86, 86, 86)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtCaliber)
-                                    .addComponent(txtDescription, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(lblCaliber, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(186, 186, 186))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(lblDescription, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(77, 77, 77))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lblErrorText, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
-                        .addComponent(btnCancel)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(txtCaliber, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblErrorText, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
+                                        .addComponent(lblText)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnCancel)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(113, 113, 113)
-                .addComponent(lblAddNewWeapon, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblAddNewWeapon, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblAddNewWeaponHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblEquipmentId)
                     .addComponent(txtEquipmentId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDescription)
+                    .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCaliber)
                     .addComponent(txtCaliber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblDescription)
-                    .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAdd)
                     .addComponent(btnCancel)
-                    .addComponent(lblErrorText))
+                    .addComponent(lblErrorText)
+                    .addComponent(lblText))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtEquipmentIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEquipmentIdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtEquipmentIdActionPerformed
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        WeaponFrame.this.dispose();
+        new EquipmentMenu(idb, agentId).setVisible(true);
+    }//GEN-LAST:event_btnCancelActionPerformed
 
-    private void txtCaliberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCaliberActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCaliberActionPerformed
-
-    private void txtDescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescriptionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDescriptionActionPerformed
-
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        if(Validation.checkEmptyTxtFields(txtEquipmentId, txtCaliber, txtDescription)) {
+            lblErrorText.setText("Every field with (*) symbol has to be filled!");
+            lblEquipmentId.setText("*Equipment-ID:");
+            lblCaliber.setText("*Caliber:");
+            lblDescription.setText("*Description");
+            
+            try {
+                int equipmentId = parseInt(txtEquipmentId.getText());
+                String description = txtDescription.getText();
+                String caliber = txtCaliber.getText();
+                String sqlQuestion = "insert into Kommunikation values (" + equipmentId + ", '" + caliber + "');";
+                idb.insert(sqlQuestion);
+                String sqlSecondQuestion = "insert into Utrsutning values (" + equipmentId + ", '" + description + "');";
+                idb.insert(sqlSecondQuestion);
+                lblText.setText("Successful register!");
+                lblErrorText.setText("");
+            }
+            catch(InfException e) {
+                lblErrorText.setText("Wrong values inserted!");
+            }
+        }
+    }//GEN-LAST:event_btnAddActionPerformed
+    
     
     
 
@@ -155,11 +183,12 @@ public class WeaponFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnCancel;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JLabel lblAddNewWeapon;
+    private javax.swing.JLabel lblAddNewWeaponHeader;
     private javax.swing.JLabel lblCaliber;
     private javax.swing.JLabel lblDescription;
     private javax.swing.JLabel lblEquipmentId;
     private javax.swing.JLabel lblErrorText;
+    private javax.swing.JLabel lblText;
     private javax.swing.JTextField txtCaliber;
     private javax.swing.JTextField txtDescription;
     private javax.swing.JTextField txtEquipmentId;

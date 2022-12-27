@@ -4,17 +4,26 @@
  */
 package mib.klasser;
 
+import static java.lang.Integer.parseInt;
+import oru.inf.InfDB;
+import oru.inf.InfException;
+
 /**
  *
  * @author Mansa
  */
 public class CommunicationFrame extends javax.swing.JFrame {
-
+    private InfDB idb;
+    private int agentId;
     /**
      * Creates new form TechnologyFrame
      */
-    public CommunicationFrame() {
+    public CommunicationFrame(InfDB idb,int agentId) {
         initComponents();
+        this.idb = idb;
+        this.agentId = agentId;
+        lblYourId.setText("Your Agent-id: " + agentId);
+        
     }
 
     /**
@@ -27,52 +36,48 @@ public class CommunicationFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jTextField1 = new javax.swing.JTextField();
-        lblCommunicationHeader = new javax.swing.JLabel();
+        lblAddNewCommunicationHeader = new javax.swing.JLabel();
         lblDescription = new javax.swing.JLabel();
-        lblTransferThechnology = new javax.swing.JLabel();
+        lblTransferTechnology = new javax.swing.JLabel();
         lblEquipmentId = new javax.swing.JLabel();
         txtEquipmentId = new javax.swing.JTextField();
-        txtEquipmentId1 = new javax.swing.JTextField();
+        txtTransferTech = new javax.swing.JTextField();
         txtDescription = new javax.swing.JTextField();
         btnAdd = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         lblErrorText = new javax.swing.JLabel();
+        lblYourId = new javax.swing.JLabel();
+        lblText = new javax.swing.JLabel();
 
         jTextField1.setText("jTextField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        lblCommunicationHeader.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblCommunicationHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblCommunicationHeader.setText("Communication");
+        lblAddNewCommunicationHeader.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblAddNewCommunicationHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblAddNewCommunicationHeader.setText("Add New Communication");
 
         lblDescription.setText("Description:");
 
-        lblTransferThechnology.setText("Transfer technology:");
+        lblTransferTechnology.setText("Transfer technology:");
 
         lblEquipmentId.setText("Equipment-ID:");
 
-        txtEquipmentId.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtEquipmentIdActionPerformed(evt);
-            }
-        });
-
-        txtEquipmentId1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtEquipmentId1ActionPerformed(evt);
-            }
-        });
-
-        txtDescription.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDescriptionActionPerformed(evt);
-            }
-        });
-
         btnAdd.setText("Add");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
 
         btnCancel.setText("Cancel");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
+
+        lblErrorText.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -83,84 +88,115 @@ public class CommunicationFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(114, 114, 114)
-                                    .addComponent(lblCommunicationHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(lblEquipmentId, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
-                                    .addGap(56, 56, 56)
-                                    .addComponent(txtEquipmentId, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(lblTransferThechnology, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblDescription, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(lblTransferTechnology)
+                                .addGap(156, 156, 156))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblEquipmentId, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(56, 56, 56)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtEquipmentId1)
-                                    .addComponent(txtDescription, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))))
+                                .addComponent(txtEquipmentId, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(lblDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(77, 77, 77))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lblErrorText, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnCancel)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(txtTransferTech, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblErrorText, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblText))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnCancel)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblAddNewCommunicationHeader)
+                .addGap(92, 92, 92))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(lblYourId)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblCommunicationHeader)
-                .addGap(33, 33, 33)
+                .addComponent(lblAddNewCommunicationHeader)
+                .addGap(4, 4, 4)
+                .addComponent(lblYourId)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblEquipmentId)
                     .addComponent(txtEquipmentId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTransferThechnology)
-                    .addComponent(txtEquipmentId1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDescription)
                     .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTransferTechnology)
+                    .addComponent(txtTransferTech, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAdd)
                     .addComponent(btnCancel)
-                    .addComponent(lblErrorText))
+                    .addComponent(lblErrorText)
+                    .addComponent(lblText))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtEquipmentIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEquipmentIdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtEquipmentIdActionPerformed
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        CommunicationFrame.this.dispose();
+        new EquipmentMenu(idb, agentId).setVisible(true);
+    }//GEN-LAST:event_btnCancelActionPerformed
 
-    private void txtEquipmentId1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEquipmentId1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtEquipmentId1ActionPerformed
-
-    private void txtDescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescriptionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDescriptionActionPerformed
-
-   
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+         if(Validation.checkEmptyTxtFields(txtEquipmentId, txtTransferTech, txtDescription)) {
+            lblErrorText.setText("Every field with (*) symbol has to be filled!");
+            lblEquipmentId.setText("*Equipment-ID:");
+            lblTransferTechnology.setText("*Transfer Technology:");
+            lblDescription.setText("*Description");
+           
+            try {
+                int equipmentId = parseInt(txtEquipmentId.getText());
+                String description = txtDescription.getText();
+                String transferTechnology = txtTransferTech.getText();
+                String sqlQuestion = "insert into Kommunikation values (" + equipmentId + ", '" + transferTechnology + "');";
+                idb.insert(sqlQuestion);
+                String sqlSecondQuestion = "insert into Utrsutning values (" + equipmentId + ", '" + description + "');";
+                idb.insert(sqlSecondQuestion);
+                lblText.setText("Successful register!");
+                lblErrorText.setText("");
+            }
+            catch(InfException e) {
+                lblErrorText.setText("Wrong values inserted!");
+            }
+        }
+    }//GEN-LAST:event_btnAddActionPerformed
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnCancel;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JLabel lblCommunicationHeader;
+    private javax.swing.JLabel lblAddNewCommunicationHeader;
     private javax.swing.JLabel lblDescription;
     private javax.swing.JLabel lblEquipmentId;
     private javax.swing.JLabel lblErrorText;
-    private javax.swing.JLabel lblTransferThechnology;
+    private javax.swing.JLabel lblText;
+    private javax.swing.JLabel lblTransferTechnology;
+    private javax.swing.JLabel lblYourId;
     private javax.swing.JTextField txtDescription;
     private javax.swing.JTextField txtEquipmentId;
-    private javax.swing.JTextField txtEquipmentId1;
+    private javax.swing.JTextField txtTransferTech;
     // End of variables declaration//GEN-END:variables
 }

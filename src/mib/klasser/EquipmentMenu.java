@@ -124,15 +124,18 @@ public class EquipmentMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnTeknikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTeknikActionPerformed
-        
+        EquipmentMenu.this.dispose();
+        new TechnologyFrame(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnTeknikActionPerformed
 
     private void btnVapenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVapenActionPerformed
-        // TODO add your handling code here:
+        EquipmentMenu.this.dispose();
+        new WeaponFrame(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnVapenActionPerformed
 
     private void btnKommunikationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKommunikationActionPerformed
-        // TODO add your handling code here:
+        EquipmentMenu.this.dispose();
+        new CommunicationFrame(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnKommunikationActionPerformed
 
     private boolean checkAdminStatus() {
