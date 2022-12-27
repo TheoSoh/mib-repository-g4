@@ -18,8 +18,6 @@ import oru.inf.InfException;
 public class Validation {
     
     
-  
-    
     /**
      * Denna metod kontrollerar ifall en textruta och lösenordsruta som är tomma.
      * Dvs. om någon utav rutorna är tomma, alltså har en tom sträng i sig, då 
@@ -56,6 +54,16 @@ public class Validation {
         return emptyTextField;
     }
     
+    /**
+     * 
+     * @param firstFieldToCheck
+     * @param secondFieldToCheck
+     * @param thirdFieldToCheck
+     * @param fourthFieldToCheck
+     * @param fifthFieldToCheck
+     * @param sixthFieldToCheck
+     * @return 
+     */
     public static boolean checkEmptyFields(JTextField firstFieldToCheck, JTextField secondFieldToCheck, JTextField thirdFieldToCheck, JTextField fourthFieldToCheck, JTextField fifthFieldToCheck, JTextField sixthFieldToCheck) {
         boolean emptyTextField = false;
         
@@ -64,6 +72,13 @@ public class Validation {
         }
         return emptyTextField;
     }
+    
+    /**
+     * 
+     * @param firstFieldToCheck
+     * @param secondFieldToCheck
+     * @return 
+     */
     public static boolean checkEmptyTxtFields(JTextField firstFieldToCheck,JTextField secondFieldToCheck) {
         boolean emptyTextField = false;
         
@@ -73,6 +88,13 @@ public class Validation {
         return emptyTextField;
     } 
     
+    /**
+     * 
+     * @param firstFieldToCheck
+     * @param secondFieldToCheck
+     * @param thirdFieldToCheck
+     * @return 
+     */
     public static boolean checkEmptyTxtFields(JTextField firstFieldToCheck,JTextField secondFieldToCheck,JTextField thirdFieldToCheck) {
         boolean emptyTextField = false;
         

@@ -78,11 +78,6 @@
               <Component id="lblAddNewCommunicationHeader" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
           </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-              <Component id="lblYourId" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
-          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -90,9 +85,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="lblAddNewCommunicationHeader" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-              <Component id="lblYourId" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblEquipmentId" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtEquipmentId" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -172,8 +165,6 @@
           <Font name="Helvetica Neue" size="10" style="0"/>
         </Property>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblYourId">
     </Component>
     <Component class="javax.swing.JLabel" name="lblText">
     </Component>

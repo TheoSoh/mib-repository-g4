@@ -22,8 +22,6 @@ public class CommunicationFrame extends javax.swing.JFrame {
         initComponents();
         this.idb = idb;
         this.agentId = agentId;
-        lblYourId.setText("Your Agent-id: " + agentId);
-        
     }
 
     /**
@@ -46,7 +44,6 @@ public class CommunicationFrame extends javax.swing.JFrame {
         btnAdd = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         lblErrorText = new javax.swing.JLabel();
-        lblYourId = new javax.swing.JLabel();
         lblText = new javax.swing.JLabel();
 
         jTextField1.setText("jTextField1");
@@ -118,19 +115,13 @@ public class CommunicationFrame extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblAddNewCommunicationHeader)
                 .addGap(92, 92, 92))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(lblYourId)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblAddNewCommunicationHeader)
-                .addGap(4, 4, 4)
-                .addComponent(lblYourId)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblEquipmentId)
                     .addComponent(txtEquipmentId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -194,7 +185,6 @@ public class CommunicationFrame extends javax.swing.JFrame {
     private javax.swing.JLabel lblErrorText;
     private javax.swing.JLabel lblText;
     private javax.swing.JLabel lblTransferTechnology;
-    private javax.swing.JLabel lblYourId;
     private javax.swing.JTextField txtDescription;
     private javax.swing.JTextField txtEquipmentId;
     private javax.swing.JTextField txtTransferTech;
