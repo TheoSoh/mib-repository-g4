@@ -64,10 +64,10 @@ public class Validation {
      * @param sixthFieldToCheck
      * @return 
      */
-    public static boolean checkEmptyFields(JTextField firstFieldToCheck, JTextField secondFieldToCheck, JTextField thirdFieldToCheck, JTextField fourthFieldToCheck, JTextField fifthFieldToCheck, JTextField sixthFieldToCheck) {
+    public static boolean checkEmptyFields(JTextField firstFieldToCheck, JTextField secondFieldToCheck, JTextField thirdFieldToCheck, JTextField fourthFieldToCheck, JTextField fifthFieldToCheck) {
         boolean emptyTextField = false;
         
-        if((firstFieldToCheck.getText().isEmpty()) || (secondFieldToCheck.getText().isEmpty()) || (thirdFieldToCheck.getText().isEmpty()) || (fourthFieldToCheck.getText().isEmpty()) || (fifthFieldToCheck.getText().isEmpty()) || (sixthFieldToCheck.getText().isEmpty())) {
+        if((firstFieldToCheck.getText().isEmpty()) || (secondFieldToCheck.getText().isEmpty()) || (thirdFieldToCheck.getText().isEmpty()) || (fourthFieldToCheck.getText().isEmpty()) || (fifthFieldToCheck.getText().isEmpty())) {
             emptyTextField = true;
         }
         return emptyTextField;
@@ -120,6 +120,5 @@ public class Validation {
         }
         return chosenIsAgent;
     }
-    
     
 }

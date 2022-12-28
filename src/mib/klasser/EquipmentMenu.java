@@ -4,25 +4,31 @@
  */
 package mib.klasser;
 
+import javax.swing.JFrame;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 import javax.swing.JOptionPane;
 
 /**
  *
- * @author Mansa
+ * @author Grupp4
  */
 public class EquipmentMenu extends javax.swing.JFrame {
+    
+    //Här påbörjas deklaration av fält.
     private InfDB idb;
     private int agentId;
+    //Här slutar deklarationen av fält.
+    
     /**
-     * Creates new form MenyUtrustning
+     * Creates new form EquipmentMenu
+     * @param idb
+     * @param agentId 
      */
     public EquipmentMenu(InfDB idb, int agentId) {
         initComponents();
         this.idb = idb;
         this.agentId = agentId;
-        
     }
 
     /**
@@ -125,7 +131,14 @@ public class EquipmentMenu extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    /**
+     * Metoden kallas när användaren klickar på cancel knappen i rutan.
+     * Stänger ner EquipmentMenu samtidigt öppnas AdminMenu eller AgentMenu,
+     * beroende på vilken meny man kom ifrån. Detta kontrolleras m.h.a. 
+     * checkAdminStatus() metoden.
+     * @param evt 
+     */
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         EquipmentMenu.this.dispose();
         checkAdminStatus();
@@ -135,29 +148,48 @@ public class EquipmentMenu extends javax.swing.JFrame {
         else {
             new AgentMenu(idb, agentId).setVisible(true);
         }
-       
     }//GEN-LAST:event_btnCancelActionPerformed
-
+    
+    /**
+     * 
+     * @param evt 
+     */
     private void btnTeknikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTeknikActionPerformed
         EquipmentMenu.this.dispose();
-        new TechnologyFrame(idb, agentId).setVisible(true);
+        new NewTechnologyPage(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnTeknikActionPerformed
-
+    
+    /**
+     * 
+     * @param evt 
+     */
     private void btnVapenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVapenActionPerformed
         EquipmentMenu.this.dispose();
-        new WeaponFrame(idb, agentId).setVisible(true);
+        new NewWeaponPage(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnVapenActionPerformed
-
+    
+    /**
+     * 
+     * @param evt 
+     */
     private void btnKommunikationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKommunikationActionPerformed
         EquipmentMenu.this.dispose();
-        new CommunicationFrame(idb, agentId).setVisible(true);
+        new NewCommunicationPage(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnKommunikationActionPerformed
-
+    
+    /**
+     * 
+     * @param evt 
+     */
     private void btnAddEquipmentToAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddEquipmentToAgentActionPerformed
         EquipmentMenu.this.dispose();
         new AddEquipmentToAgentPage(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnAddEquipmentToAgentActionPerformed
-
+    
+    /**
+     * 
+     * @return 
+     */
     private boolean checkAdminStatus() {
         boolean isAdmin = false;
         try {
