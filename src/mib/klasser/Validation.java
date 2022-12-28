@@ -36,6 +36,20 @@ public class Validation {
     }
     
     /**
+     * 
+     * @param firstFieldToCheck
+     * @return 
+     */
+    public static boolean checkEmptyTxtField(JTextField txtFieldToCheck) {
+        boolean emptyTextField = false;
+        
+        if(txtFieldToCheck.getText().isEmpty()) {
+            emptyTextField = true;
+        }
+        return emptyTextField;
+    }
+    
+    /**
      * Denna metod kontrollerar ifall rutorna som inkommer som parameter 
      * är tomma. 
      * Dvs. om någon utav rutorna är tomma, alltså har en tom sträng i sig, 

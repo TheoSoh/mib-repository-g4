@@ -4,7 +4,9 @@
  */
 package mib.klasser;
 
+import static java.lang.Integer.parseInt;
 import java.util.ArrayList;
+import java.util.HashMap;
 import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
@@ -17,6 +19,9 @@ public class ChangeAlienInfoPage extends javax.swing.JFrame {
 
     private InfDB idb;
     private int agentId;
+    private String selectedValueAlienId;
+    private String selectedRaceAlienId;
+    private String selectedNewRace;
     /**
      * Creates new form ChangeAlienInfoPage
      */
@@ -93,12 +98,24 @@ public class ChangeAlienInfoPage extends javax.swing.JFrame {
         lblRaceAlienId = new javax.swing.JLabel();
         cmbRaceAlienId = new javax.swing.JComboBox<>();
         btnCancel = new javax.swing.JButton();
+        lblRaceSuccessMessage = new javax.swing.JLabel();
+        lblValueSuccessMessage = new javax.swing.JLabel();
+        lblValueErrorMessage = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        txtAntal = new javax.swing.JTextField();
+        lblAntal = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         lblChangeInfoHeader.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         lblChangeInfoHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblChangeInfoHeader.setText("Change alien's information");
+
+        cmbValueAlienId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbValueAlienIdActionPerformed(evt);
+            }
+        });
 
         lblValueAlienId.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblValueAlienId.setText("Alien-ID:");
@@ -116,6 +133,12 @@ public class ChangeAlienInfoPage extends javax.swing.JFrame {
             }
         });
 
+        cmbNewRace.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbNewRaceActionPerformed(evt);
+            }
+        });
+
         btnSetNewRace.setText("Set Race");
         btnSetNewRace.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -129,12 +152,35 @@ public class ChangeAlienInfoPage extends javax.swing.JFrame {
         lblRaceAlienId.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblRaceAlienId.setText("Alien-ID:");
 
+        cmbRaceAlienId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbRaceAlienIdActionPerformed(evt);
+            }
+        });
+
         btnCancel.setText("Cancel");
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelActionPerformed(evt);
             }
         });
+
+        lblRaceSuccessMessage.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
+        lblRaceSuccessMessage.setForeground(new java.awt.Color(0, 255, 0));
+        lblRaceSuccessMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        lblValueSuccessMessage.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
+        lblValueSuccessMessage.setForeground(new java.awt.Color(0, 255, 0));
+        lblValueSuccessMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        lblValueErrorMessage.setFont(new java.awt.Font("Helvetica Neue", 0, 10)); // NOI18N
+        lblValueErrorMessage.setForeground(new java.awt.Color(255, 0, 0));
+        lblValueErrorMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        jLabel5.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        lblAntal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -160,13 +206,18 @@ public class ChangeAlienInfoPage extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lblRaceAlienId, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblSetNewRace, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE))
+                            .addComponent(lblSetNewRace, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
+                            .addComponent(lblAntal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cmbRaceAlienId, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmbNewRace, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cmbNewRace, 0, 130, Short.MAX_VALUE)
+                            .addComponent(txtAntal)
+                            .addComponent(cmbRaceAlienId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(53, 53, 53)
-                        .addComponent(btnSetNewRace, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnSetNewRace, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
+                            .addComponent(lblRaceSuccessMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(lblNewValue, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
@@ -178,10 +229,13 @@ public class ChangeAlienInfoPage extends javax.swing.JFrame {
                             .addComponent(txtNewValue, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
                             .addComponent(cmbValueAlienId, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(27, 27, 27)
-                        .addComponent(btnChangeInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnChangeInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
+                            .addComponent(lblValueSuccessMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblValueErrorMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(22, 22, 22))
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(21, 21, 21)
                 .addComponent(btnCancel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -193,7 +247,8 @@ public class ChangeAlienInfoPage extends javax.swing.JFrame {
                 .addGap(53, 53, 53)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmbValueAlienId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblValueAlienId))
+                    .addComponent(lblValueAlienId)
+                    .addComponent(lblValueErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -204,36 +259,166 @@ public class ChangeAlienInfoPage extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNewValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNewValue))
+                    .addComponent(lblNewValue)
+                    .addComponent(lblValueSuccessMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(separator, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblRaceAlienId)
-                            .addComponent(cmbRaceAlienId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cmbRaceAlienId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(3, 3, 3)
+                                .addComponent(lblRaceAlienId, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cmbNewRace, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblSetNewRace)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(lblSetNewRace)
+                                .addGap(3, 3, 3)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtAntal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblAntal))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnCancel)
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(btnSetNewRace)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                .addComponent(btnCancel)
-                .addGap(20, 20, 20))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnSetNewRace)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblRaceSuccessMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSetNewRaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSetNewRaceActionPerformed
+        int intAlienIdSelected = parseInt(selectedRaceAlienId);
+        String antal = txtAntal.getText();
+        int intAntal = parseInt(antal);
+        String aliensOldRace = aliensRace();
         
+        if((selectedNewRace.equals("Boglodite")) && (aliensOldRace.equals("Squid")) || (aliensOldRace.equals("Worm"))) {
+            String sqlNewRaceQuery = "insert into Boglodite values(" + intAlienIdSelected + ", " + intAntal + ");";
+            String sqlOldRaceQuery = "delete from " + aliensOldRace + " where Alien_ID = " + intAlienIdSelected + ";";
+            try {
+                idb.insert(sqlNewRaceQuery);
+                idb.delete(sqlOldRaceQuery);
+            }
+            catch(InfException e) {
+                JOptionPane.showMessageDialog(null, "Internal database error!");
+            }
+        }
+        else if((selectedNewRace.equals("Squid")) && (aliensOldRace.equals("Boglodite")) || (aliensOldRace.equals("Worm"))) {
+            String sqlNewRaceQuery = "insert into Squid values(" + intAlienIdSelected + ", " + intAntal + ");";
+            String sqlOldRaceQuery = "delete from " + aliensOldRace + " where Alien_ID = '" + intAlienIdSelected + "';";
+            try {
+                idb.insert(sqlNewRaceQuery);
+                idb.delete(sqlOldRaceQuery);
+            }
+            catch(InfException e) {
+                JOptionPane.showMessageDialog(null, "Internal database error!");
+            }
+        }
+        else if((selectedNewRace.equals("Worm")) && (aliensOldRace.equals("Squid")) || (aliensOldRace.equals("Boglodite"))) {
+            String sqlNewRaceQuery = "insert into Worm values(" + intAlienIdSelected + ");";
+            String sqlOldRaceQuery = "delete from " + aliensOldRace + " where Alien_ID = '" + intAlienIdSelected + "';";
+            try {
+                idb.insert(sqlNewRaceQuery);
+                idb.delete(sqlOldRaceQuery);
+            }
+            catch(InfException e) {
+                JOptionPane.showMessageDialog(null, "Internal database error!");
+            }
+        }
+        else if((selectedNewRace.equals("Boglodite")) && (aliensOldRace.equals(""))) {
+            String sqlNewRaceQuery = "insert into Boglodite values(" + intAlienIdSelected + ", " + intAntal + ");";
+            try {
+                idb.insert(sqlNewRaceQuery);
+            }
+            catch(InfException e) {
+                JOptionPane.showMessageDialog(null, "Internal database error!");
+            }
+        }
+        else if((selectedNewRace.equals("Squid")) && (aliensOldRace.equals(""))) {
+            String sqlNewRaceQuery = "insert into Squid values(" + intAlienIdSelected + ", " + intAntal + ");";
+            try {
+                idb.insert(sqlNewRaceQuery);
+            }
+            catch(InfException e) {
+                JOptionPane.showMessageDialog(null, "Internal database error!");
+            }
+        }
+        else if((selectedNewRace.equals("Worm")) && (aliensOldRace.equals(""))) {
+            String sqlNewRaceQuery = "insert into Worm values(" + intAlienIdSelected + ");";
+            try {
+                idb.insert(sqlNewRaceQuery);
+            }
+            catch(InfException e) {
+                JOptionPane.showMessageDialog(null, "Internal database error!");
+            }
+        }
     }//GEN-LAST:event_btnSetNewRaceActionPerformed
 
-    private void btnChangeInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeInfoActionPerformed
+    private String aliensRace() {
+        String race = "";
         
+        try {
+            String sqlBogloditeQuery = "select * from Boglodite";
+            ArrayList<HashMap<String, String>> bogloditeTable;
+            bogloditeTable = idb.fetchRows(sqlBogloditeQuery);
+            for(HashMap<String, String> everyBoglodite : bogloditeTable) {
+                if(everyBoglodite.get("Alien_ID").equals(selectedRaceAlienId)) {
+                    race = "Boglodite";
+                }
+            }
+            
+            String sqlSquidQuery = "select * from Squid";
+            ArrayList<HashMap<String, String>> SquidTable;
+            SquidTable = idb.fetchRows(sqlSquidQuery);
+            for(HashMap<String, String> everySquid : SquidTable) {
+                if(everySquid.get("Alien_ID").equals(selectedRaceAlienId)) {
+                    race = "Squid";
+                }
+            }
+            
+            String sqlWormQuery = "select * from Worm";
+            ArrayList<HashMap<String, String>> WormTable;
+            WormTable = idb.fetchRows(sqlWormQuery);
+            for(HashMap<String, String> everyWorm : WormTable) {
+                if(everyWorm.get("Alien_ID").equals(selectedRaceAlienId)) {
+                    race = "Worm";
+                }
+            }
+        }
+        catch(InfException e) {
+            JOptionPane.showMessageDialog(null, "Internal database error!");
+        }
+        return race;
+    }
+    
+    private void btnChangeInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeInfoActionPerformed
+        String selectedInfo = cmbInfoToChange.getSelectedItem().toString();
+        String newValue = txtNewValue.getText();
+        String sqlQuery = "update Alien set " + selectedInfo + " = '" + newValue + "' where Alien_ID = " + selectedValueAlienId;
+        
+        if(Validation.checkEmptyTxtField(txtNewValue)) {
+            lblValueErrorMessage.setText("Enter Value!");
+        }
+        else {
+            try {
+                lblValueErrorMessage.setText("");
+                idb.update(sqlQuery);
+            }
+            catch(InfException e) {
+                lblValueErrorMessage.setText("DB Error!");
+            }
+        }
     }//GEN-LAST:event_btnChangeInfoActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
@@ -245,6 +430,30 @@ public class ChangeAlienInfoPage extends javax.swing.JFrame {
             new AgentMenu(idb, agentId).setVisible(true);
         }
     }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void cmbNewRaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbNewRaceActionPerformed
+        selectedNewRace = cmbNewRace.getSelectedItem().toString();
+        if(selectedNewRace.equals("Boglodite")) {
+            lblAntal.setText("Antal boogies:");
+            txtAntal.setVisible(true);
+        }
+        else if(selectedNewRace.equals("Squid")) {
+            lblAntal.setText("Antal armar:");
+            txtAntal.setVisible(true);
+        }
+        else if(selectedNewRace.equals("Worm")) {
+            lblAntal.setText("");
+            txtAntal.setVisible(false);
+        }
+    }//GEN-LAST:event_cmbNewRaceActionPerformed
+
+    private void cmbValueAlienIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbValueAlienIdActionPerformed
+        selectedValueAlienId = cmbValueAlienId.getSelectedItem().toString();
+    }//GEN-LAST:event_cmbValueAlienIdActionPerformed
+
+    private void cmbRaceAlienIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbRaceAlienIdActionPerformed
+        selectedRaceAlienId = cmbRaceAlienId.getSelectedItem().toString();
+    }//GEN-LAST:event_cmbRaceAlienIdActionPerformed
     
     private boolean checkAdminStatus() {
         boolean isAdmin = false;
@@ -270,13 +479,19 @@ public class ChangeAlienInfoPage extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbRaceAlienId;
     private javax.swing.JComboBox<String> cmbValueAlienId;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel lblAntal;
     private javax.swing.JLabel lblChangeInfoHeader;
     private javax.swing.JLabel lblChangeThis;
     private javax.swing.JLabel lblNewValue;
     private javax.swing.JLabel lblRaceAlienId;
+    private javax.swing.JLabel lblRaceSuccessMessage;
     private javax.swing.JLabel lblSetNewRace;
     private javax.swing.JLabel lblValueAlienId;
+    private javax.swing.JLabel lblValueErrorMessage;
+    private javax.swing.JLabel lblValueSuccessMessage;
     private javax.swing.JSeparator separator;
+    private javax.swing.JTextField txtAntal;
     private javax.swing.JTextField txtNewValue;
     // End of variables declaration//GEN-END:variables
 }
