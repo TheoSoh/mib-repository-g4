@@ -135,4 +135,17 @@ public class Validation {
         return chosenIsAgent;
     }
     
+    /**
+     * 
+     * @param checkThisString
+     * @return 
+     */
+    public static boolean checkIfTxtFieldIsOfInt(String checkThisString) {
+        boolean isOfInt = false;
+        if(checkThisString.matches("[0-9]+")) {
+            isOfInt = true;
+        }
+        return isOfInt;
+    }
+    
 }

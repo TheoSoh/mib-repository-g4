@@ -17,13 +17,18 @@ import oru.inf.InfException;
  */
 public class ChangeAlienInfoPage extends javax.swing.JFrame {
 
+    //Här påbörjas deklaration av fält.
     private InfDB idb;
     private int agentId;
     private String selectedValueAlienId;
     private String selectedRaceAlienId;
     private String selectedNewRace;
+    //Här slutar deklarationen av fält.
+    
     /**
      * Creates new form ChangeAlienInfoPage
+     * @param idb
+     * @param agentId 
      */
     public ChangeAlienInfoPage(InfDB idb, int agentId) {
         initComponents();
@@ -34,6 +39,9 @@ public class ChangeAlienInfoPage extends javax.swing.JFrame {
         addItemsToCmbInfoToChange();
     }
     
+    /**
+     * 
+     */
     private void addItemsToCmbNewRace() {
         String firstRace = "Boglodite";
         String secondRace = "Squid";
@@ -43,6 +51,9 @@ public class ChangeAlienInfoPage extends javax.swing.JFrame {
         cmbNewRace.addItem(thirdRace);
     }
     
+    /**
+     * 
+     */
     private void addItemsToCmbInfoToChange() {
         String firstValue = "Registrationdate";
         String secondValue = "Password";
@@ -58,6 +69,9 @@ public class ChangeAlienInfoPage extends javax.swing.JFrame {
         cmbInfoToChange.addItem(sixthValue);
     }
     
+    /**
+     * 
+     */
     private void addItemsToCmbAlienId() {
         try {
             ArrayList<String> alienIdList = new ArrayList<String>();
@@ -297,6 +311,10 @@ public class ChangeAlienInfoPage extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * 
+     * @param evt 
+     */
     private void btnSetNewRaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSetNewRaceActionPerformed
         int intAlienIdSelected = parseInt(selectedRaceAlienId);
         String antal = txtAntal.getText();
@@ -377,6 +395,10 @@ public class ChangeAlienInfoPage extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnSetNewRaceActionPerformed
 
+    /**
+     * 
+     * @return 
+     */
     private String aliensRace() {
         String race = "";
         
@@ -414,29 +436,80 @@ public class ChangeAlienInfoPage extends javax.swing.JFrame {
         return race;
     }
     
+    /**
+     * 
+     * @param evt 
+     */
     private void btnChangeInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeInfoActionPerformed
-        String selectedInfo = cmbInfoToChange.getSelectedItem().toString();
+        String selectedInfo = getCorrectString();
         int selectedIntValueAlienId = parseInt(selectedValueAlienId);
         String newValue = txtNewValue.getText();
-        int newIntValue = 0;
-        String sqlQuery = "";
-        sqlQuery = "update Alien set " + selectedInfo + " = '" + newValue + "' where Alien_ID = " + selectedIntValueAlienId;
         
         if(Validation.checkEmptyTxtField(txtNewValue)) {
             lblValueErrorMessage.setText("Enter Value!");
         }
-        else {
+        else if(Validation.checkIfTxtFieldIsOfInt(newValue)){
             try {
+                String sqlQuery = "update Alien set " + selectedInfo + " = " + newValue + " where Alien_ID = " + selectedIntValueAlienId + ";";
                 lblValueErrorMessage.setText("");
                 idb.update(sqlQuery);
                 lblValueSuccessMessage.setText("Success!");
             }
             catch(InfException e) {
-                lblValueErrorMessage.setText("DB Error!");
+                lblValueErrorMessage.setText("Invalid value!");
+                lblValueSuccessMessage.setText("");
+            }
+        }
+        else {
+            try {
+                String sqlQuery = "update Alien set " + selectedInfo + " = '" + newValue + "' where Alien_ID = " + selectedIntValueAlienId + ";";
+                lblValueErrorMessage.setText("");
+                idb.update(sqlQuery);
+                lblValueSuccessMessage.setText("Success!");
+            }
+            catch(InfException e) {
+                lblValueErrorMessage.setText("Invalid value!");
+                lblValueSuccessMessage.setText("");
             }
         }
     }//GEN-LAST:event_btnChangeInfoActionPerformed
-
+    
+    /**
+     * 
+     * @return 
+     */
+    private String getCorrectString() {
+        String correctString = "";
+        String selectedInfo = cmbInfoToChange.getSelectedItem().toString();
+        
+        switch (selectedInfo) {
+            case "Registrationdate":
+                correctString = "Registreringsdatum";
+                break;
+            case "Password":
+                correctString = "Losenord";
+                break;
+            case "Name":
+                correctString = "Namn";
+                break;
+            case "Phone Number":
+                correctString = "Telefon";
+                break;
+            case "Area":
+                correctString = "Plats";
+                break;
+            default:
+                correctString = "Ansvarig_Agent";
+                break;
+        }
+        
+        return correctString;
+    }
+    
+    /**
+     * 
+     * @param evt 
+     */
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         ChangeAlienInfoPage.this.dispose();
         if(checkAdminStatus()) {
@@ -447,6 +520,10 @@ public class ChangeAlienInfoPage extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnCancelActionPerformed
 
+    /**
+     * 
+     * @param evt 
+     */
     private void cmbNewRaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbNewRaceActionPerformed
         selectedNewRace = cmbNewRace.getSelectedItem().toString();
         if(selectedNewRace.equals("Boglodite")) {
@@ -463,14 +540,26 @@ public class ChangeAlienInfoPage extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cmbNewRaceActionPerformed
 
+    /**
+     * 
+     * @param evt 
+     */
     private void cmbValueAlienIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbValueAlienIdActionPerformed
         selectedValueAlienId = cmbValueAlienId.getSelectedItem().toString();
     }//GEN-LAST:event_cmbValueAlienIdActionPerformed
 
+    /**
+     * 
+     * @param evt 
+     */
     private void cmbRaceAlienIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbRaceAlienIdActionPerformed
         selectedRaceAlienId = cmbRaceAlienId.getSelectedItem().toString();
     }//GEN-LAST:event_cmbRaceAlienIdActionPerformed
     
+    /**
+     * 
+     * @return 
+     */
     private boolean checkAdminStatus() {
         boolean isAdmin = false;
         try {
