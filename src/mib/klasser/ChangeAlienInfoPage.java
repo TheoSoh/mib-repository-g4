@@ -101,7 +101,7 @@ public class ChangeAlienInfoPage extends javax.swing.JFrame {
         lblRaceSuccessMessage = new javax.swing.JLabel();
         lblValueSuccessMessage = new javax.swing.JLabel();
         lblValueErrorMessage = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        lblRaceErrorMessage = new javax.swing.JLabel();
         txtAntal = new javax.swing.JTextField();
         lblAntal = new javax.swing.JLabel();
 
@@ -177,8 +177,8 @@ public class ChangeAlienInfoPage extends javax.swing.JFrame {
         lblValueErrorMessage.setForeground(new java.awt.Color(255, 0, 0));
         lblValueErrorMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        jLabel5.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblRaceErrorMessage.setForeground(new java.awt.Color(255, 0, 0));
+        lblRaceErrorMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         lblAntal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
 
@@ -217,7 +217,7 @@ public class ChangeAlienInfoPage extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnSetNewRace, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
                             .addComponent(lblRaceSuccessMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(lblRaceErrorMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(lblNewValue, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
@@ -286,7 +286,7 @@ public class ChangeAlienInfoPage extends javax.swing.JFrame {
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblRaceErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnSetNewRace)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -309,6 +309,8 @@ public class ChangeAlienInfoPage extends javax.swing.JFrame {
             try {
                 idb.insert(sqlNewRaceQuery);
                 idb.delete(sqlOldRaceQuery);
+                lblRaceSuccessMessage.setText("Success!");
+                lblRaceErrorMessage.setText("");
             }
             catch(InfException e) {
                 JOptionPane.showMessageDialog(null, "Internal database error!");
@@ -320,6 +322,8 @@ public class ChangeAlienInfoPage extends javax.swing.JFrame {
             try {
                 idb.insert(sqlNewRaceQuery);
                 idb.delete(sqlOldRaceQuery);
+                lblRaceSuccessMessage.setText("Success!");
+                lblRaceErrorMessage.setText("");
             }
             catch(InfException e) {
                 JOptionPane.showMessageDialog(null, "Internal database error!");
@@ -331,6 +335,8 @@ public class ChangeAlienInfoPage extends javax.swing.JFrame {
             try {
                 idb.insert(sqlNewRaceQuery);
                 idb.delete(sqlOldRaceQuery);
+                lblRaceSuccessMessage.setText("Success!");
+                lblRaceErrorMessage.setText("");
             }
             catch(InfException e) {
                 JOptionPane.showMessageDialog(null, "Internal database error!");
@@ -340,6 +346,8 @@ public class ChangeAlienInfoPage extends javax.swing.JFrame {
             String sqlNewRaceQuery = "insert into Boglodite values(" + intAlienIdSelected + ", " + intAntal + ");";
             try {
                 idb.insert(sqlNewRaceQuery);
+                lblRaceSuccessMessage.setText("Success!");
+                lblRaceErrorMessage.setText("");
             }
             catch(InfException e) {
                 JOptionPane.showMessageDialog(null, "Internal database error!");
@@ -349,6 +357,8 @@ public class ChangeAlienInfoPage extends javax.swing.JFrame {
             String sqlNewRaceQuery = "insert into Squid values(" + intAlienIdSelected + ", " + intAntal + ");";
             try {
                 idb.insert(sqlNewRaceQuery);
+                lblRaceSuccessMessage.setText("Success!");
+                lblRaceErrorMessage.setText("");
             }
             catch(InfException e) {
                 JOptionPane.showMessageDialog(null, "Internal database error!");
@@ -358,6 +368,8 @@ public class ChangeAlienInfoPage extends javax.swing.JFrame {
             String sqlNewRaceQuery = "insert into Worm values(" + intAlienIdSelected + ");";
             try {
                 idb.insert(sqlNewRaceQuery);
+                lblRaceSuccessMessage.setText("Success!");
+                lblRaceErrorMessage.setText("");
             }
             catch(InfException e) {
                 JOptionPane.showMessageDialog(null, "Internal database error!");
@@ -404,8 +416,11 @@ public class ChangeAlienInfoPage extends javax.swing.JFrame {
     
     private void btnChangeInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeInfoActionPerformed
         String selectedInfo = cmbInfoToChange.getSelectedItem().toString();
+        int selectedIntValueAlienId = parseInt(selectedValueAlienId);
         String newValue = txtNewValue.getText();
-        String sqlQuery = "update Alien set " + selectedInfo + " = '" + newValue + "' where Alien_ID = " + selectedValueAlienId;
+        int newIntValue = 0;
+        String sqlQuery = "";
+        sqlQuery = "update Alien set " + selectedInfo + " = '" + newValue + "' where Alien_ID = " + selectedIntValueAlienId;
         
         if(Validation.checkEmptyTxtField(txtNewValue)) {
             lblValueErrorMessage.setText("Enter Value!");
@@ -414,6 +429,7 @@ public class ChangeAlienInfoPage extends javax.swing.JFrame {
             try {
                 lblValueErrorMessage.setText("");
                 idb.update(sqlQuery);
+                lblValueSuccessMessage.setText("Success!");
             }
             catch(InfException e) {
                 lblValueErrorMessage.setText("DB Error!");
@@ -479,12 +495,12 @@ public class ChangeAlienInfoPage extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbRaceAlienId;
     private javax.swing.JComboBox<String> cmbValueAlienId;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel lblAntal;
     private javax.swing.JLabel lblChangeInfoHeader;
     private javax.swing.JLabel lblChangeThis;
     private javax.swing.JLabel lblNewValue;
     private javax.swing.JLabel lblRaceAlienId;
+    private javax.swing.JLabel lblRaceErrorMessage;
     private javax.swing.JLabel lblRaceSuccessMessage;
     private javax.swing.JLabel lblSetNewRace;
     private javax.swing.JLabel lblValueAlienId;
