@@ -319,10 +319,10 @@ public class ChangeAlienInfoPage extends javax.swing.JFrame {
     private void btnSetNewRaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSetNewRaceActionPerformed
         int intAlienIdSelected = parseInt(selectedRaceAlienId);
         String antal = txtAntal.getText();
-        int intAntal = parseInt(antal);
         String aliensOldRace = aliensRace();
         
         if((selectedNewRace.equals("Boglodite")) && (aliensOldRace.equals("Squid")) || (aliensOldRace.equals("Worm"))) {
+            int intAntal = parseInt(antal);
             String sqlNewRaceQuery = "insert into Boglodite values(" + intAlienIdSelected + ", " + intAntal + ");";
             String sqlOldRaceQuery = "delete from " + aliensOldRace + " where Alien_ID = " + intAlienIdSelected + ";";
             try {
@@ -336,6 +336,7 @@ public class ChangeAlienInfoPage extends javax.swing.JFrame {
             }
         }
         else if((selectedNewRace.equals("Squid")) && (aliensOldRace.equals("Boglodite")) || (aliensOldRace.equals("Worm"))) {
+            int intAntal = parseInt(antal);
             String sqlNewRaceQuery = "insert into Squid values(" + intAlienIdSelected + ", " + intAntal + ");";
             String sqlOldRaceQuery = "delete from " + aliensOldRace + " where Alien_ID = '" + intAlienIdSelected + "';";
             try {
@@ -362,6 +363,7 @@ public class ChangeAlienInfoPage extends javax.swing.JFrame {
             }
         }
         else if((selectedNewRace.equals("Boglodite")) && (aliensOldRace.equals(""))) {
+            int intAntal = parseInt(antal);
             String sqlNewRaceQuery = "insert into Boglodite values(" + intAlienIdSelected + ", " + intAntal + ");";
             try {
                 idb.insert(sqlNewRaceQuery);
@@ -373,6 +375,7 @@ public class ChangeAlienInfoPage extends javax.swing.JFrame {
             }
         }
         else if((selectedNewRace.equals("Squid")) && (aliensOldRace.equals(""))) {
+            int intAntal = parseInt(antal);
             String sqlNewRaceQuery = "insert into Squid values(" + intAlienIdSelected + ", " + intAntal + ");";
             try {
                 idb.insert(sqlNewRaceQuery);

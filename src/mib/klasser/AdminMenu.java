@@ -4,6 +4,9 @@
  */
 package mib.klasser;
 
+import static java.lang.Integer.parseInt;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
@@ -15,6 +18,7 @@ public class AdminMenu extends javax.swing.JFrame {
     
     private InfDB idb;
     private int agentId;
+    private String selectedAreaIdCommander;
     
     
     /**
@@ -25,6 +29,7 @@ public class AdminMenu extends javax.swing.JFrame {
         this.idb = idb;
         this.agentId = agentId;
         lblAgentId.setText("Your Agent-id: " + agentId);
+        addItemsToCmbCommanderArea();
     }
 
     /**
@@ -49,9 +54,11 @@ public class AdminMenu extends javax.swing.JFrame {
         btnAddEquipment = new javax.swing.JButton();
         btnSearchInfoAlien = new javax.swing.JButton();
         lblSearchAreaBoss = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cmbCommanderArea = new javax.swing.JComboBox<>();
         lblAgentId = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        lblAreaCommander = new javax.swing.JLabel();
+        lblCommander = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -77,7 +84,6 @@ public class AdminMenu extends javax.swing.JFrame {
         lblAlienVal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblAlienVal.setText("Aliens");
 
-        cmbShowForArea.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbShowForArea.setToolTipText("");
         cmbShowForArea.setName(""); // NOI18N
         cmbShowForArea.addActionListener(new java.awt.event.ActionListener() {
@@ -92,7 +98,6 @@ public class AdminMenu extends javax.swing.JFrame {
         lblAliensByRace.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblAliensByRace.setText("All aliens by race");
 
-        cmbShowByRace.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbShowByRace.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbShowByRaceActionPerformed(evt);
@@ -127,10 +132,9 @@ public class AdminMenu extends javax.swing.JFrame {
         lblSearchAreaBoss.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblSearchAreaBoss.setText("Who is the Commander (Area)");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        cmbCommanderArea.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                cmbCommanderAreaActionPerformed(evt);
             }
         });
 
@@ -160,7 +164,7 @@ public class AdminMenu extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lblAgent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cmbCommanderArea, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnAddEquipment, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lblSearchAreaBoss, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lblAlienVal, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -172,7 +176,12 @@ public class AdminMenu extends javax.swing.JFrame {
                         .addComponent(lblAgentId, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(188, 188, 188)
-                        .addComponent(lblAgentAdminHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblAgentAdminHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblAreaCommander, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblCommander, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -193,8 +202,12 @@ public class AdminMenu extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(lblSearchAreaBoss)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addComponent(cmbCommanderArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblAreaCommander)
+                    .addComponent(lblCommander))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblAlienVal, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -214,7 +227,7 @@ public class AdminMenu extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmbShowByRace, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmbShowForArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39))
+                .addGap(95, 95, 95))
         );
 
         pack();
@@ -251,19 +264,54 @@ public class AdminMenu extends javax.swing.JFrame {
         new EquipmentMenu(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnAddEquipmentActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    private void cmbCommanderAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCommanderAreaActionPerformed
+        selectedAreaIdCommander = cmbCommanderArea.getSelectedItem().toString();
+        String areaBenamning = getCorrectBenamning();
+                
+        switch(selectedAreaIdCommander) {
+            case "1":
+                lblAreaCommander.setText(areaBenamning + " ");
+        }
+    }//GEN-LAST:event_cmbCommanderAreaActionPerformed
 
+    
+    
+    private String getCorrectBenamning() {
+        String correctBenamning = "";
+        int selectedOmradesId = parseInt(selectedAreaIdCommander);
+        
+        try {
+            String sqlQuery = "select Benamning from Omrade where Omrades_ID = " + selectedOmradesId;
+            correctBenamning = idb.fetchSingle(sqlQuery);
+        }
+        catch(InfException e) {
+            JOptionPane.showMessageDialog(null, "Internal database error!");
+        }
+        return correctBenamning;
+    }
+    
+    private void addItemsToCmbCommanderArea() {
+        try {
+            String sqlQuestion = "select Omrades_ID from Omrade";
+            ArrayList<String> areaIdList = idb.fetchColumn(sqlQuestion);
+            for(String anAreaId : areaIdList) {
+                cmbCommanderArea.addItem(anAreaId);
+            }
+        }
+        catch(InfException e) {
+            JOptionPane.showMessageDialog(null, "Internal database error!");
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddEquipment;
     private javax.swing.JButton btnAddedWhen;
     private javax.swing.JButton btnChangeInfo;
     private javax.swing.JButton btnNewAlien;
     private javax.swing.JButton btnSearchInfoAlien;
+    private javax.swing.JComboBox<String> cmbCommanderArea;
     private javax.swing.JComboBox<String> cmbShowByRace;
     private javax.swing.JComboBox<String> cmbShowForArea;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblAgent;
     private javax.swing.JLabel lblAgentAdminHeader;
@@ -271,6 +319,8 @@ public class AdminMenu extends javax.swing.JFrame {
     private javax.swing.JLabel lblAlienVal;
     private javax.swing.JLabel lblAliensByRace;
     private javax.swing.JLabel lblAliensInArea;
+    private javax.swing.JLabel lblAreaCommander;
+    private javax.swing.JLabel lblCommander;
     private javax.swing.JLabel lblSearchAreaBoss;
     // End of variables declaration//GEN-END:variables
 }
