@@ -100,10 +100,12 @@
               <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
               <Component id="lblChangeInfoHeader" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="cmbValueAlienId" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblValueAlienId" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="lblValueErrorMessage" alignment="0" min="-2" pref="20" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="cmbValueAlienId" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblValueAlienId" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
@@ -114,10 +116,12 @@
                   <Component id="btnChangeInfo" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="txtNewValue" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblNewValue" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="lblValueSuccessMessage" alignment="1" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="txtNewValue" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblNewValue" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="separator" min="-2" pref="8" max="-2" attributes="0"/>
@@ -139,7 +143,6 @@
                               <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="txtAntal" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblAntal" alignment="3" min="-2" max="-2" attributes="0"/>

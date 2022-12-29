@@ -140,8 +140,9 @@ public class Validation {
      * @param checkThisString
      * @return 
      */
-    public static boolean checkIfTxtFieldIsOfInt(String checkThisString) {
+    public static boolean checkIfTxtFieldIsOfInt(JTextField checkThisTxtField) {
         boolean isOfInt = false;
+        String checkThisString = checkThisTxtField.getText();
         if(checkThisString.matches("[0-9]+")) {
             isOfInt = true;
         }
