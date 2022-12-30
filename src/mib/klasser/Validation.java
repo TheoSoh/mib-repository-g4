@@ -149,4 +149,17 @@ public class Validation {
         return isOfInt;
     }
     
+    /**
+     * 
+     * @param checkThisString
+     * @return 
+     */
+    public static boolean checkStringSelectedRace(String checkThisString) {
+        boolean raceIsWorm = false;
+        if(checkThisString.equals("Worm")) {
+            raceIsWorm = true;
+        }
+        return raceIsWorm;
+    }
+    
 }

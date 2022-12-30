@@ -24,37 +24,23 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="106" max="32767" attributes="0"/>
+              <EmptySpace pref="103" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="lblAliensInArea" max="32767" attributes="0"/>
+                  <Component id="btnChangeInfo" alignment="1" max="32767" attributes="0"/>
+                  <Component id="btnNewAlien" alignment="1" max="32767" attributes="0"/>
+                  <Component id="cmbShowForArea" min="-2" pref="165" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="lblAliensInArea" max="32767" attributes="0"/>
-                          <Component id="btnChangeInfo" alignment="1" max="32767" attributes="0"/>
-                          <Component id="btnNewAlien" alignment="1" max="32767" attributes="0"/>
-                          <Component id="cmbShowForArea" min="-2" pref="165" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="cmbShowByRace" min="-2" pref="165" max="-2" attributes="0"/>
-                          <Component id="btnAddedWhen" min="-2" pref="165" max="-2" attributes="0"/>
-                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="btnSearchInfoAlien" alignment="0" max="32767" attributes="0"/>
-                              <Component id="lblAliensByRace" alignment="0" min="-2" pref="165" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="lblAgent" max="32767" attributes="0"/>
-                          <Component id="cmbCommanderArea" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnAddEquipment" alignment="0" max="32767" attributes="0"/>
-                          <Component id="lblSearchAreaBoss" alignment="1" max="32767" attributes="0"/>
-                          <Component id="lblAlienVal" min="-2" pref="185" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="208" max="-2" attributes="0"/>
+                  <Component id="cmbShowByRace" min="-2" pref="165" max="-2" attributes="0"/>
+                  <Component id="btnAddedWhen" min="-2" pref="165" max="-2" attributes="0"/>
+                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="btnSearchInfoAlien" alignment="0" max="32767" attributes="0"/>
+                      <Component id="lblAliensByRace" alignment="0" min="-2" pref="165" max="-2" attributes="0"/>
                   </Group>
               </Group>
+              <EmptySpace min="-2" pref="103" max="-2" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
@@ -64,22 +50,43 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="188" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="lblAgentAdminHeader" min="-2" pref="225" max="-2" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <Component id="lblAreaCommander" min="-2" pref="75" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="lblCommander" max="32767" attributes="0"/>
-                          </Group>
-                      </Group>
+                      <Component id="lblAgentAdminHeader" min="-2" pref="225" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="188" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               <Component id="jSeparator1" min="-2" pref="465" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="lblSearchAreaBoss" pref="339" max="32767" attributes="0"/>
+                  <Component id="lblAgent" pref="339" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="131" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <Component id="lblAreaCommander" min="-2" pref="417" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="206" max="-2" attributes="0"/>
+              <Component id="btnAddEquipment" min="-2" pref="189" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="lblAlienVal" min="-2" pref="185" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="208" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="253" max="-2" attributes="0"/>
+              <Component id="cmbCommanderArea" min="-2" pref="95" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -90,24 +97,21 @@
               <Component id="lblAgentAdminHeader" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
               <Component id="lblAgentId" min="-2" pref="20" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="lblAgent" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="btnAddEquipment" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
               <Component id="lblSearchAreaBoss" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
               <Component id="cmbCommanderArea" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblAreaCommander" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblCommander" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace pref="41" max="32767" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="lblAreaCommander" min="-2" pref="18" max="-2" attributes="0"/>
+              <EmptySpace pref="29" max="32767" attributes="0"/>
               <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
               <Component id="lblAlienVal" min="-2" pref="25" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnNewAlien" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnAddedWhen" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -242,8 +246,11 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblSearchAreaBoss">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Helvetica Neue" size="13" style="1"/>
+        </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Who is the Commander (Area)"/>
+        <Property name="text" type="java.lang.String" value="Choose Area-ID below to see who&apos;s commander there"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="cmbCommanderArea">
@@ -269,8 +276,12 @@
     <Component class="javax.swing.JSeparator" name="jSeparator1">
     </Component>
     <Component class="javax.swing.JLabel" name="lblAreaCommander">
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblCommander">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Helvetica Neue" size="12" style="0"/>
+        </Property>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

@@ -27,13 +27,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblChangeInfoHeader" max="32767" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          </Group>
-                      </Group>
+                      <Component id="lblChangeInfoHeader" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
@@ -50,12 +44,12 @@
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="lblRaceAlienId" max="32767" attributes="0"/>
                           <Component id="lblSetNewRace" pref="145" max="32767" attributes="0"/>
-                          <Component id="lblAntal" alignment="1" pref="145" max="32767" attributes="0"/>
+                          <Component id="lblAmmount" alignment="1" pref="145" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="cmbNewRace" pref="130" max="32767" attributes="0"/>
-                          <Component id="txtAntal" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtAmmount" alignment="0" max="32767" attributes="0"/>
                           <Component id="cmbRaceAlienId" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
@@ -107,9 +101,7 @@
                       <Component id="lblValueAlienId" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="cmbInfoToChange" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                   <Component id="lblChangeThis" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -144,8 +136,8 @@
                           </Group>
                       </Group>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtAntal" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblAntal" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtAmmount" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblAmmount" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="btnCancel" min="-2" max="-2" attributes="0"/>
@@ -193,8 +185,6 @@
         <Property name="horizontalAlignment" type="int" value="4"/>
         <Property name="text" type="java.lang.String" value="Alien-ID:"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel2">
     </Component>
     <Component class="javax.swing.JComboBox" name="cmbInfoToChange">
       <Properties>
@@ -325,9 +315,9 @@
         <Property name="horizontalAlignment" type="int" value="0"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtAntal">
+    <Component class="javax.swing.JTextField" name="txtAmmount">
     </Component>
-    <Component class="javax.swing.JLabel" name="lblAntal">
+    <Component class="javax.swing.JLabel" name="lblAmmount">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="4"/>
       </Properties>

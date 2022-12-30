@@ -5,7 +5,6 @@
 package mib.klasser;
 
 import static java.lang.Integer.parseInt;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
@@ -16,9 +15,12 @@ import oru.inf.InfException;
  */
 public class NewAlienPage extends javax.swing.JFrame {
     
+    //Här startar deklaration av fält.
     private InfDB idb;
     private int agentId;
     private String selectedRace;
+    //Här slutar deklaration av fält.
+    
     /**
      * Creates new form NewAlienPage
      */
@@ -255,6 +257,15 @@ public class NewAlienPage extends javax.swing.JFrame {
             lblName.setText("*Name:");
             lblArea.setText("*Area:");
             lblAssignAgent.setText("*Assign Agent-ID:");
+            if(selectedRace.equals("Boglodite")) {
+                lblAmmount.setText("*Boogies:");
+            }
+            else if(selectedRace.equals("Squid")) {
+                lblAmmount.setText("*Arms:");
+            }
+            else {
+                lblAmmount.setText("");
+            }
         }
         else {
             try {
@@ -265,30 +276,38 @@ public class NewAlienPage extends javax.swing.JFrame {
                 int area = parseInt(txtPlats.getText());
                 int assignedAgentId = parseInt(txtAnsvarigAgent.getText());
                 String Ammount = txtAmmount.getText();
-                int AmmountToInt = parseInt(Ammount);
                 
-                String sqlQuery = "insert into Alien values (" + alienId + ", curdate(), '" + password + "', '" + name + "', '" + phoneNumber + "', " + area + ", " + assignedAgentId + ");";
-                String sqlSetRaceQuery = "insert into " + selectedRace + " values(" + alienId + ", " + AmmountToInt + ");";
-               
-                idb.insert(sqlQuery);
-                idb.insert(sqlSetRaceQuery);
-                lblMessage.setText("Successful register!");
-                lblErrorMessage.setText("");
+                if(!Validation.checkStringSelectedRace(selectedRace)) {
+                    int AmmountToInt = parseInt(Ammount);
+                    String sqlSetRaceQuery = "insert into " + selectedRace + " values(" + alienId + ", " + AmmountToInt + ");";
+                    
+                    idb.insert(sqlSetRaceQuery);
+                    lblMessage.setText("Successful register!");
+                    lblErrorMessage.setText("");
+                }
+                else {
+                    String sqlSetRaceQuery = "insert into " + selectedRace + " values(" + alienId + ");";
+                    idb.insert(sqlSetRaceQuery);
+                }
             }
             catch(InfException e) {
                 lblErrorMessage.setText("Wrong format, Alien-ID exist or Agent-ID/Area don't!");
             }
         }
     }//GEN-LAST:event_btnRegisterActionPerformed
-
+    
+    /**
+     * 
+     * @param evt 
+     */
     private void cmbSetRaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSetRaceActionPerformed
         selectedRace = cmbSetRace.getSelectedItem().toString();
         if(selectedRace.equals("Boglodite")) {
-            lblAmmount.setText("Antal boogies:");
+            lblAmmount.setText("Boogies:");
             txtAmmount.setVisible(true);
         }
         else if(selectedRace.equals("Squid")) {
-            lblAmmount.setText("Antal armar:");
+            lblAmmount.setText("Arms:");
             txtAmmount.setVisible(true);
         }
         else if(selectedRace.equals("Worm")) {
