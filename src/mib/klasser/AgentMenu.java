@@ -55,7 +55,7 @@ public class AgentMenu extends javax.swing.JFrame {
         btnAddedWhen = new javax.swing.JButton();
         lblAgent = new javax.swing.JLabel();
         btnAddEquipment = new javax.swing.JButton();
-        btnSearchInfoAlien = new javax.swing.JButton();
+        btnShowAlienInfo = new javax.swing.JButton();
         lblSearchAreaBoss = new javax.swing.JLabel();
         cmbCommanderArea = new javax.swing.JComboBox<>();
         lblAgentId = new javax.swing.JLabel();
@@ -70,7 +70,7 @@ public class AgentMenu extends javax.swing.JFrame {
         lblAgentAdminHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblAgentAdminHeader.setText("MIB - Agent menu");
 
-        btnNewAlien.setText("Add New Alien");
+        btnNewAlien.setText("Register New");
         btnNewAlien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNewAlienActionPerformed(evt);
@@ -126,10 +126,10 @@ public class AgentMenu extends javax.swing.JFrame {
             }
         });
 
-        btnSearchInfoAlien.setText("Alien Info");
-        btnSearchInfoAlien.addActionListener(new java.awt.event.ActionListener() {
+        btnShowAlienInfo.setText("Show Info");
+        btnShowAlienInfo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSearchInfoAlienActionPerformed(evt);
+                btnShowAlienInfoActionPerformed(evt);
             }
         });
 
@@ -205,7 +205,7 @@ public class AgentMenu extends javax.swing.JFrame {
                             .addComponent(cmbShowByRace, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnAddedWhen, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(btnSearchInfoAlien, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnShowAlienInfo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(lblAliensByRace, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(103, 103, 103))))
         );
@@ -237,7 +237,7 @@ public class AgentMenu extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnChangeInfo)
-                    .addComponent(btnSearchInfoAlien))
+                    .addComponent(btnShowAlienInfo))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblAliensByRace)
@@ -290,9 +290,10 @@ public class AgentMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAddedWhenActionPerformed
 
-    private void btnSearchInfoAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchInfoAlienActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSearchInfoAlienActionPerformed
+    private void btnShowAlienInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowAlienInfoActionPerformed
+        AgentMenu.this.dispose();
+        new ShowAlienInfoPage(idb, agentId).setVisible(true);
+    }//GEN-LAST:event_btnShowAlienInfoActionPerformed
 
     private void btnAddEquipmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddEquipmentActionPerformed
         AgentMenu.this.dispose();
@@ -364,7 +365,7 @@ public class AgentMenu extends javax.swing.JFrame {
     private javax.swing.JButton btnAddedWhen;
     private javax.swing.JButton btnChangeInfo;
     private javax.swing.JButton btnNewAlien;
-    private javax.swing.JButton btnSearchInfoAlien;
+    private javax.swing.JButton btnShowAlienInfo;
     private javax.swing.JComboBox<String> cmbCommanderArea;
     private javax.swing.JComboBox<String> cmbShowByRace;
     private javax.swing.JComboBox<String> cmbShowForArea;
