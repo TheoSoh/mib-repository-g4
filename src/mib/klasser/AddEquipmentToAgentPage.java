@@ -28,6 +28,7 @@ public class AddEquipmentToAgentPage extends javax.swing.JFrame {
         this.idb = idb;
         this.agentId = agentId;
         addItemsToCmbChooseEquipment();
+        setTitle("Assign equipment!");
     }
     
     /**

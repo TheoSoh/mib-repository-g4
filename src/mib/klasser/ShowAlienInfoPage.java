@@ -28,6 +28,7 @@ public class ShowAlienInfoPage extends javax.swing.JFrame {
         this.idb = idb;
         this.agentId = agentId;
         addItemsToCmbAlienId();
+        setTitle("Alien information!");
     }
     
     private void addItemsToCmbAlienId() {

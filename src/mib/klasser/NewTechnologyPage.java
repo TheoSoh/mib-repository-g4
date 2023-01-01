@@ -22,6 +22,7 @@ public class NewTechnologyPage extends javax.swing.JFrame {
         initComponents();
         this.idb = idb;
         this.agentId = agentId;
+        setTitle("Register new Technology!");
     }
 
     /**

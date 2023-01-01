@@ -23,6 +23,7 @@ public class ChangePasswordPage extends javax.swing.JFrame {
         initComponents();
         this.idb = idb;
         addTypes();
+        setTitle("Change Password!");
     }
 
     /**

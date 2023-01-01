@@ -29,6 +29,7 @@ public class EquipmentMenu extends javax.swing.JFrame {
         initComponents();
         this.idb = idb;
         this.agentId = agentId;
+        setTitle("Equipment Menu");
     }
 
     /**

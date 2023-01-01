@@ -25,6 +25,7 @@ public class AlienMenu extends javax.swing.JFrame {
         this.idb = idb;
         this.alienId = alienId;
         lblAlienId.setText("Your Alien-id: " + alienId);
+        setTitle("Alien Menu");
     }
 
     /**

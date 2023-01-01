@@ -37,6 +37,7 @@ public class ChangeAlienInfoPage extends javax.swing.JFrame {
         addItemsToCmbNewRace();
         addItemsToCmbAlienId();
         addItemsToCmbInfoToChange();
+        setTitle("Change alien Info");
     }
     
     /**

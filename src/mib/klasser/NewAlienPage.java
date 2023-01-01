@@ -29,6 +29,7 @@ public class NewAlienPage extends javax.swing.JFrame {
         this.idb = idb;
         this.agentId = agentId;
         addItemsToCmbSetRace();
+        setTitle("Register new alien!");
     }
     
     

@@ -27,6 +27,7 @@ public class LoginPage extends javax.swing.JFrame {
         initComponents();
         this.idb = idb;
         addLoginAs();
+        setTitle("Login page");
     }
 
     /**

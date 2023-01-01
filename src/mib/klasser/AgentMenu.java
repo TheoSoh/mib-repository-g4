@@ -31,6 +31,7 @@ public class AgentMenu extends javax.swing.JFrame {
         this.idb = idb;
         this.agentId = agentId;
         lblAgentId.setText("Your Agent-id: " + agentId);
+        setTitle("Agent Menu");
         addItemsToCmbAreaId(cmbCommanderArea);
         addItemsToCmbAreaId(cmbShowForArea);
     }
@@ -287,7 +288,8 @@ public class AgentMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbShowByRaceActionPerformed
 
     private void btnAddedWhenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddedWhenActionPerformed
-        // TODO add your handling code here:
+        AgentMenu.this.dispose();
+        new AddedBetweenDatePage(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnAddedWhenActionPerformed
 
     private void btnShowAlienInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowAlienInfoActionPerformed
