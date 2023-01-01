@@ -177,7 +177,7 @@ public class LoginPage extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Something went wrong!");
             }
         }
-        else if (!Validation.checkCmbBoxType(cmbLoginAs)) {
+        else {
             try {
                 String alienId = txtId.getText();
                 String alienPassword = txtPassword.getText();

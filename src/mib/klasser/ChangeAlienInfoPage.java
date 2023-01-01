@@ -34,22 +34,10 @@ public class ChangeAlienInfoPage extends javax.swing.JFrame {
         initComponents();
         this.idb = idb;
         this.agentId = agentId;
-        addItemsToCmbNewRace();
         addItemsToCmbAlienId();
         addItemsToCmbInfoToChange();
+        Validation.addRaceToCmb(cmbNewRace);
         setTitle("Change alien Info");
-    }
-    
-    /**
-     * 
-     */
-    private void addItemsToCmbNewRace() {
-        String firstRace = "Boglodite";
-        String secondRace = "Squid";
-        String thirdRace = "Worm";
-        cmbNewRace.addItem(firstRace);
-        cmbNewRace.addItem(secondRace);
-        cmbNewRace.addItem(thirdRace);
     }
     
     /**

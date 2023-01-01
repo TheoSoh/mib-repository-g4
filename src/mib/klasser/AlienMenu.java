@@ -4,6 +4,9 @@
  */
 package mib.klasser;
 
+import static java.lang.Integer.parseInt;
+import java.util.HashMap;
+import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
@@ -15,6 +18,8 @@ public class AlienMenu extends javax.swing.JFrame {
     
     private InfDB idb;
     private int alienId;
+    private int areaId;
+    private int areaCommanderId;
     
     
     /**
@@ -26,6 +31,9 @@ public class AlienMenu extends javax.swing.JFrame {
         this.alienId = alienId;
         lblAlienId.setText("Your Alien-id: " + alienId);
         setTitle("Alien Menu");
+        checkArea();
+        checkMyAreaCommander();
+        setLabels();
     }
 
     /**
@@ -38,20 +46,14 @@ public class AlienMenu extends javax.swing.JFrame {
     private void initComponents() {
 
         lblAlienHeader = new javax.swing.JLabel();
-        btnNewAlien = new javax.swing.JButton();
-        btnChangeInfo = new javax.swing.JButton();
-        lblAlienVal = new javax.swing.JLabel();
-        cmbShowForArea = new javax.swing.JComboBox<>();
-        lblAliensInArea = new javax.swing.JLabel();
-        lblAliensByRace = new javax.swing.JLabel();
-        cmbShowByRace = new javax.swing.JComboBox<>();
-        btnAddedWhen = new javax.swing.JButton();
-        lblAgent = new javax.swing.JLabel();
-        btnAddEquipment = new javax.swing.JButton();
-        btnSearchInfoAlien = new javax.swing.JButton();
-        lblSearchAreaBoss = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
         lblAlienId = new javax.swing.JLabel();
+        lblCommanderInfoHeader = new javax.swing.JLabel();
+        lblName = new javax.swing.JLabel();
+        lblShowName = new javax.swing.JLabel();
+        lblPhoneNumber = new javax.swing.JLabel();
+        lblShowPhoneNumber = new javax.swing.JLabel();
+        lblArea = new javax.swing.JLabel();
+        lblShowArea = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,121 +61,51 @@ public class AlienMenu extends javax.swing.JFrame {
         lblAlienHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblAlienHeader.setText("MIB - Alien menu");
 
-        btnNewAlien.setText("Add New Alien");
-        btnNewAlien.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNewAlienActionPerformed(evt);
-            }
-        });
-
-        btnChangeInfo.setText("Change Info");
-        btnChangeInfo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnChangeInfoActionPerformed(evt);
-            }
-        });
-
-        lblAlienVal.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
-        lblAlienVal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblAlienVal.setText("Aliens");
-
-        cmbShowForArea.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cmbShowForArea.setToolTipText("");
-        cmbShowForArea.setName(""); // NOI18N
-        cmbShowForArea.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbShowForAreaActionPerformed(evt);
-            }
-        });
-
-        lblAliensInArea.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblAliensInArea.setText("Aliens in an Area");
-
-        lblAliensByRace.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblAliensByRace.setText("All aliens by race");
-
-        cmbShowByRace.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cmbShowByRace.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbShowByRaceActionPerformed(evt);
-            }
-        });
-
-        btnAddedWhen.setText("Added Between (Date)");
-        btnAddedWhen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddedWhenActionPerformed(evt);
-            }
-        });
-
-        lblAgent.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
-        lblAgent.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblAgent.setText("Agent");
-
-        btnAddEquipment.setText("Add New Equipment");
-        btnAddEquipment.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddEquipmentActionPerformed(evt);
-            }
-        });
-
-        btnSearchInfoAlien.setText("Alien Info");
-        btnSearchInfoAlien.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSearchInfoAlienActionPerformed(evt);
-            }
-        });
-
-        lblSearchAreaBoss.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblSearchAreaBoss.setText("Who is the Commander (Area)");
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
-            }
-        });
-
         lblAlienId.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
+
+        lblCommanderInfoHeader.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        lblCommanderInfoHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCommanderInfoHeader.setText("Information about commander in your area:");
+
+        lblName.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblName.setText("Name: ");
+
+        lblPhoneNumber.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblPhoneNumber.setText("Phone Number:");
+
+        lblArea.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblArea.setText("Area:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(106, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblAliensInArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnChangeInfo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnNewAlien, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cmbShowForArea, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(65, 65, 65)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cmbShowByRace, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnAddedWhen, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(btnSearchInfoAlien, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblAliensByRace, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(100, 100, 100))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblAgent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnAddEquipment, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblSearchAreaBoss, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblAlienVal, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(208, 208, 208))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(lblAlienId, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(188, 188, 188)
+                        .addGap(190, 190, 190)
                         .addComponent(lblAlienHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 159, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(lblCommanderInfoHeader)
+                        .addGap(167, 167, 167))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(lblArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblPhoneNumber, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                            .addComponent(lblName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblShowName, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                            .addComponent(lblShowPhoneNumber, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblShowArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(145, 145, 145))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,85 +114,71 @@ public class AlienMenu extends javax.swing.JFrame {
                 .addComponent(lblAlienHeader)
                 .addGap(10, 10, 10)
                 .addComponent(lblAlienId, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(8, 8, 8)
-                .addComponent(lblAgent)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnAddEquipment)
                 .addGap(18, 18, 18)
-                .addComponent(lblSearchAreaBoss)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                .addComponent(lblAlienVal, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblCommanderInfoHeader)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnNewAlien)
-                    .addComponent(btnAddedWhen))
+                    .addComponent(lblName)
+                    .addComponent(lblShowName))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnChangeInfo)
-                    .addComponent(btnSearchInfoAlien))
+                    .addComponent(lblPhoneNumber)
+                    .addComponent(lblShowPhoneNumber))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblAliensByRace)
-                    .addComponent(lblAliensInArea))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmbShowByRace, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbShowForArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39))
+                    .addComponent(lblArea)
+                    .addComponent(lblShowArea))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnNewAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewAlienActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnNewAlienActionPerformed
-
-    private void btnChangeInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeInfoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnChangeInfoActionPerformed
-
-    private void cmbShowForAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbShowForAreaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbShowForAreaActionPerformed
-
-    private void cmbShowByRaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbShowByRaceActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbShowByRaceActionPerformed
-
-    private void btnAddedWhenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddedWhenActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAddedWhenActionPerformed
-
-    private void btnSearchInfoAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchInfoAlienActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSearchInfoAlienActionPerformed
-
-    private void btnAddEquipmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddEquipmentActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAddEquipmentActionPerformed
-
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
-
+    
+    private void setLabels() {
+        try {
+            String sqlQuery = "select Namn, Telefon from Agent where Agent_ID = " + areaCommanderId;
+            HashMap<String, String> agentInfoRow = idb.fetchRow(sqlQuery);
+            
+            lblShowName.setText(agentInfoRow.get("Namn"));
+            lblShowPhoneNumber.setText(agentInfoRow.get("Telefon"));
+            lblShowArea.setText("" + areaId);
+        }
+        catch(InfException e) {
+            JOptionPane.showMessageDialog(null, "Internal database error!");
+        }
+    }
+    
+    private void checkArea() {
+        try {
+            String sqlQuery = "select Plats from Alien where Alien_ID = " + alienId;
+            String area = idb.fetchSingle(sqlQuery);
+            areaId = parseInt(area);
+        }
+        catch(InfException e) {
+            JOptionPane.showMessageDialog(null, "Internal database error!");
+        }
+    }
+    
+    private void checkMyAreaCommander() {
+        try {
+            String sqlAgentIdQuery = "select Agent_ID from Omradeschef where Omrade = " + areaId;
+            String agentId = idb.fetchSingle(sqlAgentIdQuery);
+            areaCommanderId = parseInt(agentId);
+        }
+        catch(InfException e) {
+            JOptionPane.showMessageDialog(null, "Internal database error!");
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAddEquipment;
-    private javax.swing.JButton btnAddedWhen;
-    private javax.swing.JButton btnChangeInfo;
-    private javax.swing.JButton btnNewAlien;
-    private javax.swing.JButton btnSearchInfoAlien;
-    private javax.swing.JComboBox<String> cmbShowByRace;
-    private javax.swing.JComboBox<String> cmbShowForArea;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel lblAgent;
     private javax.swing.JLabel lblAlienHeader;
     private javax.swing.JLabel lblAlienId;
-    private javax.swing.JLabel lblAlienVal;
-    private javax.swing.JLabel lblAliensByRace;
-    private javax.swing.JLabel lblAliensInArea;
-    private javax.swing.JLabel lblSearchAreaBoss;
+    private javax.swing.JLabel lblArea;
+    private javax.swing.JLabel lblCommanderInfoHeader;
+    private javax.swing.JLabel lblName;
+    private javax.swing.JLabel lblPhoneNumber;
+    private javax.swing.JLabel lblShowArea;
+    private javax.swing.JLabel lblShowName;
+    private javax.swing.JLabel lblShowPhoneNumber;
     // End of variables declaration//GEN-END:variables
 }

@@ -34,6 +34,7 @@ public class AgentMenu extends javax.swing.JFrame {
         setTitle("Agent Menu");
         addItemsToCmbAreaId(cmbCommanderArea);
         addItemsToCmbAreaId(cmbShowForArea);
+        Validation.addRaceToCmb(cmbShowByRace);
     }
 
     /**
@@ -64,6 +65,8 @@ public class AgentMenu extends javax.swing.JFrame {
         lblAreaCommander = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtAreaAliens = new javax.swing.JTextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtAreaAliensByRace = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -98,7 +101,7 @@ public class AgentMenu extends javax.swing.JFrame {
         });
 
         lblAliensInArea.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblAliensInArea.setText("Aliens in an Area");
+        lblAliensInArea.setText("Aliens in Area");
 
         lblAliensByRace.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblAliensByRace.setText("All aliens by race");
@@ -153,6 +156,10 @@ public class AgentMenu extends javax.swing.JFrame {
         txtAreaAliens.setRows(5);
         jScrollPane1.setViewportView(txtAreaAliens);
 
+        txtAreaAliensByRace.setColumns(20);
+        txtAreaAliensByRace.setRows(5);
+        jScrollPane2.setViewportView(txtAreaAliensByRace);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -189,26 +196,31 @@ public class AgentMenu extends javax.swing.JFrame {
                 .addComponent(cmbCommanderArea, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(lblAlienVal, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(208, 208, 208))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblAliensInArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnChangeInfo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnNewAlien, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cmbShowForArea, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(65, 65, 65)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(lblAliensInArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnChangeInfo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnNewAlien, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
+                                    .addComponent(cmbShowForArea, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(65, 65, 65))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cmbShowByRace, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnAddedWhen, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(btnShowAlienInfo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblAliensByRace, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(103, 103, 103))))
+                                .addComponent(lblAliensByRace, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(48, 48, 48))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -248,8 +260,10 @@ public class AgentMenu extends javax.swing.JFrame {
                     .addComponent(cmbShowByRace, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmbShowForArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(17, 17, 17))
         );
 
         pack();
@@ -267,15 +281,15 @@ public class AgentMenu extends javax.swing.JFrame {
 
     private void cmbShowForAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbShowForAreaActionPerformed
         txtAreaAliens.setText("");
-        ArrayList< HashMap<String, String>> alienNames;
         
         try {
             String selectedAreaId = cmbShowForArea.getSelectedItem().toString();
             int selectedAreaIdInt = parseInt(selectedAreaId);
             String sqlNameQuery = "select * from Alien where Plats like '" + selectedAreaIdInt + "';";
-            alienNames = idb.fetchRows(sqlNameQuery);
-            for (HashMap <String, String> aRow : alienNames){
-            txtAreaAliens.append(aRow.get("Namn") + "\n");
+            ArrayList<HashMap<String, String>> alienList = idb.fetchRows(sqlNameQuery);
+            for (HashMap <String, String> aRow : alienList){
+                txtAreaAliens.append("Alien-ID: " + aRow.get("Alien_ID"));
+                txtAreaAliens.append("     Name: " + aRow.get("Namn") + "\n\n");
             }
         }
         catch(InfException e) {
@@ -284,9 +298,45 @@ public class AgentMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbShowForAreaActionPerformed
 
     private void cmbShowByRaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbShowByRaceActionPerformed
-        // TODO add your handling code here:
+        String selectedShowRace = cmbShowByRace.getSelectedItem().toString();
+        txtAreaAliensByRace.setText("");
+        try {
+            if(selectedShowRace.equals("Boglodite")) {
+                String sqlQuery = "select * from Alien where Alien_ID in (select Alien_ID from Boglodite);";
+                ArrayList<HashMap<String, String>> AlienList = idb.fetchRows(sqlQuery);
+                
+                for(HashMap<String, String> aRow : AlienList) {
+                    appendToTxtAreaAliensByRace(aRow);
+                }
+            }
+            else if(selectedShowRace.equals("Squid")) {
+                String sqlQuery = "select * from Alien where Alien_ID in (select Alien_ID from Squid);";
+                ArrayList<HashMap<String, String>> AlienList = idb.fetchRows(sqlQuery);
+                    
+                for(HashMap<String, String> aRow : AlienList) {
+                    appendToTxtAreaAliensByRace(aRow);
+                }
+            }
+            else {
+                String sqlQuery = "select * from Alien where Alien_ID in (select Alien_ID from Worm);";
+                ArrayList<HashMap<String, String>> AlienList = idb.fetchRows(sqlQuery);
+                    
+                for(HashMap<String, String> aRow : AlienList) {
+                    appendToTxtAreaAliensByRace(aRow);
+                }
+            }
+        }
+        catch(InfException e) {
+            JOptionPane.showMessageDialog(null, "Internal database error!");
+        }
     }//GEN-LAST:event_cmbShowByRaceActionPerformed
 
+    private void appendToTxtAreaAliensByRace(HashMap<String, String> aHashMap) {
+        txtAreaAliensByRace.append("Alien-ID: " + aHashMap.get("Alien_ID"));
+        txtAreaAliensByRace.append("     Name: " + aHashMap.get("Namn"));
+        txtAreaAliensByRace.append("     Registrationdate: " + aHashMap.get("Registreringsdatum") + "\n\n");
+    }
+    
     private void btnAddedWhenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddedWhenActionPerformed
         AgentMenu.this.dispose();
         new AddedBetweenDatePage(idb, agentId).setVisible(true);
@@ -309,7 +359,6 @@ public class AgentMenu extends javax.swing.JFrame {
         String anAgentId = "";
         String agentName = "";
         
-        
         try {
             String sqlAgentIdQuery = "select Agent_ID from Omradeschef where Omrade = " + selectedAreaIdToInt;
             anAgentId = idb.fetchSingle(sqlAgentIdQuery);
@@ -318,7 +367,7 @@ public class AgentMenu extends javax.swing.JFrame {
             agentName = idb.fetchSingle(sqlAgentNameQuery);
         }
         catch(InfException e) {
-            
+            JOptionPane.showMessageDialog(null, "Internal database error!");
         }
         switch(selectedAreaIdCommander) {
             case "1":
@@ -372,6 +421,7 @@ public class AgentMenu extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbShowByRace;
     private javax.swing.JComboBox<String> cmbShowForArea;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblAgent;
     private javax.swing.JLabel lblAgentAdminHeader;
@@ -382,5 +432,6 @@ public class AgentMenu extends javax.swing.JFrame {
     private javax.swing.JLabel lblAreaCommander;
     private javax.swing.JLabel lblSearchAreaBoss;
     private javax.swing.JTextArea txtAreaAliens;
+    private javax.swing.JTextArea txtAreaAliensByRace;
     // End of variables declaration//GEN-END:variables
 }

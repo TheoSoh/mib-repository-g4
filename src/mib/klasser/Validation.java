@@ -162,4 +162,16 @@ public class Validation {
         return raceIsWorm;
     }
     
+    /**
+     * 
+     * @param addToThisCmb 
+     */
+    public static void addRaceToCmb(JComboBox<String> addToThisCmb) {
+        String firstRace = "Boglodite";
+        String secondRace = "Squid";
+        String thirdRace = "Worm";
+        addToThisCmb.addItem(firstRace);
+        addToThisCmb.addItem(secondRace);
+        addToThisCmb.addItem(thirdRace);
+    }
 }

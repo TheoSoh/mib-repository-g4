@@ -19,6 +19,7 @@ public class ShowAlienInfoPage extends javax.swing.JFrame {
 
     private InfDB idb;
     private int agentId;
+    private String selectedAlienId;
     
     /**
      * Creates new form ShowAlienInfoPage
@@ -69,6 +70,8 @@ public class ShowAlienInfoPage extends javax.swing.JFrame {
         lblShowPhoneNumber = new javax.swing.JLabel();
         lblShowAssignedAgent = new javax.swing.JLabel();
         lblShowArea = new javax.swing.JLabel();
+        lblRace = new javax.swing.JLabel();
+        lblShowRace = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -107,6 +110,9 @@ public class ShowAlienInfoPage extends javax.swing.JFrame {
             }
         });
 
+        lblRace.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblRace.setText("Race:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -121,24 +127,25 @@ public class ShowAlienInfoPage extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblShowPhoneNumber, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(lblShowName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblShowRegistrationDate, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)))
+                    .addComponent(lblShowName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblShowRegistrationDate, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE))
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblRace, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblAssignedAgent, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblAssignedAgent, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblShowArea, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-                            .addComponent(lblShowAssignedAgent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(239, 239, 239)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnCancel)
-                        .addGap(20, 20, 20))))
+                        .addGap(20, 20, 20))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(lblShowRace, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblShowArea, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                            .addComponent(lblShowAssignedAgent, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -181,21 +188,25 @@ public class ShowAlienInfoPage extends javax.swing.JFrame {
                                     .addComponent(lblAssignedAgent)
                                     .addComponent(lblShowAssignedAgent, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblPhoneNumber)
-                            .addComponent(lblShowPhoneNumber))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(lblPhoneNumber)
+                                .addComponent(lblShowPhoneNumber))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(lblRace)
+                                .addComponent(lblShowRace)))
                         .addContainerGap(38, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnCancel)
-                        .addGap(20, 20, 20))))
+                        .addContainerGap())))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmbAlienIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAlienIdActionPerformed
-        String selectedAlienId = cmbAlienId.getSelectedItem().toString();
+        selectedAlienId = cmbAlienId.getSelectedItem().toString();
         
         try {
             int selectedAlienIdInt = parseInt(selectedAlienId);
@@ -207,12 +218,26 @@ public class ShowAlienInfoPage extends javax.swing.JFrame {
             String showPhoneNumber = alienInfoRow.get("Telefon");
             String showArea = alienInfoRow.get("Plats");
             String showAssignedAgent = alienInfoRow.get("Ansvarig_Agent");
+            String showRace = getAliensRace();
             
             lblShowRegistrationDate.setText(showRegistrationDate);
             lblShowName.setText(showName);
             lblShowPhoneNumber.setText(showPhoneNumber);
             lblShowArea.setText(showArea);
             lblShowAssignedAgent.setText(showAssignedAgent);
+            
+            if(showRace.equals("Boglodite")) {
+                lblShowRace.setText(showRace);
+            }
+            else if(showRace.equals("Squid")) {
+                lblShowRace.setText(showRace);
+            }
+            else if(showRace.equals("Worm")) {
+                lblShowRace.setText(showRace);
+            }
+            else {
+                lblShowRace.setText("");
+            }
             
         }
         catch(InfException e) {
@@ -229,7 +254,44 @@ public class ShowAlienInfoPage extends javax.swing.JFrame {
             new AgentMenu(idb, agentId).setVisible(true);
         }
     }//GEN-LAST:event_btnCancelActionPerformed
-
+    
+    private String getAliensRace() {
+        String race = "";
+        
+        try {
+            String sqlBogloditeQuery = "select * from Boglodite";
+            ArrayList<HashMap<String, String>> bogloditeTable;
+            bogloditeTable = idb.fetchRows(sqlBogloditeQuery);
+            for(HashMap<String, String> everyBoglodite : bogloditeTable) {
+                if(everyBoglodite.get("Alien_ID").equals(selectedAlienId)) {
+                    race = "Boglodite";
+                }
+            }
+            
+            String sqlSquidQuery = "select * from Squid";
+            ArrayList<HashMap<String, String>> SquidTable;
+            SquidTable = idb.fetchRows(sqlSquidQuery);
+            for(HashMap<String, String> everySquid : SquidTable) {
+                if(everySquid.get("Alien_ID").equals(selectedAlienId)) {
+                    race = "Squid";
+                }
+            }
+            
+            String sqlWormQuery = "select * from Worm";
+            ArrayList<HashMap<String, String>> WormTable;
+            WormTable = idb.fetchRows(sqlWormQuery);
+            for(HashMap<String, String> everyWorm : WormTable) {
+                if(everyWorm.get("Alien_ID").equals(selectedAlienId)) {
+                    race = "Worm";
+                }
+            }
+        }
+        catch(InfException e) {
+            JOptionPane.showMessageDialog(null, "Internal database error!");
+        }
+        return race;
+    }
+    
     private boolean checkAdminStatus() {
         boolean isAdmin = false;
         try {
@@ -253,12 +315,14 @@ public class ShowAlienInfoPage extends javax.swing.JFrame {
     private javax.swing.JLabel lblAssignedAgent;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblPhoneNumber;
+    private javax.swing.JLabel lblRace;
     private javax.swing.JLabel lblRegistrationDate;
     private javax.swing.JLabel lblShowArea;
     private javax.swing.JLabel lblShowAssignedAgent;
     private javax.swing.JLabel lblShowInfoHeader;
     private javax.swing.JLabel lblShowName;
     private javax.swing.JLabel lblShowPhoneNumber;
+    private javax.swing.JLabel lblShowRace;
     private javax.swing.JLabel lblShowRegistrationDate;
     // End of variables declaration//GEN-END:variables
 }
