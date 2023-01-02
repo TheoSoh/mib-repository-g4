@@ -184,6 +184,11 @@ public class AdminMenu extends javax.swing.JFrame {
         });
 
         btnDeleteAgent.setText("Delete Agent");
+        btnDeleteAgent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteAgentActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Show Agent Info");
 
@@ -196,7 +201,7 @@ public class AdminMenu extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblSearchAreaBoss, javax.swing.GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE)
+                    .addComponent(lblSearchAreaBoss, javax.swing.GroupLayout.PREFERRED_SIZE, 339, Short.MAX_VALUE)
                     .addComponent(lblAgent, javax.swing.GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE))
                 .addGap(131, 131, 131))
             .addGroup(layout.createSequentialGroup()
@@ -436,6 +441,10 @@ public class AdminMenu extends javax.swing.JFrame {
         AdminMenu.this.dispose();
         new NewAgentPage(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnNewAgentActionPerformed
+
+    private void btnDeleteAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteAgentActionPerformed
+        
+    }//GEN-LAST:event_btnDeleteAgentActionPerformed
     
     private String getCorrectBenamning() {
         String correctBenamning = "";

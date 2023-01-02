@@ -285,15 +285,15 @@ public class NewAlienPage extends javax.swing.JFrame {
                     int AmmountToInt = parseInt(Ammount);
                     String sqlSetRaceQuery = "insert into " + selectedRace + " values(" + alienId + ", " + AmmountToInt + ");";
                     
-                    idb.insert(sqlSetRaceQuery);
                     idb.insert(sqlNewAlienQuery);
+                    idb.insert(sqlSetRaceQuery);
                     lblMessage.setText("Successful register!");
                     lblErrorMessage.setText("");
                 }
                 else {
                     String sqlSetRaceQuery = "insert into " + selectedRace + " values(" + alienId + ");";
-                    idb.insert(sqlSetRaceQuery);
                     idb.insert(sqlNewAlienQuery);
+                    idb.insert(sqlSetRaceQuery);
                     lblMessage.setText("Successful register!");
                     lblErrorMessage.setText("");
                 }

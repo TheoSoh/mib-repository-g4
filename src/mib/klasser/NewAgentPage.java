@@ -18,7 +18,7 @@ public class NewAgentPage extends javax.swing.JFrame {
     //Här startar deklaration av fält.
     private InfDB idb;
     private int agentId;
-    private String selectedRace;
+    private String selectedStatus;
     //Här slutar deklaration av fält.
     
     /**
@@ -29,7 +29,7 @@ public class NewAgentPage extends javax.swing.JFrame {
         this.idb = idb;
         this.agentId = agentId;
         addItemsToCmbSetRace();
-        setTitle("Register new alien!");
+        setTitle("Register new Agent!");
     }
     
     
@@ -50,7 +50,7 @@ public class NewAgentPage extends javax.swing.JFrame {
         txtPassword = new javax.swing.JTextField();
         txtTelefon = new javax.swing.JTextField();
         txtArea = new javax.swing.JTextField();
-        lblAlienId = new javax.swing.JLabel();
+        lblAgentId = new javax.swing.JLabel();
         lblName = new javax.swing.JLabel();
         lblPassword = new javax.swing.JLabel();
         lblPhoneNumber = new javax.swing.JLabel();
@@ -84,8 +84,8 @@ public class NewAgentPage extends javax.swing.JFrame {
             }
         });
 
-        lblAlienId.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblAlienId.setText("Agent-ID:");
+        lblAgentId.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblAgentId.setText("Agent-ID:");
 
         lblName.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblName.setText("Name:");
@@ -156,7 +156,7 @@ public class NewAgentPage extends javax.swing.JFrame {
                                     .addComponent(lblAdminStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(lblName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(lblPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblAlienId, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblAgentId, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -204,7 +204,7 @@ public class NewAgentPage extends javax.swing.JFrame {
                             .addComponent(txtTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblPhoneNumber)
                             .addComponent(txtAgentId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblAlienId))
+                            .addComponent(lblAgentId))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -252,12 +252,11 @@ public class NewAgentPage extends javax.swing.JFrame {
      * 
      */
     private void addItemsToCmbSetRace() {
-        String firstRace = "Boglodite";
-        String secondRace = "Squid";
-        String thirdRace = "Worm";
+        String firstRace = "No";
+        String secondRace = "Yes";
         cmbAdminStatus.addItem(firstRace);
         cmbAdminStatus.addItem(secondRace);
-        cmbAdminStatus.addItem(thirdRace);
+        
     }
     
     /**
@@ -280,44 +279,48 @@ public class NewAgentPage extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
-        /**if(Validation.checkEmptyFields(txtAgentId, txtName, 
-                txtPassword, txtArea, txtAnsvarigAgent)) {
+        if(Validation.checkEmptyFields(txtAgentId, txtName, 
+                txtPassword, txtTelefon,txtArea)) {
             lblErrorMessage.setText("Every field with (*) symbol has to be filled!");
-            lblAlienId.setText("*Agent-ID:");
+            lblAgentId.setText("*Agent-ID:");
             lblName.setText("*Password:");
             lblPassword.setText("*Name:");
             lblArea.setText("*Area:");
-            lblAssignAgent.setText("*Assign Agent-ID:");
-            if(selectedRace.equals("Boglodite")) {
-                lblAmmount.setText("*Boogies:");
-            }
-            else if(selectedRace.equals("Squid")) {
-                lblAmmount.setText("*Arms:");
-            }
-            else {
-                lblAmmount.setText("");
-            }
+            lblPhoneNumber.setText("*Phone number");
+            
+                
+               
         }
         else {
             try {
-                int agentId = parseInt(txtAgentId.getText());
-                String password = txtName.getText();
-                String name = txtPassword.getText();
+                int agentIdInt = parseInt(txtAgentId.getText());
+                String name = txtName.getText();
+                String password = txtPassword.getText();
                 String phoneNumber = txtTelefon.getText();
                 int area = parseInt(txtArea.getText());
+                String sqlQuery = "";
                 
+                if(selectedStatus.equals("No")) {
+                sqlQuery = "insert into Agent "
+                        + "values(" + agentIdInt + ", '" + name + "', '" + phoneNumber + "', curdate(), 'N', '" + password + "', " + area + ");";
+                }
+                else {
+                    sqlQuery = "insert into Agent "
+                        + "values(" + agentIdInt + ", '" + name + "', '" + phoneNumber + "', curdate(), 'J', '" + password + "', " + area + ");";
+                }
                 
                 
                 
                     lblMessage.setText("Successful register!");
-                    lblErrorMessage.setText("");
+              
                 
                 
             }
+        
             catch(InfException e) {
                 lblErrorMessage.setText("Wrong format, Agent-ID already exist or Area don't!");
             }
-        }**/
+        }
     }//GEN-LAST:event_btnRegisterActionPerformed
     
     /**
@@ -325,7 +328,8 @@ public class NewAgentPage extends javax.swing.JFrame {
      * @param evt 
      */
     private void cmbAdminStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAdminStatusActionPerformed
-        selectedRace = cmbAdminStatus.getSelectedItem().toString();
+        selectedStatus = cmbAdminStatus.getSelectedItem().toString();
+        
         
     }//GEN-LAST:event_cmbAdminStatusActionPerformed
     
@@ -359,7 +363,7 @@ public class NewAgentPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblAdminStatus;
-    private javax.swing.JLabel lblAlienId;
+    private javax.swing.JLabel lblAgentId;
     private javax.swing.JLabel lblArea;
     private javax.swing.JLabel lblAreaToManage;
     private javax.swing.JLabel lblErrorMessage;
