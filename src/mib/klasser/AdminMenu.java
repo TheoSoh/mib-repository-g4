@@ -443,7 +443,8 @@ public class AdminMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNewAgentActionPerformed
 
     private void btnDeleteAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteAgentActionPerformed
-        
+        AdminMenu.this.dispose();
+        new DeleteAgentPage(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnDeleteAgentActionPerformed
     
     private String getCorrectBenamning() {

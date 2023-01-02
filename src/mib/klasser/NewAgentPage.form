@@ -45,7 +45,7 @@
                                   <Component id="lblName" alignment="1" max="32767" attributes="0"/>
                                   <Component id="lblPassword" alignment="1" max="32767" attributes="0"/>
                                   <Component id="lblAgentId" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="jLabel2" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="lblAreaManager" alignment="1" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -135,7 +135,7 @@
                           <Component id="lblOffice" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtOffice" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="cmbAreaManager" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblAreaManager" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       <Component id="lblErrorMessage" min="-2" pref="18" max="-2" attributes="0"/>
@@ -330,7 +330,7 @@
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel2">
+    <Component class="javax.swing.JLabel" name="lblAreaManager">
       <Properties>
         <Property name="text" type="java.lang.String" value="Area Mananger:"/>
       </Properties>

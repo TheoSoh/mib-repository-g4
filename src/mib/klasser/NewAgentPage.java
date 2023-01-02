@@ -22,9 +22,9 @@ public class NewAgentPage extends javax.swing.JFrame {
     private int agentId;
     private String selectedAdminStatus;
     private String selectedAreaManager;
-    private String selectedAreaToManage;
     private String selectedFieldAgent;
     private String selectedOfficeManager;
+    private int selectedAreaToManage;
     private int selectedArea;
     //Här slutar deklaration av fält.
     
@@ -74,7 +74,7 @@ public class NewAgentPage extends javax.swing.JFrame {
         txtOffice = new javax.swing.JTextField();
         cmbAreaToManage = new javax.swing.JComboBox<>();
         cmbAreaManager = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
+        lblAreaManager = new javax.swing.JLabel();
         lblAreaToManage = new javax.swing.JLabel();
         cmbAreaId = new javax.swing.JComboBox<>();
 
@@ -156,7 +156,7 @@ public class NewAgentPage extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Area Mananger:");
+        lblAreaManager.setText("Area Mananger:");
 
         lblAreaToManage.setText("Area-ID to Manage:");
 
@@ -190,7 +190,7 @@ public class NewAgentPage extends javax.swing.JFrame {
                                     .addComponent(lblName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(lblPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(lblAgentId, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(lblAreaManager, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(cmbAreaManager, 0, 90, Short.MAX_VALUE)
@@ -261,7 +261,7 @@ public class NewAgentPage extends javax.swing.JFrame {
                             .addComponent(lblOffice)
                             .addComponent(txtOffice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cmbAreaManager, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
+                            .addComponent(lblAreaManager))
                         .addGap(27, 27, 27)
                         .addComponent(lblErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -335,7 +335,24 @@ public class NewAgentPage extends javax.swing.JFrame {
                 
                 idb.insert(sqlNewAgentQuery);
                 lblMessage.setText("Successful register!");
+                lblErrorMessage.setText("");
                 
+                if(selectedAreaManager.equals("Yes")) {
+                    String sqlAreaManagerDeleteQuery = "delete from OmradesChef where Omrade = " + selectedAreaToManage + ";";
+                    idb.delete(sqlAreaManagerDeleteQuery);
+                    
+                    String sqlAreaManagerInsertQuery = "insert into OmradesChef values(" + agentIdInt + ", " + selectedAreaToManage + ");";
+                    idb.insert(sqlAreaManagerInsertQuery);
+                }
+                if(selectedFieldAgent.equals("Yes")) {
+                    String sqlFieldAgentQuery = "insert into Faltagent values(" + agentIdInt + ");";
+                    idb.insert(sqlFieldAgentQuery);
+                }
+                if(selectedOfficeManager.equals("Yes")) {
+                    String office = txtOffice.getText();
+                    String sqlOfficeManagerQuery = "insert into Kontorschef values(" + agentIdInt + ", '" + office + "');";
+                    idb.insert(sqlOfficeManagerQuery);
+                }
                 
             }
             catch(InfException e) {
@@ -387,7 +404,8 @@ public class NewAgentPage extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbOfficeManagerActionPerformed
 
     private void cmbAreaToManageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAreaToManageActionPerformed
-        selectedAreaToManage = cmbAreaToManage.getSelectedItem().toString();
+        String selectedAreaToManageString = cmbAreaToManage.getSelectedItem().toString();
+        selectedAreaToManage = parseInt(selectedAreaToManageString);
     }//GEN-LAST:event_cmbAreaToManageActionPerformed
 
     private void cmbAreaIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAreaIdActionPerformed
@@ -417,10 +435,10 @@ public class NewAgentPage extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbAreaToManage;
     private javax.swing.JComboBox<String> cmbFieldAgent;
     private javax.swing.JComboBox<String> cmbOfficeManager;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblAdminStatus;
     private javax.swing.JLabel lblAgentId;
     private javax.swing.JLabel lblArea;
+    private javax.swing.JLabel lblAreaManager;
     private javax.swing.JLabel lblAreaToManage;
     private javax.swing.JLabel lblErrorMessage;
     private javax.swing.JLabel lblFieldAgent;
