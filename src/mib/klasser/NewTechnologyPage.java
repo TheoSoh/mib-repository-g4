@@ -158,7 +158,7 @@ public class NewTechnologyPage extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnAddTechnologyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddTechnologyActionPerformed
-        if(Validation.checkEmptyTxtFields(txtEquipmentId, txtDescription, txtPowerSource)) {
+        if(Validation.checkThreeEmptyTxtFields(txtEquipmentId, txtDescription, txtPowerSource)) {
             lblErrorText.setText("Every field with (*) symbol has to be filled!");
             lblEquipmentId.setText("*Equipment-ID:");
             lblPowerSource.setText("*Transfer Technology:");

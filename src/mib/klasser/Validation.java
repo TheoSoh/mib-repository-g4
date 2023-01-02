@@ -74,14 +74,12 @@ public class Validation {
      * @param secondFieldToCheck
      * @param thirdFieldToCheck
      * @param fourthFieldToCheck
-     * @param fifthFieldToCheck
-     * @param sixthFieldToCheck
      * @return 
      */
-    public static boolean checkEmptyFields(JTextField firstFieldToCheck, JTextField secondFieldToCheck, JTextField thirdFieldToCheck, JTextField fourthFieldToCheck, JTextField fifthFieldToCheck) {
+    public static boolean checkFourEmptyFields(JTextField firstFieldToCheck, JTextField secondFieldToCheck, JTextField thirdFieldToCheck, JTextField fourthFieldToCheck) {
         boolean emptyTextField = false;
         
-        if((firstFieldToCheck.getText().isEmpty()) || (secondFieldToCheck.getText().isEmpty()) || (thirdFieldToCheck.getText().isEmpty()) || (fourthFieldToCheck.getText().isEmpty()) || (fifthFieldToCheck.getText().isEmpty())) {
+        if((firstFieldToCheck.getText().isEmpty()) || (secondFieldToCheck.getText().isEmpty()) || (thirdFieldToCheck.getText().isEmpty()) || (fourthFieldToCheck.getText().isEmpty())) {
             emptyTextField = true;
         }
         return emptyTextField;
@@ -93,7 +91,7 @@ public class Validation {
      * @param secondFieldToCheck
      * @return 
      */
-    public static boolean checkEmptyTxtFields(JTextField firstFieldToCheck,JTextField secondFieldToCheck) {
+    public static boolean checkTwoEmptyTxtFields(JTextField firstFieldToCheck,JTextField secondFieldToCheck) {
         boolean emptyTextField = false;
         
         if((firstFieldToCheck.getText().isEmpty()) || (secondFieldToCheck.getText().isEmpty()))  {
@@ -109,7 +107,7 @@ public class Validation {
      * @param thirdFieldToCheck
      * @return 
      */
-    public static boolean checkEmptyTxtFields(JTextField firstFieldToCheck,JTextField secondFieldToCheck,JTextField thirdFieldToCheck) {
+    public static boolean checkThreeEmptyTxtFields(JTextField firstFieldToCheck,JTextField secondFieldToCheck,JTextField thirdFieldToCheck) {
         boolean emptyTextField = false;
         
         if((firstFieldToCheck.getText().isEmpty()) || (secondFieldToCheck.getText().isEmpty()) || (thirdFieldToCheck.getText().isEmpty()))  {

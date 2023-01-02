@@ -5,6 +5,8 @@
 package mib.klasser;
 
 import static java.lang.Integer.parseInt;
+import java.util.ArrayList;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
@@ -29,6 +31,8 @@ public class NewAlienPage extends javax.swing.JFrame {
         this.idb = idb;
         this.agentId = agentId;
         addItemsToCmbSetRace();
+        addItemsToCmbAreaId(cmbAreaId);
+        addItemsToCmbAssignAgentId(cmbAssignAgentId);
         setTitle("Register new alien!");
     }
     
@@ -46,11 +50,9 @@ public class NewAlienPage extends javax.swing.JFrame {
         lblNewAlienHeader = new javax.swing.JLabel();
         btnRegister = new javax.swing.JButton();
         txtAlienId = new javax.swing.JTextField();
-        txtLosenord = new javax.swing.JTextField();
-        txtNamn = new javax.swing.JTextField();
-        txtTelefon = new javax.swing.JTextField();
-        txtPlats = new javax.swing.JTextField();
-        txtAnsvarigAgent = new javax.swing.JTextField();
+        txtPassword = new javax.swing.JTextField();
+        txtName = new javax.swing.JTextField();
+        txtPhoneNumber = new javax.swing.JTextField();
         lblAlienId = new javax.swing.JLabel();
         lblPassword = new javax.swing.JLabel();
         lblName = new javax.swing.JLabel();
@@ -64,6 +66,8 @@ public class NewAlienPage extends javax.swing.JFrame {
         cmbSetRace = new javax.swing.JComboBox<>();
         txtAmmount = new javax.swing.JTextField();
         lblAmmount = new javax.swing.JLabel();
+        cmbAreaId = new javax.swing.JComboBox<>();
+        cmbAssignAgentId = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -143,8 +147,8 @@ public class NewAlienPage extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(txtAlienId)
-                                    .addComponent(txtLosenord)
-                                    .addComponent(txtNamn, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtPassword)
+                                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(58, 58, 58)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(lblPhoneNumber)
@@ -152,9 +156,9 @@ public class NewAlienPage extends javax.swing.JFrame {
                                     .addComponent(lblAssignAgent))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txtTelefon)
-                                    .addComponent(txtPlats)
-                                    .addComponent(txtAnsvarigAgent, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(txtPhoneNumber)
+                                    .addComponent(cmbAreaId, javax.swing.GroupLayout.Alignment.LEADING, 0, 90, Short.MAX_VALUE)
+                                    .addComponent(cmbAssignAgentId, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(cmbSetRace, 0, 116, Short.MAX_VALUE)
@@ -175,24 +179,24 @@ public class NewAlienPage extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtAlienId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblAlienId)
                             .addComponent(lblPhoneNumber))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtPlats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblArea))
+                            .addComponent(lblArea)
+                            .addComponent(cmbAreaId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(24, 24, 24)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtAnsvarigAgent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblAssignAgent)))
+                            .addComponent(lblAssignAgent)
+                            .addComponent(cmbAssignAgentId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblPassword))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtNamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblName))))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,6 +234,32 @@ public class NewAlienPage extends javax.swing.JFrame {
         cmbSetRace.addItem(thirdRace);
     }
     
+    private void addItemsToCmbAreaId(JComboBox<String> fillThisBox) {
+        try {
+            String sqlQuestion = "select Omrades_ID from Omrade";
+            ArrayList<String> areaIdList = idb.fetchColumn(sqlQuestion);
+            for(String anAreaId : areaIdList) {
+                fillThisBox.addItem(anAreaId);
+            }
+        }
+        catch(InfException e) {
+            JOptionPane.showMessageDialog(null, "Internal database error!");
+        }
+    }
+    
+    private void addItemsToCmbAssignAgentId(JComboBox<String> fillThisBox) {
+        try {
+            String sqlQuestion = "select Agent_ID from Agent";
+            ArrayList<String> areaIdList = idb.fetchColumn(sqlQuestion);
+            for(String anAreaId : areaIdList) {
+                fillThisBox.addItem(anAreaId);
+            }
+        }
+        catch(InfException e) {
+            JOptionPane.showMessageDialog(null, "Internal database error!");
+        }
+    }
+    
     /**
      * 
      * @param evt 
@@ -250,49 +280,36 @@ public class NewAlienPage extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
-        if(Validation.checkEmptyFields(txtAlienId, txtLosenord, 
-                txtNamn, txtPlats, txtAnsvarigAgent)) {
-            lblErrorMessage.setText("Every field with (*) symbol has to be filled!");
-            lblAlienId.setText("*AlienID:");
-            lblPassword.setText("*Password:");
-            lblName.setText("*Name:");
-            lblArea.setText("*Area:");
-            lblAssignAgent.setText("*Assign Agent-ID:");
-            if(selectedRace.equals("Boglodite")) {
-                lblAmmount.setText("*Boogies:");
-            }
-            else if(selectedRace.equals("Squid")) {
-                lblAmmount.setText("*Arms:");
-            }
-            else {
-                lblAmmount.setText("");
-            }
+        if(Validation.checkFourEmptyFields(txtAlienId, txtPassword, 
+                txtName, txtPhoneNumber)) {
+            lblErrorMessage.setText("Every field has to be filled!");
+            
         }
-        else {
+        else if (Validation.checkIfTxtFieldIsOfInt(txtAlienId)) {
             try {
                 int alienId = parseInt(txtAlienId.getText());
-                String password = txtLosenord.getText();
-                String name = txtNamn.getText();
-                String phoneNumber = txtTelefon.getText();
-                int area = parseInt(txtPlats.getText());
-                int assignedAgentId = parseInt(txtAnsvarigAgent.getText());
+                String password = txtPassword.getText();
+                String name = txtName.getText();
+                String phoneNumber = txtPhoneNumber.getText();
+                String selectedAreaId = cmbAreaId.getSelectedItem().toString();
+                int area = parseInt(selectedAreaId);
+                String selectedAgentId = cmbAssignAgentId.getSelectedItem().toString();
+                int assignedAgentId = parseInt(selectedAgentId);
                 String Ammount = txtAmmount.getText();
                 String sqlNewAlienQuery = "insert into Alien "
                         + "values(" + alienId + ", curdate(), '" + password + "',"
                         + " '" + name + "', '" + phoneNumber + "', " + area + ", " + assignedAgentId + ");";
+                idb.insert(sqlNewAlienQuery);
                 
                 if(!Validation.checkStringSelectedRace(selectedRace)) {
                     int AmmountToInt = parseInt(Ammount);
                     String sqlSetRaceQuery = "insert into " + selectedRace + " values(" + alienId + ", " + AmmountToInt + ");";
-                    
-                    idb.insert(sqlNewAlienQuery);
                     idb.insert(sqlSetRaceQuery);
                     lblMessage.setText("Successful register!");
                     lblErrorMessage.setText("");
                 }
                 else {
                     String sqlSetRaceQuery = "insert into " + selectedRace + " values(" + alienId + ");";
-                    idb.insert(sqlNewAlienQuery);
                     idb.insert(sqlSetRaceQuery);
                     lblMessage.setText("Successful register!");
                     lblErrorMessage.setText("");
@@ -302,6 +319,10 @@ public class NewAlienPage extends javax.swing.JFrame {
                 lblErrorMessage.setText("Wrong format, Alien-ID exist or Agent-ID/Area don't!");
                 lblMessage.setText("");
             }
+        }
+        else {
+            lblMessage.setText("");
+            lblErrorMessage.setText("Wrong format!");
         }
     }//GEN-LAST:event_btnRegisterActionPerformed
     
@@ -347,6 +368,8 @@ public class NewAlienPage extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnRegister;
+    private javax.swing.JComboBox<String> cmbAreaId;
+    private javax.swing.JComboBox<String> cmbAssignAgentId;
     private javax.swing.JComboBox<String> cmbSetRace;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblAlienId;
@@ -361,10 +384,8 @@ public class NewAlienPage extends javax.swing.JFrame {
     private javax.swing.JLabel lblPhoneNumber;
     private javax.swing.JTextField txtAlienId;
     private javax.swing.JTextField txtAmmount;
-    private javax.swing.JTextField txtAnsvarigAgent;
-    private javax.swing.JTextField txtLosenord;
-    private javax.swing.JTextField txtNamn;
-    private javax.swing.JTextField txtPlats;
-    private javax.swing.JTextField txtTelefon;
+    private javax.swing.JTextField txtName;
+    private javax.swing.JTextField txtPassword;
+    private javax.swing.JTextField txtPhoneNumber;
     // End of variables declaration//GEN-END:variables
 }

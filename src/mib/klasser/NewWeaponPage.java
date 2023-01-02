@@ -171,7 +171,7 @@ public class NewWeaponPage extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnAddWeaponActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddWeaponActionPerformed
-        if(Validation.checkEmptyTxtFields(txtEquipmentId, txtDescription, txtCaliber)) {
+        if(Validation.checkThreeEmptyTxtFields(txtEquipmentId, txtDescription, txtCaliber)) {
             lblErrorText.setText("Every field with (*) symbol has to be filled!");
             lblEquipmentId.setText("*Equipment-ID:");
             lblCaliber.setText("*Transfer Technology:");

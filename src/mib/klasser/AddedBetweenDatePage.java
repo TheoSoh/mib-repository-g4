@@ -152,7 +152,7 @@ public class AddedBetweenDatePage extends javax.swing.JFrame {
         String toDate = txtToDate.getText();
         txtAreaAlienInfo.setText("");
         
-        if(Validation.checkEmptyTxtFields(txtFromDate, txtToDate)) {
+        if(Validation.checkTwoEmptyTxtFields(txtFromDate, txtToDate)) {
             lblErrorMessage.setText("Enter a date in each text field!");
         }
         else {

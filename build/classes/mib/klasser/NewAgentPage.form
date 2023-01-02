@@ -49,7 +49,7 @@
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jComboBox1" pref="90" max="32767" attributes="0"/>
+                                  <Component id="cmbAreaManager" pref="90" max="32767" attributes="0"/>
                                   <Component id="txtAgentId" alignment="1" max="32767" attributes="0"/>
                                   <Component id="txtName" alignment="1" max="32767" attributes="0"/>
                                   <Component id="txtPassword" alignment="1" max="32767" attributes="0"/>
@@ -69,16 +69,16 @@
                                   <Component id="lblFieldAgent" max="32767" attributes="0"/>
                                   <Component id="lblPhoneNumber" max="32767" attributes="0"/>
                                   <Component id="lblArea" max="32767" attributes="0"/>
-                                  <Component id="jLabel1" max="32767" attributes="0"/>
+                                  <Component id="lblOfficeManager" max="32767" attributes="0"/>
                                   <Component id="lblOffice" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                   <Component id="txtTelefon" max="32767" attributes="0"/>
-                                  <Component id="txtArea" alignment="1" max="32767" attributes="0"/>
                                   <Component id="cmbFieldAgent" alignment="0" pref="90" max="32767" attributes="0"/>
                                   <Component id="cmbOfficeManager" alignment="0" max="32767" attributes="0"/>
                                   <Component id="txtOffice" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="cmbAreaId" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -114,7 +114,7 @@
                           <Component id="txtName" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblName" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblArea" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtArea" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cmbAreaId" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -128,13 +128,13 @@
                           <Component id="lblAdminStatus" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="cmbAdminStatus" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="cmbOfficeManager" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblOfficeManager" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lblOffice" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtOffice" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cmbAreaManager" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
@@ -185,8 +185,6 @@
     <Component class="javax.swing.JTextField" name="txtPassword">
     </Component>
     <Component class="javax.swing.JTextField" name="txtTelefon">
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtArea">
     </Component>
     <Component class="javax.swing.JLabel" name="lblAgentId">
       <Properties>
@@ -271,14 +269,12 @@
     <Component class="javax.swing.JComboBox" name="cmbFieldAgent">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
-          </StringArray>
+          <StringArray count="0"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbFieldAgentActionPerformed"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
@@ -286,53 +282,50 @@
     <Component class="javax.swing.JComboBox" name="cmbOfficeManager">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
-          </StringArray>
+          <StringArray count="0"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbOfficeManagerActionPerformed"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JLabel" name="lblOfficeManager">
       <Properties>
         <Property name="text" type="java.lang.String" value="Office Mananger:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblOffice">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Name of Office:"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtOffice">
     </Component>
     <Component class="javax.swing.JComboBox" name="cmbAreaToManage">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
-          </StringArray>
+          <StringArray count="0"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbAreaToManageActionPerformed"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jComboBox1">
+    <Component class="javax.swing.JComboBox" name="cmbAreaManager">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
-          </StringArray>
+          <StringArray count="0"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbAreaManagerActionPerformed"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
@@ -343,6 +336,22 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblAreaToManage">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Area-ID to Manage:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="cmbAreaId">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbAreaIdActionPerformed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

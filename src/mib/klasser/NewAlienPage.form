@@ -50,8 +50,8 @@
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                   <Component id="txtAlienId" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="txtLosenord" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="txtNamn" alignment="1" min="-2" pref="90" max="-2" attributes="0"/>
+                                  <Component id="txtPassword" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="txtName" alignment="1" min="-2" pref="90" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
@@ -61,9 +61,9 @@
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="txtTelefon" max="32767" attributes="0"/>
-                                  <Component id="txtPlats" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="txtAnsvarigAgent" alignment="1" min="-2" pref="90" max="-2" attributes="0"/>
+                                  <Component id="txtPhoneNumber" max="32767" attributes="0"/>
+                                  <Component id="cmbAreaId" alignment="0" pref="90" max="32767" attributes="0"/>
+                                  <Component id="cmbAssignAgentId" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" attributes="0">
@@ -94,29 +94,29 @@
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="txtAlienId" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtTelefon" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtPhoneNumber" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblAlienId" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblPhoneNumber" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtPlats" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblArea" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cmbAreaId" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtAnsvarigAgent" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblAssignAgent" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cmbAssignAgentId" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtLosenord" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtPassword" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblPassword" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtNamn" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtName" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblName" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -170,15 +170,11 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txtAlienId">
     </Component>
-    <Component class="javax.swing.JTextField" name="txtLosenord">
+    <Component class="javax.swing.JTextField" name="txtPassword">
     </Component>
-    <Component class="javax.swing.JTextField" name="txtNamn">
+    <Component class="javax.swing.JTextField" name="txtName">
     </Component>
-    <Component class="javax.swing.JTextField" name="txtTelefon">
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtPlats">
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtAnsvarigAgent">
+    <Component class="javax.swing.JTextField" name="txtPhoneNumber">
     </Component>
     <Component class="javax.swing.JLabel" name="lblAlienId">
       <Properties>
@@ -263,6 +259,26 @@
     <Component class="javax.swing.JTextField" name="txtAmmount">
     </Component>
     <Component class="javax.swing.JLabel" name="lblAmmount">
+    </Component>
+    <Component class="javax.swing.JComboBox" name="cmbAreaId">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="cmbAssignAgentId">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

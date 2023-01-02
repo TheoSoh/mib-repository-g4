@@ -170,7 +170,7 @@ public class NewCommunicationPage extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnAddCommunicationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCommunicationActionPerformed
-        if(Validation.checkEmptyTxtFields(txtEquipmentId, txtDescription, txtTransferTechnology)) {
+        if(Validation.checkThreeEmptyTxtFields(txtEquipmentId, txtDescription, txtTransferTechnology)) {
             lblErrorText.setText("Every field with (*) symbol has to be filled!");
             lblEquipmentId.setText("*Equipment-ID:");
             lblTransferTechnology.setText("*Transfer Technology:");
