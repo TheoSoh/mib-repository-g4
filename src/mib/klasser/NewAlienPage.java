@@ -277,22 +277,30 @@ public class NewAlienPage extends javax.swing.JFrame {
                 int area = parseInt(txtPlats.getText());
                 int assignedAgentId = parseInt(txtAnsvarigAgent.getText());
                 String Ammount = txtAmmount.getText();
+                String sqlNewAlienQuery = "insert into Alien "
+                        + "values(" + alienId + ", curdate(), '" + password + "',"
+                        + " '" + name + "', '" + phoneNumber + "', " + area + ", " + assignedAgentId + ");";
                 
                 if(!Validation.checkStringSelectedRace(selectedRace)) {
                     int AmmountToInt = parseInt(Ammount);
                     String sqlSetRaceQuery = "insert into " + selectedRace + " values(" + alienId + ", " + AmmountToInt + ");";
                     
                     idb.insert(sqlSetRaceQuery);
+                    idb.insert(sqlNewAlienQuery);
                     lblMessage.setText("Successful register!");
                     lblErrorMessage.setText("");
                 }
                 else {
                     String sqlSetRaceQuery = "insert into " + selectedRace + " values(" + alienId + ");";
                     idb.insert(sqlSetRaceQuery);
+                    idb.insert(sqlNewAlienQuery);
+                    lblMessage.setText("Successful register!");
+                    lblErrorMessage.setText("");
                 }
             }
             catch(InfException e) {
                 lblErrorMessage.setText("Wrong format, Alien-ID exist or Agent-ID/Area don't!");
+                lblMessage.setText("");
             }
         }
     }//GEN-LAST:event_btnRegisterActionPerformed

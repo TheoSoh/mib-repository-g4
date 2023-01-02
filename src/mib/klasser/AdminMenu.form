@@ -395,6 +395,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="New Agent"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNewAgentActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnDeleteAgent">
       <Properties>

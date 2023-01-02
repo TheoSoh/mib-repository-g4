@@ -177,6 +177,11 @@ public class AdminMenu extends javax.swing.JFrame {
         btnDeleteEquipment.setText("Delete Equipment");
 
         btnNewAgent.setText("New Agent");
+        btnNewAgent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNewAgentActionPerformed(evt);
+            }
+        });
 
         btnDeleteAgent.setText("Delete Agent");
 
@@ -413,34 +418,24 @@ public class AdminMenu extends javax.swing.JFrame {
         selectedAreaIdCommander = cmbCommanderArea.getSelectedItem().toString();
         int selectedAreaIdToInt = parseInt(selectedAreaIdCommander);
         String areaBenamning = getCorrectBenamning();
-        String anAgentId = "";
-        String agentName = "";
-        
         
         try {
             String sqlAgentIdQuery = "select Agent_ID from Omradeschef where Omrade = " + selectedAreaIdToInt;
-            anAgentId = idb.fetchSingle(sqlAgentIdQuery);
+            String anAgentId = idb.fetchSingle(sqlAgentIdQuery);
             int anAgentIdToInt = parseInt(anAgentId);
             String sqlAgentNameQuery = "select Namn from Agent where Agent_ID = " + anAgentIdToInt;
-            agentName = idb.fetchSingle(sqlAgentNameQuery);
+            String agentName = idb.fetchSingle(sqlAgentNameQuery);
+            lblAreaCommander.setText(areaBenamning + "'s commander is Agent-ID: " + anAgentId + " Name: " + agentName);
         }
         catch(InfException e) {
-            
-        }
-        switch(selectedAreaIdCommander) {
-            case "1":
-                lblAreaCommander.setText(areaBenamning + "'s commander is Agent-ID: " + anAgentId + " Name: " + agentName);
-                break;
-            case "2":
-                lblAreaCommander.setText(areaBenamning + "'s commander is Agent-ID: " + anAgentId + " Name: " + agentName);
-                break;
-            default:
-                lblAreaCommander.setText(areaBenamning + "'s commander is Agent-ID: " + anAgentId + " Name: " + agentName);
-                break;
+            JOptionPane.showMessageDialog(null, "Internal database error!");
         }
     }//GEN-LAST:event_cmbCommanderAreaActionPerformed
 
-    
+    private void btnNewAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewAgentActionPerformed
+        AdminMenu.this.dispose();
+        new NewAgentPage(idb, agentId).setVisible(true);
+    }//GEN-LAST:event_btnNewAgentActionPerformed
     
     private String getCorrectBenamning() {
         String correctBenamning = "";
