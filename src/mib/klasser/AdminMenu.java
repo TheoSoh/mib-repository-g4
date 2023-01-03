@@ -73,7 +73,7 @@ public class AdminMenu extends javax.swing.JFrame {
         btnDeleteEquipment = new javax.swing.JButton();
         btnNewAgent = new javax.swing.JButton();
         btnDeleteAgent = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnShowAgentInfo = new javax.swing.JButton();
         btnChangeAgentInfo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -190,7 +190,12 @@ public class AdminMenu extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Show Agent Info");
+        btnShowAgentInfo.setText("Show Agent Info");
+        btnShowAgentInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnShowAgentInfoActionPerformed(evt);
+            }
+        });
 
         btnChangeAgentInfo.setText("Change Agent Info");
 
@@ -262,7 +267,7 @@ public class AdminMenu extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(103, 103, 103)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
+                    .addComponent(btnShowAgentInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
                     .addComponent(btnDeleteAgent, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnNewAgent, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(65, 65, 65)
@@ -328,7 +333,7 @@ public class AdminMenu extends javax.swing.JFrame {
                     .addComponent(btnDeleteAgent))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(btnShowAgentInfo)
                     .addComponent(btnChangeAgentInfo))
                 .addGap(54, 54, 54))
         );
@@ -446,6 +451,11 @@ public class AdminMenu extends javax.swing.JFrame {
         AdminMenu.this.dispose();
         new DeleteAgentPage(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnDeleteAgentActionPerformed
+
+    private void btnShowAgentInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowAgentInfoActionPerformed
+        AdminMenu.this.dispose();
+        new ShowAgentInfoPage(idb, agentId).setVisible(true);
+    }//GEN-LAST:event_btnShowAgentInfoActionPerformed
     
     private String getCorrectBenamning() {
         String correctBenamning = "";
@@ -484,11 +494,11 @@ public class AdminMenu extends javax.swing.JFrame {
     private javax.swing.JButton btnDeleteEquipment;
     private javax.swing.JButton btnNewAgent;
     private javax.swing.JButton btnNewAlien;
+    private javax.swing.JButton btnShowAgentInfo;
     private javax.swing.JButton btnShowAlienInfo;
     private javax.swing.JComboBox<String> cmbCommanderArea;
     private javax.swing.JComboBox<String> cmbShowByRace;
     private javax.swing.JComboBox<String> cmbShowForArea;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

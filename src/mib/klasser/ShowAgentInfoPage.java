@@ -140,10 +140,11 @@ public class ShowAgentInfoPage extends javax.swing.JFrame {
                         .addComponent(btnCancel)
                         .addGap(20, 20, 20))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(lblShowArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblShowAdminStatus, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-                            .addComponent(lblShowPassword, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(lblShowAdminStatus, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                                .addComponent(lblShowPassword, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(lblShowArea, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -193,7 +194,7 @@ public class ShowAgentInfoPage extends javax.swing.JFrame {
                                 .addComponent(lblShowRegistrationDate))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(lblArea)
-                                .addComponent(lblShowArea)))
+                                .addComponent(lblShowArea, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(63, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -212,19 +213,26 @@ public class ShowAgentInfoPage extends javax.swing.JFrame {
             String sqlQuery = "select * from Agent where Agent_ID = " + selectedAgentIdInt;
             HashMap<String, String> agentInfoRow = idb.fetchRow(sqlQuery);
             
-            String showRegistrationDate = agentInfoRow.get("Registreringsdatum");
             String showName= agentInfoRow.get("Namn");
             String showPhoneNumber = agentInfoRow.get("Telefon");
-            String showArea = agentInfoRow.get("Plats");
-            String showAssignedAgent = agentInfoRow.get("Ansvarig_Agent");
+            String showRegistrationDate = agentInfoRow.get("Anstallningsdatum");
+            String showAdminStatus = agentInfoRow.get("Administrator");
+            String showPassword = agentInfoRow.get("Losenord");
+            String showArea = agentInfoRow.get("Omrade");
             
-            
-            lblShowPhoneNumber.setText(showRegistrationDate);
             lblShowName.setText(showName);
-            lblShowRegistrationDate.setText(showPhoneNumber);
-            lblShowAdminStatus.setText(showArea);
-            lblShowPassword.setText(showAssignedAgent);
-            
+            lblShowPhoneNumber.setText(showPhoneNumber);
+            lblShowRegistrationDate.setText(showRegistrationDate);
+            lblShowPassword.setText(showPassword);
+            lblShowArea.setText(showArea);
+            switch(showAdminStatus) {
+                case "J":
+                    lblShowAdminStatus.setText("Yes");
+                    break;
+                default :
+                    lblShowAdminStatus.setText("No");
+                    break;
+            }
         }
         catch(InfException e) {
             JOptionPane.showMessageDialog(null, "Internal Database Error!");
