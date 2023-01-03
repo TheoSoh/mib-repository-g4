@@ -173,8 +173,18 @@ public class AdminMenu extends javax.swing.JFrame {
         jLabel1.setText("Admin functions");
 
         btnDeleteAlien.setText("Delete Alien");
+        btnDeleteAlien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteAlienActionPerformed(evt);
+            }
+        });
 
         btnDeleteEquipment.setText("Delete Equipment");
+        btnDeleteEquipment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteEquipmentActionPerformed(evt);
+            }
+        });
 
         btnNewAgent.setText("New Agent");
         btnNewAgent.addActionListener(new java.awt.event.ActionListener() {
@@ -456,6 +466,15 @@ public class AdminMenu extends javax.swing.JFrame {
         AdminMenu.this.dispose();
         new ShowAgentInfoPage(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnShowAgentInfoActionPerformed
+
+    private void btnDeleteEquipmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteEquipmentActionPerformed
+        AdminMenu.this.dispose();
+        new DeleteEquipmentPage(idb, agentId).setVisible(true);
+    }//GEN-LAST:event_btnDeleteEquipmentActionPerformed
+
+    private void btnDeleteAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteAlienActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDeleteAlienActionPerformed
     
     private String getCorrectBenamning() {
         String correctBenamning = "";

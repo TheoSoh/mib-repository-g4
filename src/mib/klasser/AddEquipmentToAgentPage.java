@@ -19,6 +19,7 @@ public class AddEquipmentToAgentPage extends javax.swing.JFrame {
 
     private InfDB idb;
     private int agentId;
+    private int selectedEquipment;
     
     /**
      * Creates new form AddEquipmentToAgentPage
@@ -95,10 +96,6 @@ public class AddEquipmentToAgentPage extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(72, 72, 72)
-                        .addComponent(lblAssignEquipmentHeader)
-                        .addGap(0, 66, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblSuccessMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -106,16 +103,19 @@ public class AddEquipmentToAgentPage extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnAssign, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnAssign, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(72, 72, 72)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblAssignEquipmentHeader))
+                        .addGap(0, 66, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(lblChooseEquipment, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cmbChooseEquipment, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(87, 87, 87)
+                .addComponent(lblChooseEquipment, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cmbChooseEquipment, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -128,30 +128,34 @@ public class AddEquipmentToAgentPage extends javax.swing.JFrame {
                     .addComponent(cmbChooseEquipment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblChooseEquipment))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblSuccessMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 17, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblErrorMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnAssign)
-                        .addComponent(btnCancel))))
+                        .addComponent(lblSuccessMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblErrorMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnAssign)
+                            .addComponent(btnCancel))))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAssignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignActionPerformed
-        String chosenEquipment = cmbChooseEquipment.getSelectedItem().toString();
-        int assignThisEquipmentId = parseInt(chosenEquipment);
-        String sqlInsertQuery = "insert into Innehar_Utrustning values (" + agentId + ", " + assignThisEquipmentId + ", curdate() );";
-        
         try {
+            if(checkIfEquipmentIsAssigned()) {
+                String sqlDeleteQuery = "delete from Innehar_Utrustning where Utrustnings_ID = " + selectedEquipment + ";";
+                idb.delete(sqlDeleteQuery);
+            }
+            
+            String sqlInsertQuery = "insert into Innehar_Utrustning values (" + agentId + ", " + selectedEquipment + ", curdate() );";
             idb.insert(sqlInsertQuery);
-            lblSuccessMessage.setText("Successfully added Equipment-ID: " + assignThisEquipmentId);
+            lblSuccessMessage.setText("Successfully added Equipment-ID: " + selectedEquipment);
         }
         catch(InfException e) {
             lblErrorMessage.setText("Unexpected error!");
@@ -162,6 +166,7 @@ public class AddEquipmentToAgentPage extends javax.swing.JFrame {
         txtAreaEquipmentInfo.setText("");
         ArrayList<HashMap<String, String>> equipmentInfo = new ArrayList<HashMap<String, String>>();
         String chosenEquipment = cmbChooseEquipment.getSelectedItem().toString();
+        selectedEquipment = parseInt(chosenEquipment);
         try {
             String sqlRowsQuestion = "select * from Utrustning;";
             equipmentInfo = idb.fetchRows(sqlRowsQuestion);
@@ -196,6 +201,21 @@ public class AddEquipmentToAgentPage extends javax.swing.JFrame {
         catch(InfException e) {
             JOptionPane.showMessageDialog(null, "Internal database error!");
         }
+    }
+    
+    private boolean checkIfEquipmentIsAssigned() {
+        boolean isAssigned = false;
+        try {
+            String sqlRowsQuery = "select Utrustnings_ID from Innehar_Utrustning where Utrustnings_ID = " + selectedEquipment + ";";
+            String result = idb.fetchSingle(sqlRowsQuery);
+            if(result != null) {
+                isAssigned = true;
+            }
+        }
+        catch(InfException e) {
+            JOptionPane.showMessageDialog(null, "Internal database error!");
+        }
+        return isAssigned;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

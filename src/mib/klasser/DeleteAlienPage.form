@@ -27,20 +27,18 @@
               <EmptySpace pref="21" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="lblDeleteAgentHeader" min="-2" pref="463" max="-2" attributes="0"/>
+                      <Component id="lblDeleteAlienHeader" min="-2" pref="463" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                           <Component id="lblAgentName" max="32767" attributes="0"/>
-                          <Component id="lblAgentId" max="32767" attributes="0"/>
-                          <Component id="lblNewAreaManager" alignment="1" max="32767" attributes="0"/>
+                          <Component id="lblAlienId" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="cmbAgentId" min="-2" pref="90" max="-2" attributes="0"/>
+                          <Component id="cmbAlienId" min="-2" pref="90" max="-2" attributes="0"/>
                           <Component id="lblShowAgentName" min="-2" pref="200" max="-2" attributes="0"/>
-                          <Component id="cmbNewAreaManager" alignment="0" min="-2" pref="89" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
                   </Group>
@@ -58,23 +56,18 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-              <Component id="lblDeleteAgentHeader" min="-2" max="-2" attributes="0"/>
+              <Component id="lblDeleteAlienHeader" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="cmbAgentId" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblAgentId" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cmbAlienId" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblAlienId" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblAgentName" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblShowAgentName" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="cmbNewAreaManager" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblNewAreaManager" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace pref="25" max="32767" attributes="0"/>
+              <EmptySpace pref="66" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnDelete" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnCancel" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -85,37 +78,37 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="lblDeleteAgentHeader">
+    <Component class="javax.swing.JLabel" name="lblDeleteAlienHeader">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Helvetica Neue" size="18" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Delete an Agent"/>
+        <Property name="text" type="java.lang.String" value="Delete an Alien"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="cmbAgentId">
+    <Component class="javax.swing.JComboBox" name="cmbAlienId">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="0"/>
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbAgentIdActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbAlienIdActionPerformed"/>
       </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblAgentId">
+    <Component class="javax.swing.JLabel" name="lblAlienId">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Delete this Agent-ID:"/>
+        <Property name="text" type="java.lang.String" value="Delete this Alien-ID:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblAgentName">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="4"/>
-        <Property name="text" type="java.lang.String" value="Agent&apos;s name:"/>
+        <Property name="text" type="java.lang.String" value="Alien&apos;s name:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblShowAgentName">
@@ -135,25 +128,6 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelActionPerformed"/>
       </Events>
-    </Component>
-    <Component class="javax.swing.JComboBox" name="cmbNewAreaManager">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="0"/>
-        </Property>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbNewAreaManagerActionPerformed"/>
-      </Events>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-      </AuxValues>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblNewAreaManager">
-      <Properties>
-        <Property name="horizontalAlignment" type="int" value="4"/>
-        <Property name="text" type="java.lang.String" value="New Area Manager:"/>
-      </Properties>
     </Component>
   </SubComponents>
 </Form>
