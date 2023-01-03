@@ -171,25 +171,33 @@ public class NewCommunicationPage extends javax.swing.JFrame {
      */
     private void btnAddCommunicationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCommunicationActionPerformed
         if(Validation.checkThreeEmptyTxtFields(txtEquipmentId, txtDescription, txtTransferTechnology)) {
-            lblErrorText.setText("Every field with (*) symbol has to be filled!");
-            lblEquipmentId.setText("*Equipment-ID:");
-            lblTransferTechnology.setText("*Transfer Technology:");
-            lblDescription.setText("*Description:");
+            lblText.setText("");
+            lblErrorText.setText("Every field has to be filled!");
         }
         else {
             try {
-                int equipmentId = parseInt(txtEquipmentId.getText());
-                String description = txtDescription.getText();
-                String transferTechnology = txtTransferTechnology.getText();
-                String sqlQuestion = "insert into Kommunikation values (" + equipmentId + ", '" + transferTechnology + "');";
-                idb.insert(sqlQuestion);
-                String sqlSecondQuestion = "insert into Utrustning values (" + equipmentId + ", '" + description + "');";
-                idb.insert(sqlSecondQuestion);
-                lblText.setText("Successful register!");
-                lblErrorText.setText("");
+                if(Validation.checkIfTxtFieldIsOfInt(txtEquipmentId)) {
+                    int equipmentId = parseInt(txtEquipmentId.getText());
+                    String description = txtDescription.getText();
+                    String transferTechnology = txtTransferTechnology.getText();
+                
+                    String sqlSecondQuestion = "insert into Utrustning values (" + equipmentId + ", '" + description + "');";
+                    idb.insert(sqlSecondQuestion);
+                
+                    String sqlQuestion = "insert into Kommunikation values (" + equipmentId + ", '" + transferTechnology + "');";
+                    idb.insert(sqlQuestion);
+                    
+                    lblText.setText("Successful register!");
+                    lblErrorText.setText("");
+                }
+                else {
+                    lblText.setText("");
+                    lblErrorText.setText("ID must be correct number format!");
+                }
             }
             catch(InfException e) {
-                lblErrorText.setText("Wrong values inserted!");
+                lblText.setText("");
+                lblErrorText.setText("ID already exist!");
             }
         }
     }//GEN-LAST:event_btnAddCommunicationActionPerformed

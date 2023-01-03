@@ -4,6 +4,7 @@
  */
 package mib.klasser;
 
+import static java.lang.Integer.parseInt;
 import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
@@ -35,10 +36,10 @@ public class ChangePasswordPage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblUsername = new javax.swing.JLabel();
+        lblId = new javax.swing.JLabel();
         lblOldPassword = new javax.swing.JLabel();
         lblNewPassword = new javax.swing.JLabel();
-        txtUsername = new javax.swing.JTextField();
+        txtId = new javax.swing.JTextField();
         btnChange = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         txtNewPassword = new javax.swing.JPasswordField();
@@ -50,7 +51,7 @@ public class ChangePasswordPage extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        lblUsername.setText("Username:");
+        lblId.setText("ID:");
 
         lblOldPassword.setText("Old password:");
 
@@ -93,7 +94,7 @@ public class ChangePasswordPage extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                    .addComponent(lblId, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                     .addComponent(lblOldPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                     .addComponent(lblNewPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                     .addComponent(btnCancel)
@@ -109,7 +110,7 @@ public class ChangePasswordPage extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(txtOldPassword, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-                                .addComponent(txtUsername, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE))
+                                .addComponent(txtId, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE))
                             .addComponent(cmbChooseType, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
@@ -128,8 +129,8 @@ public class ChangePasswordPage extends javax.swing.JFrame {
                     .addComponent(cmbChooseType, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblUsername)
-                    .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblId)
+                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblOldPassword)
@@ -151,51 +152,62 @@ public class ChangePasswordPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeActionPerformed
-        if(Validation.checkEmptyFields(txtUsername, txtOldPassword, txtNewPassword)) {
+        if(Validation.checkEmptyFields(txtId, txtOldPassword, txtNewPassword)) {
             lblErrorMessage.setText("Please enter a username, old password and new password!");
         }
         else if(Validation.checkCmbBoxType(cmbChooseType)) {
             try {
-                String agentUsername = txtUsername.getText();
-                String agentOldPassword = txtOldPassword.getText();
-                String agentNewPassword = txtNewPassword.getText();
-                String agentQuestion = "select Losenord from Agent where Namn = '" + agentUsername + "';";
-                String sqlAgentAnswer = idb.fetchSingle(agentQuestion);
-                if(agentOldPassword.equals(sqlAgentAnswer)) {
-                    String sqlAgentQuestion = "update Agent set Losenord = '" + agentNewPassword + "' where Namn = '" + agentUsername + "' and Losenord = '" + agentOldPassword + "';";
-                    idb.update(sqlAgentQuestion);
-                    JOptionPane.showMessageDialog(null, "You've successfully changed\nyour password to: " + agentNewPassword);
+                if(Validation.checkIfTxtFieldIsOfInt(txtId)) {
+                    String agentIdString = txtId.getText();
+                    int agentId = parseInt(agentIdString);
+                    String agentOldPassword = txtOldPassword.getText();
+                    String agentNewPassword = txtNewPassword.getText();
+                    String agentQuestion = "select Losenord from Agent where Agent_ID = " + agentId + ";";
+                    String sqlAgentAnswer = idb.fetchSingle(agentQuestion);
+                    if(agentOldPassword.equals(sqlAgentAnswer)) {
+                        String sqlAgentQuestion = "update Agent set Losenord = '" + agentNewPassword + "' where Agent_ID = " + agentId + ";";
+                        idb.update(sqlAgentQuestion);
+                        JOptionPane.showMessageDialog(null, "You've successfully changed\nyour password to: " + agentNewPassword);
+                        lblErrorMessage.setText("");
+                    }
+                    else {
+                        lblErrorMessage.setText("Invalid ID or password!");
+                    }
                 }
                 else {
-                    lblErrorMessage.setText("Invalid username or password!");
+                    lblErrorMessage.setText("ID must be a number!");
                 }
             }
             catch(InfException ex) {
                 JOptionPane.showMessageDialog(null, "Internal database error");
             }
         }
-        else if(!Validation.checkCmbBoxType(cmbChooseType)) {
+        else {
             try {
-                String alienUsername = txtUsername.getText();
-                String alienOldPassword = txtOldPassword.getText();
-                String alienNewPassword = txtNewPassword.getText();
-                String alienQuestion = "select Losenord from Alien where Namn = '" + alienUsername + "';";
-                String sqlAlienAnswer = idb.fetchSingle(alienQuestion);
-                
-                if(alienOldPassword.equals(sqlAlienAnswer)) {
-                    String sqlAlienQuestion = "update Alien set Losenord = '" + alienNewPassword + "' where Namn = '" + alienUsername + "' and Losenord = '" + alienOldPassword + "';";
-                    idb.update(sqlAlienQuestion);
+                if(Validation.checkIfTxtFieldIsOfInt(txtId)) {
+                    String alienIdString = txtId.getText();
+                    int alienId = parseInt(alienIdString);
+                    String alienOldPassword = txtOldPassword.getText();
+                    String alienNewPassword = txtNewPassword.getText();
+                    String alienQuestion = "select Losenord from Alien where Alien_ID = " + alienId + ";";
+                    String sqlAlienAnswer = idb.fetchSingle(alienQuestion);
+                    
+                    if(alienOldPassword.equals(sqlAlienAnswer)) {
+                        String sqlAlienQuestion = "update Alien set Losenord = '" + alienNewPassword + "' where Alien_ID = " + alienId + ";";
+                        idb.update(sqlAlienQuestion);
+                        JOptionPane.showMessageDialog(null, "You've successfully changed\nyour password to: " + alienNewPassword);
+                    }
+                    else {
+                        lblErrorMessage.setText("Invalid ID or password!");
+                    }
                 }
                 else {
-                    lblErrorMessage.setText("Invalid username or password!");
+                    lblErrorMessage.setText("ID must be a number!");
                 }
             }
             catch(InfException ex) {
                 JOptionPane.showMessageDialog(null, "Internal database error!");
             }
-        }
-        else {
-            lblErrorMessage.setText("Unexpected error!");
         }
     }//GEN-LAST:event_btnChangeActionPerformed
 
@@ -218,11 +230,11 @@ public class ChangePasswordPage extends javax.swing.JFrame {
     private javax.swing.JLabel lblChangeAs;
     private javax.swing.JLabel lblErrorMessage;
     private javax.swing.JLabel lblHeaderChangePassword;
+    private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblNewPassword;
     private javax.swing.JLabel lblOldPassword;
-    private javax.swing.JLabel lblUsername;
+    private javax.swing.JTextField txtId;
     private javax.swing.JPasswordField txtNewPassword;
     private javax.swing.JPasswordField txtOldPassword;
-    private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 }

@@ -37,9 +37,9 @@ public class DeleteAgentPage extends javax.swing.JFrame {
     private void addItemsToCmbAgentId(JComboBox<String> fillThisBox) {
         try {
             String sqlQuestion = "select Agent_ID from Agent";
-            ArrayList<String> areaIdList = idb.fetchColumn(sqlQuestion);
-            for(String anAreaId : areaIdList) {
-                fillThisBox.addItem(anAreaId);
+            ArrayList<String> agentIdList = idb.fetchColumn(sqlQuestion);
+            for(String anAgentId : agentIdList) {
+                fillThisBox.addItem(anAgentId);
             }
         }
         catch(InfException e) {

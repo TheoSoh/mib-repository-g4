@@ -146,16 +146,18 @@ public class LoginPage extends javax.swing.JFrame {
         }
         else if (Validation.checkCmbBoxType(cmbLoginAs)) {
             try {
-                String agentId = txtId.getText();
-                String agentPassword = txtPassword.getText();
-                String agentQuestion = "select Losenord from Agent where Agent_ID = '" + agentId + "';";
-                String sqlAgentAnswer = idb.fetchSingle(agentQuestion);
-                if(agentPassword.equals(sqlAgentAnswer)) {
-                    try {
-                        String sqlAdminQuestion = "select Administrator from Agent where Agent_ID = '" + agentId + "' and Losenord = '" + agentPassword + "';";
+                if(Validation.checkIfTxtFieldIsOfInt(txtId)) {
+                    String agentId = txtId.getText();
+                    int agentIdInt = parseInt(agentId);
+                    String agentPassword = txtPassword.getText();
+                    
+                    String agentQuestion = "select Losenord from Agent where Agent_ID = " + agentIdInt + ";";
+                    String sqlAgentAnswer = idb.fetchSingle(agentQuestion);
+                    
+                    if(agentPassword.equals(sqlAgentAnswer)) {
+                        String sqlAdminQuestion = "select Administrator from Agent where Agent_ID = " + agentIdInt + ";";
                         String adminAnswer = idb.fetchSingle(sqlAdminQuestion);
-                        int agentIdInt = parseInt(agentId);
-                        
+                            
                         if(adminAnswer.equals("N")) {
                             new AgentMenu(idb, agentIdInt).setVisible(true);
                             LoginPage.this.dispose();
@@ -165,12 +167,12 @@ public class LoginPage extends javax.swing.JFrame {
                             LoginPage.this.dispose();
                         }
                     }
-                    catch(InfException e) {
-                        JOptionPane.showMessageDialog(null, "Internal database error!");
+                    else {
+                        lblLoginFail.setText("Invalid username or password!");
                     }
                 }
                 else {
-                    lblLoginFail.setText("Invalid username or password!");
+                    lblLoginFail.setText("ID must be a number!");
                 }
             }
             catch(InfException ex) {
@@ -179,18 +181,24 @@ public class LoginPage extends javax.swing.JFrame {
         }
         else {
             try {
-                String alienId = txtId.getText();
-                String alienPassword = txtPassword.getText();
-                String alienQuestion = "select Losenord from Alien where Alien_ID = '" + alienId + "';";
-                String sqlAlienAnswer = idb.fetchSingle(alienQuestion);
-                if(alienPassword.equals(sqlAlienAnswer)) {
-                    int alienIdInt = Integer.parseInt(alienId);
+                if(Validation.checkIfTxtFieldIsOfInt(txtId)) {
+                    String alienId = txtId.getText();
+                    int alienIdInt = parseInt(alienId);
+                    String alienPassword = txtPassword.getText();
                     
-                    new AlienMenu(idb, alienIdInt).setVisible(true);
-                    LoginPage.this.dispose();
+                    String alienQuestion = "select Losenord from Alien where Alien_ID = " + alienIdInt + ";";
+                    String sqlAlienAnswer = idb.fetchSingle(alienQuestion);
+                    
+                    if(alienPassword.equals(sqlAlienAnswer)) {
+                        new AlienMenu(idb, alienIdInt).setVisible(true);
+                        LoginPage.this.dispose();
+                    }
+                    else {
+                        lblLoginFail.setText("Invalid username or password!");
+                    }
                 }
                 else {
-                    lblLoginFail.setText("Invalid username or password!");
+                    lblLoginFail.setText("ID must be a number!");
                 }
             }
             catch(InfException ex) {

@@ -28,16 +28,15 @@ public class DeleteAlienPage extends javax.swing.JFrame {
         initComponents();
         this.idb = idb;
         this.agentId = agentId;
-        addItemsToCmbAgentId(cmbAlienId);
-        addItemsToCmbAgentId(cmbNewAreaManager);
+        addItemsToCmbAlienId(cmbAlienId);
     }
 
-    private void addItemsToCmbAgentId(JComboBox<String> fillThisBox) {
+    private void addItemsToCmbAlienId(JComboBox<String> fillThisBox) {
         try {
-            String sqlQuestion = "select Agent_ID from Agent";
-            ArrayList<String> areaIdList = idb.fetchColumn(sqlQuestion);
-            for(String anAreaId : areaIdList) {
-                fillThisBox.addItem(anAreaId);
+            String sqlQuestion = "select Alien_ID from Alien";
+            ArrayList<String> alienIdList = idb.fetchColumn(sqlQuestion);
+            for(String anAlienId : alienIdList) {
+                fillThisBox.addItem(anAlienId);
             }
         }
         catch(InfException e) {
@@ -57,10 +56,12 @@ public class DeleteAlienPage extends javax.swing.JFrame {
         lblDeleteAlienHeader = new javax.swing.JLabel();
         cmbAlienId = new javax.swing.JComboBox<>();
         lblAlienId = new javax.swing.JLabel();
-        lblAgentName = new javax.swing.JLabel();
-        lblShowAgentName = new javax.swing.JLabel();
+        lblAlienName = new javax.swing.JLabel();
+        lblShowAlienName = new javax.swing.JLabel();
         btnDelete = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
+        lblSuccessMessage = new javax.swing.JLabel();
+        lblErrorMessage = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -76,8 +77,8 @@ public class DeleteAlienPage extends javax.swing.JFrame {
 
         lblAlienId.setText("Delete this Alien-ID:");
 
-        lblAgentName.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblAgentName.setText("Alien's name:");
+        lblAlienName.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblAlienName.setText("Alien's name:");
 
         btnDelete.setText("Delete");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -93,30 +94,44 @@ public class DeleteAlienPage extends javax.swing.JFrame {
             }
         });
 
+        lblSuccessMessage.setFont(new java.awt.Font("Helvetica Neue", 0, 12)); // NOI18N
+        lblSuccessMessage.setForeground(new java.awt.Color(0, 255, 0));
+        lblSuccessMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        lblErrorMessage.setFont(new java.awt.Font("Helvetica Neue", 0, 12)); // NOI18N
+        lblErrorMessage.setForeground(new java.awt.Color(255, 0, 0));
+        lblErrorMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(21, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lblDeleteAlienHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(21, 21, 21))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(lblErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(lblAgentName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblAlienId, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cmbAlienId, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblShowAgentName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(80, 80, 80))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30))))
+                            .addComponent(lblSuccessMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(30, 30, 30))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(lblDeleteAlienHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(21, 21, 21))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(lblAlienName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblAlienId, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGap(18, 18, 18)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(cmbAlienId, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblShowAlienName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(80, 80, 80)))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,12 +144,15 @@ public class DeleteAlienPage extends javax.swing.JFrame {
                     .addComponent(lblAlienId))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblAgentName)
-                    .addComponent(lblShowAgentName))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                    .addComponent(lblAlienName)
+                    .addComponent(lblShowAlienName))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addComponent(lblSuccessMessage)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDelete)
-                    .addComponent(btnCancel))
+                    .addComponent(btnCancel)
+                    .addComponent(lblErrorMessage))
                 .addGap(25, 25, 25))
         );
 
@@ -142,51 +160,43 @@ public class DeleteAlienPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmbAlienIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAlienIdActionPerformed
-        selectedAgentIdString = cmbAlienId.getSelectedItem().toString();
-        selectedAgentId = parseInt(selectedAgentIdString);
+        String selectedAlienIdString = cmbAlienId.getSelectedItem().toString();
+        selectedAlienId = parseInt(selectedAlienIdString);
         
         try {
-            String sqlQuery = "select Namn from Agent where Agent_ID = " + selectedAgentId;
-            String agentName = idb.fetchSingle(sqlQuery);
-            lblShowAgentName.setText(agentName);
+            String sqlQuery = "select Namn from Alien where Alien_ID = " + selectedAlienId;
+            String alienName = idb.fetchSingle(sqlQuery);
+            lblShowAlienName.setText(alienName);
         }
         catch(InfException e) {
             JOptionPane.showMessageDialog(null, "Internal database error!");
         }
         
-        lblNewAreaManager.setVisible(false);
-        cmbNewAreaManager.setVisible(false);
-        
-        if(checkIfIsAreaManager()) {
-            lblNewAreaManager.setVisible(true);
-            cmbNewAreaManager.setVisible(true);
-        }
     }//GEN-LAST:event_cmbAlienIdActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         try {
-            
-            if(checkIfIsAreaManager()) {
-                String sqlUpdateAreaManagerQuery = "update Omradeschef set "
-                        + "Agent_ID = " + selectedNewAreaManager + " where Agent_ID = " + selectedAgentId + ";";
-                idb.update(sqlUpdateAreaManagerQuery);
+            if(checkIfAlienIsBoglodite()) {
+                String deleteFromRaceQuery = "delete from Boglodite where Alien_ID = " + selectedAlienId + ";";
+                idb.delete(deleteFromRaceQuery);
+            }
+            else if(checkIfAlienIsSquid()) {
+                String deleteFromRaceQuery = "delete from Squid where Alien_ID = " + selectedAlienId + ";";
+                idb.delete(deleteFromRaceQuery);
+            }
+            else {
+                String deleteFromRaceQuery = "delete from Worm where Alien_ID = " + selectedAlienId + ";";
+                idb.delete(deleteFromRaceQuery);
             }
             
-            if(checkIfIsOfficeManager()) {
-                String sqlDeleteOfficeManagerQuery = "delete from Kontorschef where Agent_ID = " + selectedAgentId;
-                idb.delete(sqlDeleteOfficeManagerQuery);
-            }
-            
-            if(checkIfIsFieldAgent()) {
-                String sqlDeleteFieldAgentQuery = "delete from Faltagent where Agent_ID = " + selectedAgentId;
-                idb.delete(sqlDeleteFieldAgentQuery);
-            }
-            
-            String sqlDeleteQuery = "delete from Agent where Agent_ID = " + selectedAgentId;
+            String sqlDeleteQuery = "delete from Alien where Alien_ID = " + selectedAlienId;
             idb.delete(sqlDeleteQuery);
+            lblSuccessMessage.setText(selectedAlienId + " was deleted!");
+            lblErrorMessage.setText("");
         }
         catch(InfException e) {
-            JOptionPane.showMessageDialog(null, "Internal database error!");
+            lblSuccessMessage.setText("");
+            lblErrorMessage.setText("Something went wrong!");
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
@@ -195,58 +205,47 @@ public class DeleteAlienPage extends javax.swing.JFrame {
         new AdminMenu(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnCancelActionPerformed
 
-    private boolean checkIfIsAreaManager() {
-        boolean isAreaManager = false;
+    private boolean checkIfAlienIsBoglodite() {
+        boolean isBoglodite = false;
+        
         try {
-            String sqlQuestion = "select Agent_ID from Omradeschef where Agent_ID = " + selectedAgentId + ";";
-            String result = idb.fetchSingle(sqlQuestion);
+            String sqlBogloditeQuery = "select Alien_ID from Boglodite where Alien_ID = " + selectedAlienId + ";";
+            String result = idb.fetchSingle(sqlBogloditeQuery);
             if(result != null) {
-                isAreaManager = true;
+                isBoglodite = true;
             }
         }
         catch(InfException e) {
             JOptionPane.showMessageDialog(null, "Internal database error!");
         }
-        return isAreaManager;
+        return isBoglodite;
     }
     
-    private boolean checkIfIsOfficeManager() {
-        boolean isOfficeManager = false;
+    private boolean checkIfAlienIsSquid() {
+        boolean isSquid = false;
+        
         try {
-            String sqlQuestion = "select Agent_ID from Kontorschef where Agent_ID = " + selectedAgentId + ";";
-            String result = idb.fetchSingle(sqlQuestion);
+            String sqlSquidQuery = "select Alien_ID from Squid where Alien_ID = " + selectedAlienId + ";";
+            String result = idb.fetchSingle(sqlSquidQuery);
             if(result != null) {
-                isOfficeManager = true;
+                isSquid = true;
             }
         }
         catch(InfException e) {
             JOptionPane.showMessageDialog(null, "Internal database error!");
         }
-        return isOfficeManager;
+        return isSquid;
     }
     
-    private boolean checkIfIsFieldAgent() {
-        boolean isFieldAgent = false;
-        try {
-            String sqlQuestion = "select Agent_ID from Faltagent where Agent_ID = " + selectedAgentId + ";";
-            String result = idb.fetchSingle(sqlQuestion);
-            if(result != null) {
-                isFieldAgent = true;
-            }
-        }
-        catch(InfException e) {
-            JOptionPane.showMessageDialog(null, "Internal database error!");
-        }
-        return isFieldAgent;
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnDelete;
     private javax.swing.JComboBox<String> cmbAlienId;
-    private javax.swing.JLabel lblAgentName;
     private javax.swing.JLabel lblAlienId;
+    private javax.swing.JLabel lblAlienName;
     private javax.swing.JLabel lblDeleteAlienHeader;
-    private javax.swing.JLabel lblShowAgentName;
+    private javax.swing.JLabel lblErrorMessage;
+    private javax.swing.JLabel lblShowAlienName;
+    private javax.swing.JLabel lblSuccessMessage;
     // End of variables declaration//GEN-END:variables
 }

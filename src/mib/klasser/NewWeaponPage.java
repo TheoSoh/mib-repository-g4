@@ -172,25 +172,34 @@ public class NewWeaponPage extends javax.swing.JFrame {
      */
     private void btnAddWeaponActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddWeaponActionPerformed
         if(Validation.checkThreeEmptyTxtFields(txtEquipmentId, txtDescription, txtCaliber)) {
-            lblErrorText.setText("Every field with (*) symbol has to be filled!");
-            lblEquipmentId.setText("*Equipment-ID:");
-            lblCaliber.setText("*Transfer Technology:");
-            lblDescription.setText("*Description:");
+            lblText.setText("");
+            lblErrorText.setText("Every field has to be filled!");
         }
         else {
             try {
-                int equipmentId = parseInt(txtEquipmentId.getText());
-                String description = txtDescription.getText();
-                String caliber = txtCaliber.getText();
-                String sqlQuestion = "insert into Weapon values (" + equipmentId + ", '" + caliber + "');";
-                idb.insert(sqlQuestion);
-                String sqlSecondQuestion = "insert into Utrustning values (" + equipmentId + ", '" + description + "');";
-                idb.insert(sqlSecondQuestion);
-                lblText.setText("Successful register!");
-                lblErrorText.setText("");
+                if((Validation.checkIfTxtFieldIsOfInt(txtCaliber)) && (Validation.checkIfTxtFieldIsOfInt(txtEquipmentId))) {
+                    String equipmentIdString =txtEquipmentId.getText();
+                    String description = txtDescription.getText();
+                    String caliber = txtCaliber.getText();
+                    int equipmentId = parseInt(equipmentIdString);
+                    int intCaliber = parseInt(caliber);
+                    
+                    String sqlSecondQuestion = "insert into Utrustning values (" + equipmentId + ", '" + description + "');";
+                    idb.insert(sqlSecondQuestion);
+                
+                    String sqlQuestion = "insert into Vapen values (" + equipmentId + ", " + intCaliber + ");";
+                    idb.insert(sqlQuestion);
+   
+                    lblText.setText("Successful register!");
+                    lblErrorText.setText("");
+                }
+                else {
+                    lblErrorText.setText("ID and Caliber must be correct number format!");
+                }
             }
             catch(InfException e) {
-                lblErrorText.setText("Wrong values inserted!");
+                lblText.setText("");
+                lblErrorText.setText("ID already exist!");
             }
         }
     }//GEN-LAST:event_btnAddWeaponActionPerformed

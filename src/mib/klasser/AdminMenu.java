@@ -473,7 +473,8 @@ public class AdminMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDeleteEquipmentActionPerformed
 
     private void btnDeleteAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteAlienActionPerformed
-        // TODO add your handling code here:
+        AdminMenu.this.dispose();
+        new DeleteAlienPage(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnDeleteAlienActionPerformed
     
     private String getCorrectBenamning() {

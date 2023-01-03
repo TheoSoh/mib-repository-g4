@@ -13,17 +13,17 @@ import oru.inf.InfException;
 
 /**
  *
- * @author theosohlman
+ * @author Grupp4
  */
 public class ChangeAlienInfoPage extends javax.swing.JFrame {
 
-    //H√§r p√•b√∂rjas deklaration av f√§lt.
+    //H‰r pÂbˆrjas deklaration av f‰lt.
     private InfDB idb;
     private int agentId;
     private String selectedValueAlienId;
     private String selectedRaceAlienId;
     private String selectedNewRace;
-    //H√§r slutar deklarationen av f√§lt.
+    //H‰r slutar deklarationen av f‰lt.
     
     /**
      * Creates new form ChangeAlienInfoPage
