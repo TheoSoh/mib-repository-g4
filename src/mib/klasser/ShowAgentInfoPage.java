@@ -208,7 +208,7 @@ public class ShowAgentInfoPage extends javax.swing.JFrame {
         selectedAgentId = cmbAgentId.getSelectedItem().toString();
         
         try {
-            int selectedAlienIdInt = parseInt(selectedAgentId);
+            int selectedAgentIdInt = parseInt(selectedAgentId);
             String sqlQuery = "select * from Agent where Agent_ID = " + selectedAgentIdInt;
             HashMap<String, String> agentInfoRow = idb.fetchRow(sqlQuery);
             
