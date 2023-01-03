@@ -32,6 +32,7 @@ public class DeleteAgentPage extends javax.swing.JFrame {
         this.agentId = agentId;
         addItemsToCmbAgentId(cmbAgentId);
         addItemsToCmbAgentId(cmbNewAreaManager);
+        setTitle("Delete an Agent");
     }
 
     private void addItemsToCmbAgentId(JComboBox<String> fillThisBox) {

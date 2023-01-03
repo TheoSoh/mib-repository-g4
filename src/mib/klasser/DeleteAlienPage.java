@@ -29,6 +29,7 @@ public class DeleteAlienPage extends javax.swing.JFrame {
         this.idb = idb;
         this.agentId = agentId;
         addItemsToCmbAlienId(cmbAlienId);
+        setTitle("Delete an Alien");
     }
 
     private void addItemsToCmbAlienId(JComboBox<String> fillThisBox) {

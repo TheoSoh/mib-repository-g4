@@ -208,6 +208,11 @@ public class AdminMenu extends javax.swing.JFrame {
         });
 
         btnChangeAgentInfo.setText("Change Agent Info");
+        btnChangeAgentInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChangeAgentInfoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -476,6 +481,10 @@ public class AdminMenu extends javax.swing.JFrame {
         AdminMenu.this.dispose();
         new DeleteAlienPage(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnDeleteAlienActionPerformed
+
+    private void btnChangeAgentInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeAgentInfoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnChangeAgentInfoActionPerformed
     
     private String getCorrectBenamning() {
         String correctBenamning = "";

@@ -425,6 +425,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Change Agent Info"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnChangeAgentInfoActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
