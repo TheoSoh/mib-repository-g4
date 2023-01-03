@@ -60,7 +60,7 @@ public class ChangeAgentInfoPage extends javax.swing.JFrame {
      */
     private void addItemsToCmbAgentId() {
         try {
-            String sqlQuestion = "select Alien_ID from Alien";
+            String sqlQuestion = "select Agent_ID from Agent";
             ArrayList<String> agentIdList = idb.fetchColumn(sqlQuestion);
             for(String anAgentId : agentIdList) {
                 cmbAgentId.addItem(anAgentId);
@@ -87,11 +87,10 @@ public class ChangeAgentInfoPage extends javax.swing.JFrame {
         lblChangeThis = new javax.swing.JLabel();
         txtNewValue = new javax.swing.JTextField();
         lblNewValue = new javax.swing.JLabel();
-        btnChangeInfo = new javax.swing.JButton();
+        btnChange = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         lblSuccessMessage = new javax.swing.JLabel();
         lblErrorMessage = new javax.swing.JLabel();
-        lblAmmount = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -114,10 +113,10 @@ public class ChangeAgentInfoPage extends javax.swing.JFrame {
         lblNewValue.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblNewValue.setText("Insert new value here:");
 
-        btnChangeInfo.setText("Change");
-        btnChangeInfo.addActionListener(new java.awt.event.ActionListener() {
+        btnChange.setText("Change");
+        btnChange.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnChangeInfoActionPerformed(evt);
+                btnChangeActionPerformed(evt);
             }
         });
 
@@ -136,53 +135,44 @@ public class ChangeAgentInfoPage extends javax.swing.JFrame {
         lblErrorMessage.setForeground(new java.awt.Color(255, 0, 0));
         lblErrorMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        lblAmmount.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(lblErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblSuccessMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lblErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblSuccessMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnChangeInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(21, 21, 21))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(lblAmmount, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(302, 302, 302))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(lblNewValue, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
-                                    .addComponent(lblChangeThis, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblAgentId, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(cmbInfoToChange, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtNewValue, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                                    .addComponent(cmbAgentId, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(134, 134, 134))))))
+                        .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnChange, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(21, 21, 21))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblChangeInfoHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(89, 89, 89))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(100, 100, 100)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(lblNewValue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblChangeThis, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblAgentId, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cmbAgentId, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbInfoToChange, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtNewValue, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(lblChangeInfoHeader)
-                .addGap(30, 30, 30)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmbAgentId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblAgentId))
@@ -194,87 +184,88 @@ public class ChangeAgentInfoPage extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNewValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblNewValue))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(lblSuccessMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnChangeInfo)
+                        .addComponent(btnChange)
                         .addComponent(btnCancel))
                     .addComponent(lblErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblAmmount)
-                .addGap(18, 18, 18))
+                .addGap(12, 12, 12))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    /**
-     * 
-     * @return 
-     */
-    private String getAliensRace() {
-        String race = "";
-        
-        try {
-            String sqlBogloditeQuery = "select * from Boglodite";
-            ArrayList<HashMap<String, String>> bogloditeTable;
-            bogloditeTable = idb.fetchRows(sqlBogloditeQuery);
-            for(HashMap<String, String> everyBoglodite : bogloditeTable) {
-                if(everyBoglodite.get("Alien_ID").equals(selectedRaceAlienId)) {
-                    race = "Boglodite";
-                }
-            }
-            
-            String sqlSquidQuery = "select * from Squid";
-            ArrayList<HashMap<String, String>> SquidTable;
-            SquidTable = idb.fetchRows(sqlSquidQuery);
-            for(HashMap<String, String> everySquid : SquidTable) {
-                if(everySquid.get("Alien_ID").equals(selectedRaceAlienId)) {
-                    race = "Squid";
-                }
-            }
-            
-            String sqlWormQuery = "select * from Worm";
-            ArrayList<HashMap<String, String>> WormTable;
-            WormTable = idb.fetchRows(sqlWormQuery);
-            for(HashMap<String, String> everyWorm : WormTable) {
-                if(everyWorm.get("Alien_ID").equals(selectedRaceAlienId)) {
-                    race = "Worm";
-                }
-            }
-        }
-        catch(InfException e) {
-            JOptionPane.showMessageDialog(null, "Internal database error!");
-        }
-        return race;
-    }
     
     /**
      * 
      * @param evt 
      */
-    private void btnChangeInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeInfoActionPerformed
-        String selectedInfo = getCorrectString();
-        int selectedIntValueAlienId = parseInt(selectedValueAlienId);
-        String newValue = txtNewValue.getText();
-        
+    private void btnChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeActionPerformed
         try {
             if(Validation.checkEmptyTxtField(txtNewValue)) {
-                lblErrorMessage.setText("Enter Value!");
-            }
-            else if(Validation.checkIfTxtFieldIsOfInt(txtNewValue)){
-                String sqlQuery = "update Alien set " + selectedInfo + " = " + newValue + " where Alien_ID = " + selectedIntValueAlienId + ";";
-                lblErrorMessage.setText("");
-                idb.update(sqlQuery);
-                lblSuccessMessage.setText("Success!");
+                lblErrorMessage.setText("Enter a new Value!");
             }
             else {
-                String sqlQuery = "update Alien set " + selectedInfo + " = '" + newValue + "' where Alien_ID = " + selectedIntValueAlienId + ";";
-                lblErrorMessage.setText("");
-                idb.update(sqlQuery);
-                lblSuccessMessage.setText("Success!");
+                String selectedInfo = cmbInfoToChange.getSelectedItem().toString();
+                String newValue = txtNewValue.getText();
+                
+                if(selectedInfo.equals("Name")) {
+                    String sqlUpdateQuery = "update Agent set Namn = '" + newValue + "' where Agent_ID = " + selectedAgentId + ";";
+                    idb.update(sqlUpdateQuery);
+                    lblErrorMessage.setText("");
+                    lblSuccessMessage.setText("Updated Name to " + newValue);
+                }
+                else if(selectedInfo.equals("Phone number")) {
+                    String sqlUpdateQuery = "update Agent set Telefon = '" + newValue + "' where Agent_ID = " + selectedAgentId + ";";
+                    idb.update(sqlUpdateQuery);
+                    lblErrorMessage.setText("");
+                    lblSuccessMessage.setText("Updated Phone number to " + newValue);
+                }
+                else if(selectedInfo.equals("Employment date")) {
+                    String sqlUpdateQuery = "update Agent set Anstallningsdatum = '" + newValue + "' where Agent_ID = " + selectedAgentId + ";";
+                    idb.update(sqlUpdateQuery);
+                    lblErrorMessage.setText("");
+                    lblSuccessMessage.setText("Updated Employment date to " + newValue);
+                }
+                else if(selectedInfo.equals("Admin status")) {
+                    if((newValue.equals("J")) || (newValue.equals("j"))) {
+                        String sqlUpdateQuery = "update Agent set Administrator = 'J' where Agent_ID = " + selectedAgentId + ";";
+                        idb.update(sqlUpdateQuery);
+                        lblErrorMessage.setText("");
+                        lblSuccessMessage.setText("Updated Admin status to J");
+                    }
+                    else if((newValue.equals("N")) || (newValue.equals("n"))) {
+                        String sqlUpdateQuery = "update Agent set Administrator = 'N' where Agent_ID = " + selectedAgentId + ";";
+                        idb.update(sqlUpdateQuery);
+                        lblErrorMessage.setText("");
+                        lblSuccessMessage.setText("Updated Admin status to N");
+                    }
+                    else {
+                        lblSuccessMessage.setText("");
+                        lblErrorMessage.setText("Enter J or N as value. J = admin, N = not admin!");
+                    }
+                }
+                else if(selectedInfo.equals("Password")) {
+                    String sqlUpdateQuery = "update Agent set Losenord = '" + newValue + "' where Agent_ID = " + selectedAgentId + ";";
+                    idb.update(sqlUpdateQuery);
+                    lblErrorMessage.setText("");
+                    lblSuccessMessage.setText("Updated Password to " + newValue);
+                }
+                else if(selectedInfo.equals("Area")) {
+                    if(Validation.checkIfTxtFieldIsOfInt(txtNewValue)) {
+                        int newIntValue = parseInt(newValue);
+                        String sqlUpdateQuery = "update Agent set Omrade = " + newIntValue + " where Agent_ID = " + selectedAgentId + ";";
+                        idb.update(sqlUpdateQuery);
+                        lblErrorMessage.setText("");
+                        lblSuccessMessage.setText("Updated Area to " + newIntValue);
+                    }
+                    else {
+                        lblSuccessMessage.setText("");
+                        lblErrorMessage.setText("Enter a valid Area-ID!");
+                    }
+                }
             }
         }
         catch(InfException e) {
@@ -283,39 +274,7 @@ public class ChangeAgentInfoPage extends javax.swing.JFrame {
         }
         
         
-    }//GEN-LAST:event_btnChangeInfoActionPerformed
-    
-    /**
-     * 
-     * @return 
-     */
-    private String getCorrectString() {
-        String correctString = "";
-        String selectedInfo = cmbInfoToChange.getSelectedItem().toString();
-        
-        switch (selectedInfo) {
-            case "Registrationdate":
-                correctString = "Registreringsdatum";
-                break;
-            case "Password":
-                correctString = "Losenord";
-                break;
-            case "Name":
-                correctString = "Namn";
-                break;
-            case "Phone Number":
-                correctString = "Telefon";
-                break;
-            case "Area":
-                correctString = "Plats";
-                break;
-            default:
-                correctString = "Ansvarig_Agent";
-                break;
-        }
-        
-        return correctString;
-    }
+    }//GEN-LAST:event_btnChangeActionPerformed
     
     /**
      * 
@@ -323,12 +282,7 @@ public class ChangeAgentInfoPage extends javax.swing.JFrame {
      */
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         ChangeAgentInfoPage.this.dispose();
-        if(checkAdminStatus()) {
-            new AdminMenu(idb, agentId).setVisible(true);
-        }
-        else {
-            new AgentMenu(idb, agentId).setVisible(true);
-        }
+        new AdminMenu(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnCancelActionPerformed
 
     /**
@@ -336,36 +290,16 @@ public class ChangeAgentInfoPage extends javax.swing.JFrame {
      * @param evt 
      */
     private void cmbAgentIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAgentIdActionPerformed
-        selectedValueAlienId = cmbAgentId.getSelectedItem().toString();
+        String selectedAgentIdString = cmbAgentId.getSelectedItem().toString();
+        selectedAgentId = parseInt(selectedAgentIdString);
     }//GEN-LAST:event_cmbAgentIdActionPerformed
-
-   
-    /**
-     * 
-     * @return 
-     */
-    private boolean checkAdminStatus() {
-        boolean isAdmin = false;
-        try {
-            String sqlQuestion = "select Administrator from Agent where Agent_ID = '" + agentId + "';";
-            String result = idb.fetchSingle(sqlQuestion);
-            if(result.equals("J")) {
-                isAdmin = true;
-            }
-        }
-        catch(InfException e) {
-            JOptionPane.showMessageDialog(null, "Internal database error!");
-        }
-        return isAdmin;
-    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
-    private javax.swing.JButton btnChangeInfo;
+    private javax.swing.JButton btnChange;
     private javax.swing.JComboBox<String> cmbAgentId;
     private javax.swing.JComboBox<String> cmbInfoToChange;
     private javax.swing.JLabel lblAgentId;
-    private javax.swing.JLabel lblAmmount;
     private javax.swing.JLabel lblChangeInfoHeader;
     private javax.swing.JLabel lblChangeThis;
     private javax.swing.JLabel lblErrorMessage;

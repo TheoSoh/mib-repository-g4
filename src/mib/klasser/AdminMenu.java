@@ -483,7 +483,8 @@ public class AdminMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDeleteAlienActionPerformed
 
     private void btnChangeAgentInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeAgentInfoActionPerformed
-        // TODO add your handling code here:
+        AdminMenu.this.dispose();
+        new ChangeAgentInfoPage(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnChangeAgentInfoActionPerformed
     
     private String getCorrectBenamning() {
