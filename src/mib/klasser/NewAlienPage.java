@@ -302,11 +302,18 @@ public class NewAlienPage extends javax.swing.JFrame {
                 idb.insert(sqlNewAlienQuery);
                 
                 if(!Validation.checkStringSelectedRace(selectedRace)) {
-                    int AmmountToInt = parseInt(Ammount);
-                    String sqlSetRaceQuery = "insert into " + selectedRace + " values(" + alienId + ", " + AmmountToInt + ");";
-                    idb.insert(sqlSetRaceQuery);
-                    lblMessage.setText("Successful register!");
-                    lblErrorMessage.setText("");
+                    if(Validation.checkIfTxtFieldIsOfInt(txtAmmount)) {
+                        int AmmountToInt = parseInt(Ammount);
+                        String sqlSetRaceQuery = "insert into " + selectedRace + " values(" + alienId + ", " + AmmountToInt + ");";
+                        idb.insert(sqlSetRaceQuery);
+                        lblMessage.setText("Successful register!");
+                        lblErrorMessage.setText("");
+                    }
+                    else {
+                        lblMessage.setText("");
+                        lblErrorMessage.setText("Arms/Boogies has to be correct format!");
+                    }
+                    
                 }
                 else {
                     String sqlSetRaceQuery = "insert into " + selectedRace + " values(" + alienId + ");";

@@ -455,7 +455,7 @@ public class ChangeAlienInfoPage extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-        ChangeAlienInfoPage.this.dispose();
+        dispose();
         if(checkAdminStatus()) {
             new AdminMenu(idb, agentId).setVisible(true);
         }
