@@ -18,7 +18,7 @@ import oru.inf.InfException;
  */
 public class LoginPage extends javax.swing.JFrame {
     
-    private InfDB idb;
+    private static InfDB idb;
     
     /**
      * Creates new form mittFÃ¶nster
@@ -217,6 +217,25 @@ public class LoginPage extends javax.swing.JFrame {
         String alien = "Alien";
         cmbLoginAs.addItem(agent);
         cmbLoginAs.addItem(alien);
+    }
+    
+    /**
+     * Denna metod kontrollerar ifall det aktuella ID:t som är inloggat innehar admin-status.
+     * @return 
+     */
+    public static boolean checkAdminStatus(int agentId) {
+        boolean isAdmin = false;
+        try {
+            String sqlQuestion = "select Administrator from Agent where Agent_ID = '" + agentId + "';";
+            String result = idb.fetchSingle(sqlQuestion);
+            if(result.equals("J")) {
+                isAdmin = true;
+            }
+        }
+        catch(InfException e) {
+            JOptionPane.showMessageDialog(null, "Internal database error!");
+        }
+        return isAdmin;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

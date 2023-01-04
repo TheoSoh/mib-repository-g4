@@ -18,7 +18,7 @@ import oru.inf.InfException;
 public class NewAlienPage extends javax.swing.JFrame {
     
     //Fältdeklarationer
-    private InfDB idb;
+    private static InfDB idb;
     private int agentId;
     private String selectedRace;
     
@@ -272,8 +272,7 @@ public class NewAlienPage extends javax.swing.JFrame {
      */
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         NewAlienPage.this.dispose();
-        checkAdminStatus();
-        if(checkAdminStatus()) {
+        if(LoginPage.checkAdminStatus(agentId)) {
             new AdminMenu(idb, agentId).setVisible(true);
         }
         else {
@@ -360,25 +359,6 @@ public class NewAlienPage extends javax.swing.JFrame {
             txtAmmount.setVisible(false);
         }
     }//GEN-LAST:event_cmbSetRaceActionPerformed
-    
-    /**
-     * 
-     * @return 
-     */
-    private boolean checkAdminStatus() {
-        boolean isAdmin = false;
-        try {
-            String sqlQuestion = "select Administrator from Agent where Agent_ID = '" + agentId + "';";
-            String result = idb.fetchSingle(sqlQuestion);
-            if(result.equals("J")) {
-                isAdmin = true;
-            }
-        }
-        catch(InfException e) {
-            JOptionPane.showMessageDialog(null, "Internal database error!");
-        }
-        return isAdmin;
-    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;

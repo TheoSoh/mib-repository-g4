@@ -17,7 +17,7 @@ import oru.inf.InfException;
 public class AddedBetweenDatePage extends javax.swing.JFrame {
 
     //Variabel deklaration - påbörjas här
-    private InfDB idb;
+    private static InfDB idb;
     private int agentId;
     //Variabel deklaration - avslutas här
     
@@ -146,7 +146,7 @@ public class AddedBetweenDatePage extends javax.swing.JFrame {
      */
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         AddedBetweenDatePage.this.dispose();
-        if(checkAdminStatus()) {
+        if(LoginPage.checkAdminStatus(agentId)) {
             new AdminMenu(idb, agentId).setVisible(true);
         }
         else {
@@ -195,24 +195,6 @@ public class AddedBetweenDatePage extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnConfirmActionPerformed
     
-    /**
-     * @return 
-     */
-    private boolean checkAdminStatus() {
-        boolean isAdmin = false;
-        try {
-            String sqlQuestion = "select Administrator from Agent where Agent_ID = '" + agentId + "';";
-            String result = idb.fetchSingle(sqlQuestion);
-            if(result.equals("J")) {
-                isAdmin = true;
-            }
-        }
-        catch(InfException e) {
-            JOptionPane.showMessageDialog(null, "Internal database error!");
-        }
-        return isAdmin;
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnConfirm;

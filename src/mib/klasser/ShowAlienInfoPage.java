@@ -18,7 +18,7 @@ import oru.inf.InfException;
 public class ShowAlienInfoPage extends javax.swing.JFrame {
 
     // Fält-deklarationer.
-    private InfDB idb;
+    private static InfDB idb;
     private int agentId;
     private String selectedAlienId;
     
@@ -256,7 +256,7 @@ public class ShowAlienInfoPage extends javax.swing.JFrame {
      */
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         ShowAlienInfoPage.this.dispose();
-        if(checkAdminStatus()) {
+        if(LoginPage.checkAdminStatus(agentId)) {
             new AdminMenu(idb, agentId).setVisible(true);
         }
         else {
@@ -304,25 +304,7 @@ public class ShowAlienInfoPage extends javax.swing.JFrame {
         }
         return race;
     }
-    /**
-     * Denna metod kontrollerar ifall det aktuella ID:t som är inloggat innehar admin-status.
-     * @return 
-     */
-    private boolean checkAdminStatus() {
-        boolean isAdmin = false;
-        try {
-            String sqlQuestion = "select Administrator from Agent where Agent_ID = '" + agentId + "';";
-            String result = idb.fetchSingle(sqlQuestion);
-            if(result.equals("J")) {
-                isAdmin = true;
-            }
-        }
-        catch(InfException e) {
-            JOptionPane.showMessageDialog(null, "Internal database error!");
-        }
-        return isAdmin;
-    }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JComboBox<String> cmbAlienId;

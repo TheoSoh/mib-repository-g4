@@ -19,7 +19,7 @@ import oru.inf.InfException;
 public class AdminMenu extends javax.swing.JFrame {
     
     //Variabel deklaration - påbörjas här
-    private InfDB idb;
+    private static InfDB idb;
     private int agentId;
     private String selectedAreaIdCommander;
     //Variabel deklaration - avslutas här

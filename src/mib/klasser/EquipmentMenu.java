@@ -15,10 +15,10 @@ import javax.swing.JOptionPane;
  */
 public class EquipmentMenu extends javax.swing.JFrame {
     
-    //H√§r p√•b√∂rjas deklaration av f√§lt.
-    private InfDB idb;
+    //H‰r pÂbˆrjas deklaration av f‰lt.
+    private static InfDB idb;
     private int agentId;
-    //H√§r slutar deklarationen av f√§lt.
+    //H‰r slutar deklarationen av f‰lt.
     
     /**
      * Creates new form EquipmentMenu
@@ -142,8 +142,7 @@ public class EquipmentMenu extends javax.swing.JFrame {
      */
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         EquipmentMenu.this.dispose();
-        checkAdminStatus();
-        if(checkAdminStatus()) {
+        if(LoginPage.checkAdminStatus(agentId)) {
             new AdminMenu(idb, agentId).setVisible(true);
         }
         else {
@@ -186,25 +185,6 @@ public class EquipmentMenu extends javax.swing.JFrame {
         EquipmentMenu.this.dispose();
         new AddEquipmentToAgentPage(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnAddEquipmentToAgentActionPerformed
-    
-    /**
-     * 
-     * @return 
-     */
-    private boolean checkAdminStatus() {
-        boolean isAdmin = false;
-        try {
-            String sqlQuestion = "select Administrator from Agent where Agent_ID = '" + agentId + "';";
-            String result = idb.fetchSingle(sqlQuestion);
-            if(result.equals("J")) {
-                isAdmin = true;
-            }
-        }
-        catch(InfException e) {
-            JOptionPane.showMessageDialog(null, "Internal database error!");
-        }
-        return isAdmin;
-    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddEquipmentToAgent;

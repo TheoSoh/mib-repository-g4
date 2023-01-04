@@ -18,7 +18,7 @@ import oru.inf.InfException;
 public class ChangeAlienInfoPage extends javax.swing.JFrame {
 
     //Här påbörjas deklaration av fält.
-    private InfDB idb;
+    private static InfDB idb;
     private int agentId;
     private String selectedValueAlienId;
     private String selectedRaceAlienId;
@@ -456,7 +456,7 @@ public class ChangeAlienInfoPage extends javax.swing.JFrame {
      */
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         dispose();
-        if(checkAdminStatus()) {
+        if(LoginPage.checkAdminStatus(agentId)) {
             new AdminMenu(idb, agentId).setVisible(true);
         }
         else {
@@ -499,25 +499,6 @@ public class ChangeAlienInfoPage extends javax.swing.JFrame {
     private void cmbRaceAlienIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbRaceAlienIdActionPerformed
         selectedRaceAlienId = cmbRaceAlienId.getSelectedItem().toString();
     }//GEN-LAST:event_cmbRaceAlienIdActionPerformed
-    
-    /**
-     * 
-     * @return 
-     */
-    private boolean checkAdminStatus() {
-        boolean isAdmin = false;
-        try {
-            String sqlQuestion = "select Administrator from Agent where Agent_ID = '" + agentId + "';";
-            String result = idb.fetchSingle(sqlQuestion);
-            if(result.equals("J")) {
-                isAdmin = true;
-            }
-        }
-        catch(InfException e) {
-            JOptionPane.showMessageDialog(null, "Internal database error!");
-        }
-        return isAdmin;
-    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
