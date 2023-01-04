@@ -76,6 +76,7 @@ public class AdminMenu extends javax.swing.JFrame {
         btnDeleteAgent = new javax.swing.JButton();
         btnShowAgentInfo = new javax.swing.JButton();
         btnChangeAgentInfo = new javax.swing.JButton();
+        btnChangeManagers = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -215,6 +216,13 @@ public class AdminMenu extends javax.swing.JFrame {
             }
         });
 
+        btnChangeManagers.setText("Change Managers");
+        btnChangeManagers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChangeManagersActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -293,6 +301,10 @@ public class AdminMenu extends javax.swing.JFrame {
                         .addComponent(btnDeleteAlien, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnChangeAgentInfo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnChangeManagers)
+                .addGap(233, 233, 233))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -339,7 +351,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(17, 17, 17)
+                .addComponent(btnChangeManagers)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDeleteEquipment)
                     .addComponent(btnNewAgent))
@@ -351,7 +365,7 @@ public class AdminMenu extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnShowAgentInfo)
                     .addComponent(btnChangeAgentInfo))
-                .addGap(54, 54, 54))
+                .addGap(30, 30, 30))
         );
 
         pack();
@@ -547,6 +561,11 @@ public class AdminMenu extends javax.swing.JFrame {
         AdminMenu.this.dispose();
         new ChangeAgentInfoPage(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnChangeAgentInfoActionPerformed
+
+    private void btnChangeManagersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeManagersActionPerformed
+        dispose();
+        new 
+    }//GEN-LAST:event_btnChangeManagersActionPerformed
     
     /**
      * Denna metod hämtar ut ett områdes benämning.
@@ -588,6 +607,7 @@ public class AdminMenu extends javax.swing.JFrame {
     private javax.swing.JButton btnAddedWhen;
     private javax.swing.JButton btnChangeAgentInfo;
     private javax.swing.JButton btnChangeInfo;
+    private javax.swing.JButton btnChangeManagers;
     private javax.swing.JButton btnDeleteAgent;
     private javax.swing.JButton btnDeleteAlien;
     private javax.swing.JButton btnDeleteEquipment;
