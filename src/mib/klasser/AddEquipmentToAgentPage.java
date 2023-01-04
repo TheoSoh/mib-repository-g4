@@ -194,7 +194,7 @@ public class AddEquipmentToAgentPage extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbChooseEquipmentActionPerformed
    
     /**
-     * Denna metod stänger ner det nuvarende fönsret och återgår till föregående fönster.
+     * Denna metod stänger ner det nuvarande fönsret och återgår till föregående fönster.
      * @param evt 
      */
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed

@@ -271,7 +271,7 @@ public class AgentMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * Denna metod stänger ner det nuvarende fönstret och öppnar upp ett nytt.
+     * Denna metod stänger ner det nuvarande fönstret och öppnar upp ett nytt.
      * @param evt 
      */
     private void btnNewAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewAlienActionPerformed
@@ -280,7 +280,7 @@ public class AgentMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNewAlienActionPerformed
 
     /**
-     * Denna metod stänger ner det nuvarende fönstret och öppnar upp ett nytt.
+     * Denna metod stänger ner det nuvarande fönstret och öppnar upp ett nytt.
      * @param evt 
      */
     private void btnChangeInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeInfoActionPerformed
@@ -359,7 +359,7 @@ public class AgentMenu extends javax.swing.JFrame {
     }
     
     /**
-     * Denna metod stänger ner det nuvarende fönstret och öppnar upp ett nytt.
+     * Denna metod stänger ner det nuvarande fönstret och öppnar upp ett nytt.
      * @param evt 
      */
     private void btnAddedWhenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddedWhenActionPerformed
@@ -368,7 +368,7 @@ public class AgentMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddedWhenActionPerformed
 
     /**
-     * Denna metod stänger ner det nuvarende fönstret och öppnar upp ett nytt.
+     * Denna metod stänger ner det nuvarande fönstret och öppnar upp ett nytt.
      * @param evt 
      */
     private void btnShowAlienInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowAlienInfoActionPerformed
@@ -377,7 +377,7 @@ public class AgentMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnShowAlienInfoActionPerformed
 
     /**
-     * Denna metod stänger ner det nuvarende fönstret och öppnar upp ett nytt.
+     * Denna metod stänger ner det nuvarande fönstret och öppnar upp ett nytt.
      * @param evt 
      */
     private void btnAddEquipmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddEquipmentActionPerformed
