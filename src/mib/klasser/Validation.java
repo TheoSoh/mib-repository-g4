@@ -36,7 +36,7 @@ public class Validation {
     }
     
     /**
-     * 
+     * Denna metod kontrollerar om ett specifikt textfält är tomt.
      * @param firstFieldToCheck
      * @return 
      */
@@ -69,7 +69,7 @@ public class Validation {
     }
     
     /**
-     * 
+     * Denna metod kontrollerar ifall rutorna som inkommer som parameter är tomma.
      * @param firstFieldToCheck
      * @param secondFieldToCheck
      * @param thirdFieldToCheck
@@ -86,7 +86,7 @@ public class Validation {
     }
     
     /**
-     * 
+     * Denna metod kontrollerar ifall rutorna som inkommer som parameter är tomma.
      * @param firstFieldToCheck
      * @param secondFieldToCheck
      * @return 
@@ -101,7 +101,7 @@ public class Validation {
     } 
     
     /**
-     * 
+     * Denna metod kontrollerar ifall rutorna som inkommer som parameter är tomma.
      * @param firstFieldToCheck
      * @param secondFieldToCheck
      * @param thirdFieldToCheck
@@ -134,7 +134,7 @@ public class Validation {
     }
     
     /**
-     * 
+     * Denna metod kontrollerar så att textfältet är ifyllt med datatypen int.
      * @param checkThisString
      * @return 
      */
@@ -148,7 +148,7 @@ public class Validation {
     }
     
     /**
-     * 
+     * Denna metod kontrollerar att en specifik sträng är lika som den sträng som sitter i kontrollen.
      * @param checkThisString
      * @return 
      */
@@ -161,7 +161,7 @@ public class Validation {
     }
     
     /**
-     * 
+     * Denna metod lägger till x antal strängar till en kombobox.
      * @param addToThisCmb 
      */
     public static void addRaceToCmb(JComboBox<String> addToThisCmb) {
