@@ -11,13 +11,16 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 
 /**
- *
- * @author theosohlman
+ * @author Grupp4
+ * Klasens fält
  */
 public class AddedBetweenDatePage extends javax.swing.JFrame {
 
+    //Variabel deklaration - påbörjas här
     private InfDB idb;
     private int agentId;
+    //Variabel deklaration - avslutas här
+    
     /**
      * Creates new form AddedBetweenDatePage
      */
@@ -137,6 +140,10 @@ public class AddedBetweenDatePage extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Denna metod stänger ner det nuvarande fönstret och återgår till det föregående fönsret.
+     * @param evt 
+     */
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         AddedBetweenDatePage.this.dispose();
         if(checkAdminStatus()) {
@@ -146,7 +153,11 @@ public class AddedBetweenDatePage extends javax.swing.JFrame {
             new AgentMenu(idb, agentId).setVisible(true);
         }
     }//GEN-LAST:event_btnCancelActionPerformed
-
+    
+    /**
+     * Denna metod bekräftar ifall de ifyllda värderna visar ett resultat.
+     * @param evt 
+     */
     private void btnConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmActionPerformed
         String fromDate = txtFromDate.getText();
         String toDate = txtToDate.getText();
@@ -183,7 +194,10 @@ public class AddedBetweenDatePage extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnConfirmActionPerformed
-
+    
+    /**
+     * @return 
+     */
     private boolean checkAdminStatus() {
         boolean isAdmin = false;
         try {

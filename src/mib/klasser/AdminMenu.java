@@ -13,15 +13,16 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 
 /**
- *
  * @author Grupp4
+ * Klassens fält
  */
 public class AdminMenu extends javax.swing.JFrame {
     
+    //Variabel deklaration - påbörjas här
     private InfDB idb;
     private int agentId;
     private String selectedAreaIdCommander;
-    
+    //Variabel deklaration - avslutas här
     
     /**
      * Creates new form agentMeny
@@ -356,16 +357,28 @@ public class AdminMenu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Denna metod stänger ner det nuvarende fönstret och öppnar upp ett nytt.
+     * @param evt 
+     */
     private void btnNewAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewAlienActionPerformed
         AdminMenu.this.dispose();
         new NewAlienPage(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnNewAlienActionPerformed
 
+    /**
+     * Denna metod stänger ner det nuvarende fönstret och öppnar upp ett nytt.
+     * @param evt 
+     */
     private void btnChangeInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeInfoActionPerformed
         AdminMenu.this.dispose();
         new ChangeAlienInfoPage(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnChangeInfoActionPerformed
 
+    /**
+     * Denna metod visar vilka aliens med ett visst Id finns på vilken plats.
+     * @param evt 
+     */
     private void cmbShowForAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbShowForAreaActionPerformed
        txtAreaAliens.setText("");
         ArrayList< HashMap<String, String>> alienNames;
@@ -384,6 +397,10 @@ public class AdminMenu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cmbShowForAreaActionPerformed
     
+    /**
+     * Denna metod visar information om aliens beroende på vilken ras alienen är.
+     * @param evt 
+     */
     private void cmbShowByRaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbShowByRaceActionPerformed
         String selectedShowRace = cmbShowByRace.getSelectedItem().toString();
         txtAreaAliensByRace.setText("");
@@ -418,27 +435,47 @@ public class AdminMenu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cmbShowByRaceActionPerformed
 
+    /**
+     * Denna metod lägger till text i textarean. 
+     * @param aHashMap 
+     */
     private void appendToTxtAreaAliensByRace(HashMap<String, String> aHashMap) {
         txtAreaAliensByRace.append("Alien-ID: " + aHashMap.get("Alien_ID"));
         txtAreaAliensByRace.append("     Name: " + aHashMap.get("Namn"));
         txtAreaAliensByRace.append("     Registrationdate: " + aHashMap.get("Registreringsdatum") + "\n\n");
     }
     
+    /**
+     * Denna metod stänger ner det nuvarende fönstret och öppnar upp ett nytt.
+     * @param evt 
+     */
     private void btnAddedWhenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddedWhenActionPerformed
         AdminMenu.this.dispose();
         new AddedBetweenDatePage(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnAddedWhenActionPerformed
 
+    /**
+     * Denna metod stänger ner det nuvarende fönstret och öppnar upp ett nytt.
+     * @param evt 
+     */
     private void btnShowAlienInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowAlienInfoActionPerformed
         AdminMenu.this.dispose();
         new ShowAlienInfoPage(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnShowAlienInfoActionPerformed
 
+    /**
+     * Denna metod stänger ner det nuvarende fönstret och öppnar upp ett nytt.
+     * @param evt 
+     */
     private void btnAddEquipmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddEquipmentActionPerformed
         AdminMenu.this.dispose();
         new EquipmentMenu(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnAddEquipmentActionPerformed
 
+    /**
+     * Denna metod visar information om vilken områdeschef som finns i ett område.
+     * @param evt 
+     */
     private void cmbCommanderAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCommanderAreaActionPerformed
         selectedAreaIdCommander = cmbCommanderArea.getSelectedItem().toString();
         int selectedAreaIdToInt = parseInt(selectedAreaIdCommander);
@@ -457,36 +494,64 @@ public class AdminMenu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cmbCommanderAreaActionPerformed
 
+    /**
+     * Denna metod stänger ner det nuvarende fönstret och öppnar upp ett nytt.
+     * @param evt 
+     */
     private void btnNewAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewAgentActionPerformed
         AdminMenu.this.dispose();
         new NewAgentPage(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnNewAgentActionPerformed
 
+    /**
+     * Denna metod stänger ner det nuvarende fönstret och öppnar upp ett nytt.
+     * @param evt 
+     */
     private void btnDeleteAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteAgentActionPerformed
         AdminMenu.this.dispose();
         new DeleteAgentPage(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnDeleteAgentActionPerformed
 
+    /**
+     * Denna metod stänger ner det nuvarende fönstret och öppnar upp ett nytt.
+     * @param evt 
+     */
     private void btnShowAgentInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowAgentInfoActionPerformed
         AdminMenu.this.dispose();
         new ShowAgentInfoPage(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnShowAgentInfoActionPerformed
 
+    /**
+     * Denna metod stänger ner det nuvarende fönstret och öppnar upp ett nytt.
+     * @param evt 
+     */
     private void btnDeleteEquipmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteEquipmentActionPerformed
         AdminMenu.this.dispose();
         new DeleteEquipmentPage(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnDeleteEquipmentActionPerformed
 
+    /**
+     * Denna metod stänger ner det nuvarende fönstret och öppnar upp ett nytt.
+     * @param evt 
+     */
     private void btnDeleteAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteAlienActionPerformed
         AdminMenu.this.dispose();
         new DeleteAlienPage(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnDeleteAlienActionPerformed
 
+    /**
+     * Denna metod stänger ner det nuvarende fönstret och öppnar upp ett nytt.
+     * @param evt 
+     */
     private void btnChangeAgentInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeAgentInfoActionPerformed
         AdminMenu.this.dispose();
         new ChangeAgentInfoPage(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnChangeAgentInfoActionPerformed
     
+    /**
+     * Denna metod hämtar ut ett områdes benämning.
+     * @return 
+     */
     private String getCorrectBenamning() {
         String correctBenamning = "";
         int selectedOmradesId = parseInt(selectedAreaIdCommander);
@@ -501,6 +566,10 @@ public class AdminMenu extends javax.swing.JFrame {
         return correctBenamning;
     }
     
+    /**
+     * Denna metod ger kombinationsrutan de olika föremålen som kan tilldelas.
+     * @param fillThisBox 
+     */
     private void addItemsToCmbAreaId(JComboBox<String> fillThisBox) {
         try {
             String sqlQuestion = "select Omrades_ID from Omrade";
