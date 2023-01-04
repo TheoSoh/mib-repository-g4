@@ -12,7 +12,7 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 
 /**
- *
+ * Klassens fält.
  * @author theosohlman
  */
 public class AddEquipmentToAgentPage extends javax.swing.JFrame {
@@ -22,7 +22,7 @@ public class AddEquipmentToAgentPage extends javax.swing.JFrame {
     private int selectedEquipment;
     
     /**
-     * Creates new form AddEquipmentToAgentPage
+     * Klassens konstruktor.
      */
     public AddEquipmentToAgentPage(InfDB idb, int agentId) {
         initComponents();
@@ -145,7 +145,11 @@ public class AddEquipmentToAgentPage extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    /**
+     * Denna method tilldelar utrustning till en agent.
+     * @param evt 
+     */
     private void btnAssignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignActionPerformed
         try {
             if(checkIfEquipmentIsAssigned()) {
@@ -162,6 +166,10 @@ public class AddEquipmentToAgentPage extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnAssignActionPerformed
     
+    /**
+     * Denna method väljer vilken utrustning som skall tilldelas.
+     * @param evt 
+     */
     private void cmbChooseEquipmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbChooseEquipmentActionPerformed
         txtAreaEquipmentInfo.setText("");
         ArrayList<HashMap<String, String>> equipmentInfo = new ArrayList<HashMap<String, String>>();
@@ -182,12 +190,19 @@ public class AddEquipmentToAgentPage extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Internal database error!");
         }
     }//GEN-LAST:event_cmbChooseEquipmentActionPerformed
-
+   
+    /**
+     * Denna method stänger ner det nuvarende fönsret och återgår till föregående fönster.
+     * @param evt 
+     */
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         AddEquipmentToAgentPage.this.dispose();
         new EquipmentMenu(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnCancelActionPerformed
     
+    /**
+     * Denna method ger kombinationsrutan de olika föremålen som kan tilldelas till en agent.
+     */
     private void addItemsToCmbChooseEquipment() {
         String sqlQuestion = "select Utrustnings_ID from Utrustning";
         ArrayList<String> equipmentIdList = new ArrayList<String>();
@@ -202,7 +217,10 @@ public class AddEquipmentToAgentPage extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Internal database error!");
         }
     }
-    
+    /**
+     * Denna method kollar ifall agenten har fått utrustning tilldelad till sig.
+     * @return 
+     */
     private boolean checkIfEquipmentIsAssigned() {
         boolean isAssigned = false;
         try {
