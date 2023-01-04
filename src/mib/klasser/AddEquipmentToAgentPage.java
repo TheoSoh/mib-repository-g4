@@ -12,17 +12,19 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 
 /**
- * Klassens fält.
- * @author theosohlman
+ * @author Grupp4
+ * Klassens fält
  */
 public class AddEquipmentToAgentPage extends javax.swing.JFrame {
 
+    //Variabel deklaration - påbörjar här
     private InfDB idb;
     private int agentId;
     private int selectedEquipment;
+    //Variabel deklaration - avslutas här
     
     /**
-     * Klassens konstruktor.
+     * Creates new form AddEquipmentToAgentPage
      */
     public AddEquipmentToAgentPage(InfDB idb, int agentId) {
         initComponents();
@@ -147,7 +149,7 @@ public class AddEquipmentToAgentPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     /**
-     * Denna method tilldelar utrustning till en agent.
+     * Denna metod tilldelar utrustning till en agent.
      * @param evt 
      */
     private void btnAssignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignActionPerformed
@@ -167,7 +169,7 @@ public class AddEquipmentToAgentPage extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAssignActionPerformed
     
     /**
-     * Denna method väljer vilken utrustning som skall tilldelas.
+     * Denna metod väljer vilken utrustning som skall tilldelas.
      * @param evt 
      */
     private void cmbChooseEquipmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbChooseEquipmentActionPerformed
@@ -192,7 +194,7 @@ public class AddEquipmentToAgentPage extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbChooseEquipmentActionPerformed
    
     /**
-     * Denna method stänger ner det nuvarende fönsret och återgår till föregående fönster.
+     * Denna metod stänger ner det nuvarende fönsret och återgår till föregående fönster.
      * @param evt 
      */
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
@@ -201,7 +203,7 @@ public class AddEquipmentToAgentPage extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelActionPerformed
     
     /**
-     * Denna method ger kombinationsrutan de olika föremålen som kan tilldelas till en agent.
+     * Denna metod ger kombinationsrutan de olika föremålen som kan tilldelas till en agent.
      */
     private void addItemsToCmbChooseEquipment() {
         String sqlQuestion = "select Utrustnings_ID from Utrustning";
@@ -218,7 +220,7 @@ public class AddEquipmentToAgentPage extends javax.swing.JFrame {
         }
     }
     /**
-     * Denna method kollar ifall agenten har fått utrustning tilldelad till sig.
+     * Denna metod kollar ifall agenten har fått utrustning tilldelad till sig.
      * @return 
      */
     private boolean checkIfEquipmentIsAssigned() {

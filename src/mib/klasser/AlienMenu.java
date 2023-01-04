@@ -11,15 +11,17 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 
 /**
- *
+ * klassens fält
  * @author Grupp4
  */
 public class AlienMenu extends javax.swing.JFrame {
     
+    //Variabel deklaration - påbörjas här
     private InfDB idb;
     private int alienId;
     private int areaId;
     private int areaCommanderId;
+    //Variabel deklaration - avslutas här
     
     
     /**
@@ -134,6 +136,9 @@ public class AlienMenu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
+    /**
+     * 
+     */
     private void setLabels() {
         try {
             String sqlQuery = "select Namn, Telefon from Agent where Agent_ID = " + areaCommanderId;
