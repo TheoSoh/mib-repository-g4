@@ -17,7 +17,7 @@ import oru.inf.InfException;
 public class AddedBetweenDatePage extends javax.swing.JFrame {
 
     //Variabel deklaration - påbörjas här
-    private static InfDB idb;
+    private InfDB idb;
     private int agentId;
     //Variabel deklaration - avslutas här
     

@@ -53,7 +53,7 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="253" max="-2" attributes="0"/>
-                      <Component id="cmbCommanderArea" min="-2" pref="95" max="-2" attributes="0"/>
+                      <Component id="cmbManagerArea" min="-2" pref="95" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
@@ -142,7 +142,7 @@
               <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
               <Component id="lblSearchAreaBoss" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-              <Component id="cmbCommanderArea" min="-2" max="-2" attributes="0"/>
+              <Component id="cmbManagerArea" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="lblAreaCommander" min="-2" pref="18" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="32767" attributes="0"/>
@@ -314,17 +314,17 @@
           <Font name="Helvetica Neue" size="13" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Choose Area-ID below to see who&apos;s commander there"/>
+        <Property name="text" type="java.lang.String" value="Choose Area-ID below to see who&apos;s manager there"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="cmbCommanderArea">
+    <Component class="javax.swing.JComboBox" name="cmbManagerArea">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="0"/>
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbCommanderAreaActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbManagerAreaActionPerformed"/>
       </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>

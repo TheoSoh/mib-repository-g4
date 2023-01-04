@@ -33,8 +33,8 @@ public class AgentMenu extends javax.swing.JFrame {
         this.agentId = agentId;
         lblAgentId.setText("Your Agent-id: " + agentId);
         setTitle("Agent Menu");
-        addItemsToCmbAreaId(cmbCommanderArea);
-        addItemsToCmbAreaId(cmbShowForArea);
+        LoginPage.addAreaIdToCmb(cmbManagerArea);
+        LoginPage.addAreaIdToCmb(cmbShowForArea);
         Validation.addRaceToCmb(cmbShowByRace);
     }
 
@@ -60,7 +60,7 @@ public class AgentMenu extends javax.swing.JFrame {
         btnAddEquipment = new javax.swing.JButton();
         btnShowAlienInfo = new javax.swing.JButton();
         lblSearchAreaBoss = new javax.swing.JLabel();
-        cmbCommanderArea = new javax.swing.JComboBox<>();
+        cmbManagerArea = new javax.swing.JComboBox<>();
         lblAgentId = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         lblAreaCommander = new javax.swing.JLabel();
@@ -140,11 +140,11 @@ public class AgentMenu extends javax.swing.JFrame {
 
         lblSearchAreaBoss.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         lblSearchAreaBoss.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblSearchAreaBoss.setText("Choose Area-ID below to see who's commander there");
+        lblSearchAreaBoss.setText("Choose Area-ID below to see who's manager there");
 
-        cmbCommanderArea.addActionListener(new java.awt.event.ActionListener() {
+        cmbManagerArea.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbCommanderAreaActionPerformed(evt);
+                cmbManagerAreaActionPerformed(evt);
             }
         });
 
@@ -194,7 +194,7 @@ public class AgentMenu extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(253, 253, 253)
-                .addComponent(cmbCommanderArea, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cmbManagerArea, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(48, 48, 48)
@@ -237,7 +237,7 @@ public class AgentMenu extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(lblSearchAreaBoss)
                 .addGap(8, 8, 8)
-                .addComponent(cmbCommanderArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cmbManagerArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblAreaCommander, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -389,8 +389,8 @@ public class AgentMenu extends javax.swing.JFrame {
      * Denna metod visar information om vilken områdeschef som finns i ett område.
      * @param evt 
      */
-    private void cmbCommanderAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCommanderAreaActionPerformed
-        selectedAreaIdCommander = cmbCommanderArea.getSelectedItem().toString();
+    private void cmbManagerAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbManagerAreaActionPerformed
+        selectedAreaIdCommander = cmbManagerArea.getSelectedItem().toString();
         int selectedAreaIdToInt = parseInt(selectedAreaIdCommander);
         String areaBenamning = getCorrectBenamning();     
         
@@ -405,7 +405,7 @@ public class AgentMenu extends javax.swing.JFrame {
         catch(InfException e) {
             JOptionPane.showMessageDialog(null, "Internal database error!");
         }
-    }//GEN-LAST:event_cmbCommanderAreaActionPerformed
+    }//GEN-LAST:event_cmbManagerAreaActionPerformed
 
     /**
      * Denna metod hämtar ut ett områdes benämning.
@@ -448,7 +448,7 @@ public class AgentMenu extends javax.swing.JFrame {
     private javax.swing.JButton btnChangeInfo;
     private javax.swing.JButton btnNewAlien;
     private javax.swing.JButton btnShowAlienInfo;
-    private javax.swing.JComboBox<String> cmbCommanderArea;
+    private javax.swing.JComboBox<String> cmbManagerArea;
     private javax.swing.JComboBox<String> cmbShowByRace;
     private javax.swing.JComboBox<String> cmbShowForArea;
     private javax.swing.JScrollPane jScrollPane1;

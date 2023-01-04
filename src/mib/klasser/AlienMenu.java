@@ -19,6 +19,7 @@ public class AlienMenu extends javax.swing.JFrame {
     //Variabel deklaration - påbörjas här
     private InfDB idb;
     private int alienId;
+    private int positionId;
     private int areaId;
     private int areaCommanderId;
     //Variabel deklaration - avslutas här
@@ -33,6 +34,7 @@ public class AlienMenu extends javax.swing.JFrame {
         this.alienId = alienId;
         lblAlienId.setText("Your Alien-id: " + alienId);
         setTitle("Alien Menu");
+        checkPosition();
         checkArea();
         checkMyAreaCommander();
         setLabels();
@@ -67,7 +69,7 @@ public class AlienMenu extends javax.swing.JFrame {
 
         lblCommanderInfoHeader.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         lblCommanderInfoHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblCommanderInfoHeader.setText("Information about commander in your area:");
+        lblCommanderInfoHeader.setText("Information about your area manager:");
 
         lblName.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblName.setText("Name: ");
@@ -96,7 +98,7 @@ public class AlienMenu extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(lblCommanderInfoHeader)
-                        .addGap(167, 167, 167))
+                        .addGap(185, 185, 185))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(lblArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -136,17 +138,11 @@ public class AlienMenu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
-    /**
-     * 
-     */
-    private void setLabels() {
+    private void checkPosition() {
         try {
-            String sqlQuery = "select Namn, Telefon from Agent where Agent_ID = " + areaCommanderId;
-            HashMap<String, String> agentInfoRow = idb.fetchRow(sqlQuery);
-            
-            lblShowName.setText(agentInfoRow.get("Namn"));
-            lblShowPhoneNumber.setText(agentInfoRow.get("Telefon"));
-            lblShowArea.setText("" + areaId);
+            String sqlQuery = "select Plats from Alien where Alien_ID = " + alienId;
+            String position = idb.fetchSingle(sqlQuery);
+            positionId = parseInt(position);
         }
         catch(InfException e) {
             JOptionPane.showMessageDialog(null, "Internal database error!");
@@ -155,8 +151,8 @@ public class AlienMenu extends javax.swing.JFrame {
     
     private void checkArea() {
         try {
-            String sqlQuery = "select Plats from Alien where Alien_ID = " + alienId;
-            String area = idb.fetchSingle(sqlQuery);
+            String sqlAreaIdQuery = "select Finns_I from Plats where Plats_ID = " + positionId;
+            String area = idb.fetchSingle(sqlAreaIdQuery);
             areaId = parseInt(area);
         }
         catch(InfException e) {
@@ -169,6 +165,23 @@ public class AlienMenu extends javax.swing.JFrame {
             String sqlAgentIdQuery = "select Agent_ID from Omradeschef where Omrade = " + areaId;
             String agentId = idb.fetchSingle(sqlAgentIdQuery);
             areaCommanderId = parseInt(agentId);
+        }
+        catch(InfException e) {
+            JOptionPane.showMessageDialog(null, "Internal database error!");
+        }
+    }
+    
+    /**
+     * 
+     */
+    private void setLabels() {
+        try {
+            String sqlQuery = "select Namn, Telefon from Agent where Agent_ID = " + areaCommanderId;
+            HashMap<String, String> agentInfoRow = idb.fetchRow(sqlQuery);
+            
+            lblShowName.setText(agentInfoRow.get("Namn"));
+            lblShowPhoneNumber.setText(agentInfoRow.get("Telefon"));
+            lblShowArea.setText("" + areaId);
         }
         catch(InfException e) {
             JOptionPane.showMessageDialog(null, "Internal database error!");

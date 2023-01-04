@@ -30,22 +30,9 @@ public class DeleteAgentPage extends javax.swing.JFrame {
         initComponents();
         this.idb = idb;
         this.agentId = agentId;
-        addItemsToCmbAgentId(cmbAgentId);
-        addItemsToCmbAgentId(cmbNewAreaManager);
+        LoginPage.addAgentIdToCmb(cmbAgentId);
+        LoginPage.addAgentIdToCmb(cmbNewAreaManager);
         setTitle("Delete an Agent");
-    }
-
-    private void addItemsToCmbAgentId(JComboBox<String> fillThisBox) {
-        try {
-            String sqlQuestion = "select Agent_ID from Agent";
-            ArrayList<String> agentIdList = idb.fetchColumn(sqlQuestion);
-            for(String anAgentId : agentIdList) {
-                fillThisBox.addItem(anAgentId);
-            }
-        }
-        catch(InfException e) {
-            JOptionPane.showMessageDialog(null, "Internal database error!");
-        }
     }
     
     /**
@@ -177,7 +164,7 @@ public class DeleteAgentPage extends javax.swing.JFrame {
         lblNewAreaManager.setVisible(false);
         cmbNewAreaManager.setVisible(false);
         
-        if(checkIfIsAreaManager()) {
+        if(LoginPage.checkIfIsAreaManager(selectedAgentId)) {
             lblNewAreaManager.setVisible(true);
             cmbNewAreaManager.setVisible(true);
         }
@@ -186,18 +173,23 @@ public class DeleteAgentPage extends javax.swing.JFrame {
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         try {
             
-            if(checkIfIsAreaManager()) {
+            if(checkIfAgentHasEquipment()) {
+                String sqlDeleteHasEquipmentQuery = "delete from Innehar_Utrustning where Agent_ID = " + selectedAgentId;
+                idb.delete(sqlDeleteHasEquipmentQuery);
+            }
+            
+            if(LoginPage.checkIfIsAreaManager(selectedAgentId)) {
                 String sqlUpdateAreaManagerQuery = "update Omradeschef set "
                         + "Agent_ID = " + selectedNewAreaManager + " where Agent_ID = " + selectedAgentId + ";";
                 idb.update(sqlUpdateAreaManagerQuery);
             }
             
-            if(checkIfIsOfficeManager()) {
+            if(LoginPage.checkIfIsOfficeManager(selectedAgentId)) {
                 String sqlDeleteOfficeManagerQuery = "delete from Kontorschef where Agent_ID = " + selectedAgentId;
                 idb.delete(sqlDeleteOfficeManagerQuery);
             }
             
-            if(checkIfIsFieldAgent()) {
+            if(LoginPage.checkIfIsFieldAgent(selectedAgentId)) {
                 String sqlDeleteFieldAgentQuery = "delete from Faltagent where Agent_ID = " + selectedAgentId;
                 idb.delete(sqlDeleteFieldAgentQuery);
             }
@@ -219,50 +211,20 @@ public class DeleteAgentPage extends javax.swing.JFrame {
         String selectedNewAreaManagerString = cmbNewAreaManager.getSelectedItem().toString();
         selectedNewAreaManager = parseInt(selectedNewAreaManagerString);
     }//GEN-LAST:event_cmbNewAreaManagerActionPerformed
-
-    private boolean checkIfIsAreaManager() {
-        boolean isAreaManager = false;
-        try {
-            String sqlQuestion = "select Agent_ID from Omradeschef where Agent_ID = " + selectedAgentId + ";";
-            String result = idb.fetchSingle(sqlQuestion);
-            if(result != null) {
-                isAreaManager = true;
-            }
-        }
-        catch(InfException e) {
-            JOptionPane.showMessageDialog(null, "Internal database error!");
-        }
-        return isAreaManager;
-    }
     
-    private boolean checkIfIsOfficeManager() {
-        boolean isOfficeManager = false;
+    private boolean checkIfAgentHasEquipment() {
+        boolean hasEquipment = false;
         try {
-            String sqlQuestion = "select Agent_ID from Kontorschef where Agent_ID = " + selectedAgentId + ";";
+            String sqlQuestion = "select Agent_ID from Innehar_Utrustning where Agent_ID = " + selectedAgentId + ";";
             String result = idb.fetchSingle(sqlQuestion);
             if(result != null) {
-                isOfficeManager = true;
+                hasEquipment = true;
             }
         }
         catch(InfException e) {
             JOptionPane.showMessageDialog(null, "Internal database error!");
         }
-        return isOfficeManager;
-    }
-    
-    private boolean checkIfIsFieldAgent() {
-        boolean isFieldAgent = false;
-        try {
-            String sqlQuestion = "select Agent_ID from Faltagent where Agent_ID = " + selectedAgentId + ";";
-            String result = idb.fetchSingle(sqlQuestion);
-            if(result != null) {
-                isFieldAgent = true;
-            }
-        }
-        catch(InfException e) {
-            JOptionPane.showMessageDialog(null, "Internal database error!");
-        }
-        return isFieldAgent;
+        return hasEquipment;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

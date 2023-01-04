@@ -18,7 +18,7 @@ import oru.inf.InfException;
 public class ChangeAlienInfoPage extends javax.swing.JFrame {
 
     //Här påbörjas deklaration av fält.
-    private static InfDB idb;
+    private InfDB idb;
     private int agentId;
     private String selectedValueAlienId;
     private String selectedRaceAlienId;
@@ -34,7 +34,8 @@ public class ChangeAlienInfoPage extends javax.swing.JFrame {
         initComponents();
         this.idb = idb;
         this.agentId = agentId;
-        addItemsToCmbAlienId();
+        LoginPage.addAlienIdToCmb(cmbValueAlienId);
+        LoginPage.addAlienIdToCmb(cmbRaceAlienId);
         addItemsToCmbInfoToChange();
         Validation.addRaceToCmb(cmbNewRace);
         setTitle("Change alien Info");
@@ -56,24 +57,6 @@ public class ChangeAlienInfoPage extends javax.swing.JFrame {
         cmbInfoToChange.addItem(fourthValue);
         cmbInfoToChange.addItem(fifthValue);
         cmbInfoToChange.addItem(sixthValue);
-    }
-    
-    /**
-     * 
-     */
-    private void addItemsToCmbAlienId() {
-        try {
-            ArrayList<String> alienIdList = new ArrayList<String>();
-            String sqlQuestion = "select Alien_ID from Alien";
-            alienIdList = idb.fetchColumn(sqlQuestion);
-            for(String anAlienId : alienIdList) {
-                cmbValueAlienId.addItem(anAlienId);
-                cmbRaceAlienId.addItem(anAlienId);
-            }
-        }
-        catch(InfException e) {
-            JOptionPane.showMessageDialog(null, "Internal database error!");
-        }
     }
     
     /**
@@ -397,17 +380,29 @@ public class ChangeAlienInfoPage extends javax.swing.JFrame {
             if(Validation.checkEmptyTxtField(txtNewValue)) {
                 lblValueErrorMessage.setText("Enter Value!");
             }
-            else if(Validation.checkIfTxtFieldIsOfInt(txtNewValue)){
+            else if(Validation.checkIfTxtFieldIsOfInt(txtNewValue) && (!selectedInfo.equals("Losenord"))){
                 String sqlQuery = "update Alien set " + selectedInfo + " = " + newValue + " where Alien_ID = " + selectedIntValueAlienId + ";";
                 lblValueErrorMessage.setText("");
                 idb.update(sqlQuery);
                 lblValueSuccessMessage.setText("Success!");
             }
             else {
-                String sqlQuery = "update Alien set " + selectedInfo + " = '" + newValue + "' where Alien_ID = " + selectedIntValueAlienId + ";";
-                lblValueErrorMessage.setText("");
-                idb.update(sqlQuery);
-                lblValueSuccessMessage.setText("Success!");
+                if((selectedInfo.equals("Losenord")) && (LoginPage.checkAdminStatus(agentId))) {
+                    String sqlQuery = "update Alien set " + selectedInfo + " = '" + newValue + "' where Alien_ID = " + selectedIntValueAlienId + ";";
+                    idb.update(sqlQuery);
+                    lblValueErrorMessage.setText("");
+                    lblValueSuccessMessage.setText("Success!");
+                }
+                else if((selectedInfo.equals("Losenord")) && (!LoginPage.checkAdminStatus(agentId))) {
+                    lblValueSuccessMessage.setText("");
+                    lblValueErrorMessage.setText("Insufficient permission!");
+                }
+                else {
+                    String sqlQuery = "update Alien set " + selectedInfo + " = '" + newValue + "' where Alien_ID = " + selectedIntValueAlienId + ";";
+                    idb.update(sqlQuery);
+                    lblValueErrorMessage.setText("");
+                    lblValueSuccessMessage.setText("Success!");
+                }
             }
         }
         catch(InfException e) {
@@ -427,9 +422,6 @@ public class ChangeAlienInfoPage extends javax.swing.JFrame {
         String selectedInfo = cmbInfoToChange.getSelectedItem().toString();
         
         switch (selectedInfo) {
-            case "Registrationdate":
-                correctString = "Registreringsdatum";
-                break;
             case "Password":
                 correctString = "Losenord";
                 break;

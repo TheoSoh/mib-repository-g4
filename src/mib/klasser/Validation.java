@@ -5,11 +5,8 @@
 package mib.klasser;
 
 import javax.swing.JComboBox;
-import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import oru.inf.InfDB;
-import oru.inf.InfException;
 
 /**
  * 

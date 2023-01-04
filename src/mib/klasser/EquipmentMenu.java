@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 public class EquipmentMenu extends javax.swing.JFrame {
     
     //Här påbörjas deklaration av fält.
-    private static InfDB idb;
+    private InfDB idb;
     private int agentId;
     //Här slutar deklarationen av fält.
     

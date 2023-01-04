@@ -6,6 +6,8 @@ package mib.klasser;
  */
 
 import static java.lang.Integer.parseInt;
+import java.util.ArrayList;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
@@ -134,13 +136,14 @@ public class LoginPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     /**
-     * This method is called when pressing the "Login" button.
-     * It fetches values from the database and comparing it with the values that the user has entered.
+     * Denna metod kallas på när användaren klickar på "Login" knappen.
+     * Metoden hämtar värden från databasen och jämför dom med värdena som användaren har angett i textrutorna.
+     * Därefter skickas man vidare till antingen AgentMenu, AdminMenu eller AlienMenu.
      * @param evt 
      */
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         if(Validation.checkEmptyFields(txtId, txtPassword)) {
-            lblLoginFail.setText("Please enter a username and password!");
+            lblLoginFail.setText("Please enter an ID and password!");
         }
         else if (Validation.checkCmbBoxType(cmbLoginAs)) {
             try {
@@ -153,20 +156,17 @@ public class LoginPage extends javax.swing.JFrame {
                     String sqlAgentAnswer = idb.fetchSingle(agentQuestion);
                     
                     if(agentPassword.equals(sqlAgentAnswer)) {
-                        String sqlAdminQuestion = "select Administrator from Agent where Agent_ID = " + agentIdInt + ";";
-                        String adminAnswer = idb.fetchSingle(sqlAdminQuestion);
-                            
-                        if(adminAnswer.equals("N")) {
+                        if(!checkAdminStatus(agentIdInt)) {
+                            dispose();
                             new AgentMenu(idb, agentIdInt).setVisible(true);
-                            LoginPage.this.dispose();
                         }
-                        else if(adminAnswer.equals("J")) {
+                        else {
+                            dispose();
                             new AdminMenu(idb, agentIdInt).setVisible(true);
-                            LoginPage.this.dispose();
                         }
                     }
                     else {
-                        lblLoginFail.setText("Invalid username or password!");
+                        lblLoginFail.setText("Invalid ID or password!");
                     }
                 }
                 else {
@@ -188,11 +188,11 @@ public class LoginPage extends javax.swing.JFrame {
                     String sqlAlienAnswer = idb.fetchSingle(alienQuestion);
                     
                     if(alienPassword.equals(sqlAlienAnswer)) {
+                        dispose();
                         new AlienMenu(idb, alienIdInt).setVisible(true);
-                        LoginPage.this.dispose();
                     }
                     else {
-                        lblLoginFail.setText("Invalid username or password!");
+                        lblLoginFail.setText("Invalid ID or password!");
                     }
                 }
                 else {
@@ -205,11 +205,18 @@ public class LoginPage extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
+    /**
+     * Denna metod stänger LoginPage och öppnar upp en ny JFrame som heter ChangePasswordPage.
+     * @param evt 
+     */
     private void btnChangePasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangePasswordActionPerformed
-        LoginPage.this.dispose();
+        dispose();
         new ChangePasswordPage(idb).setVisible(true);
     }//GEN-LAST:event_btnChangePasswordActionPerformed
     
+    /**
+     * Metoden anropas i kontruktorn, och den lägger till strängar i en combobox.
+     */
     private void addLoginAs() {
         String agent = "Agent";
         String alien = "Alien";
@@ -218,7 +225,7 @@ public class LoginPage extends javax.swing.JFrame {
     }
     
     /**
-     * Denna metod kontrollerar ifall det aktuella ID:t som är inloggat innehar admin-status.
+     * Denna metod kontrollerar ifall det aktuella ID:t som inkommer som parameter innehar admin-status.
      * @return 
      */
     public static boolean checkAdminStatus(int agentId) {
@@ -234,6 +241,120 @@ public class LoginPage extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Internal database error!");
         }
         return isAdmin;
+    }
+    
+    /**
+     * Denna metod hämtar värden från Agent-tabellen samt lägger till dom i parameternskombobox.
+     * @param fillThisBox 
+     */
+    public static void addAgentIdToCmb(JComboBox<String> fillThisBox) {
+        try {
+            String sqlQuestion = "select Agent_ID from Agent";
+            ArrayList<String> agentIdList = idb.fetchColumn(sqlQuestion);
+            for(String anAgentId : agentIdList) {
+                fillThisBox.addItem(anAgentId);
+            }
+        }
+        catch(InfException e) {
+            JOptionPane.showMessageDialog(null, "Internal database error!");
+        }
+    }
+    
+    /**
+     * Denna metod hämtar värden från Alien-tabellen samt lägger till dom i komboboxen.
+     * @param fillThisBox 
+     */
+    public static void addAlienIdToCmb(JComboBox<String> fillThisBox) {
+        try {
+            ArrayList<String> alienIdList = new ArrayList<String>();
+            String sqlQuestion = "select Alien_ID from Alien";
+            alienIdList = idb.fetchColumn(sqlQuestion);
+            for(String anAlienId : alienIdList) {
+                fillThisBox.addItem(anAlienId);
+            }
+        }
+        catch(InfException e) {
+            JOptionPane.showMessageDialog(null, "Internal database error!");
+        }
+    }
+    
+    /**
+     * Denna metod ger kombinationsrutan de olika föremålen som kan tilldelas.
+     * @param fillThisBox 
+     */
+    public static void addAreaIdToCmb(JComboBox<String> fillThisBox) {
+        try {
+            String sqlQuestion = "select Omrades_ID from Omrade";
+            ArrayList<String> areaIdList = idb.fetchColumn(sqlQuestion);
+            for(String anAreaId : areaIdList) {
+                fillThisBox.addItem(anAreaId);
+            }
+        }
+        catch(InfException e) {
+            JOptionPane.showMessageDialog(null, "Internal database error!");
+        }
+    }
+    
+    /**
+     * Metoden returnerar en boolean, och kontrollerar ifall det ID som kommer in via parametern 
+     * finns med i databasens tabell Kontorschef.
+     * @param checkThisId
+     * @return 
+     */
+    public static boolean checkIfIsOfficeManager(int checkThisId) {
+        boolean isOfficeManager = false;
+        try {
+            String sqlQuestion = "select Agent_ID from Kontorschef where Agent_ID = " + checkThisId + ";";
+            String result = idb.fetchSingle(sqlQuestion);
+            if(result != null) {
+                isOfficeManager = true;
+            }
+        }
+        catch(InfException e) {
+            JOptionPane.showMessageDialog(null, "Internal database error!");
+        }
+        return isOfficeManager;
+    }
+    
+    /**
+     * Metoden returnerar en boolean, och kontrollerar ifall det ID som kommer in via parametern 
+     * ffinns med i databasens tabell Omradeschef.
+     * @param checkThisId
+     * @return 
+     */
+    public static boolean checkIfIsAreaManager(int checkThisId) {
+        boolean isAreaManager = false;
+        try {
+            String sqlQuestion = "select Agent_ID from Omradeschef where Agent_ID = " + checkThisId + ";";
+            String result = idb.fetchSingle(sqlQuestion);
+            if(result != null) {
+                isAreaManager = true;
+            }
+        }
+        catch(InfException e) {
+            JOptionPane.showMessageDialog(null, "Internal database error!");
+        }
+        return isAreaManager;
+    }
+    /**
+     * Metoden returnerar en boolean, och kontrollerar ifall det ID som kommer in via parametern 
+     * finns med i databasens tabell Faltagent.
+     * @param checkThisId
+     * @return 
+     */
+    public static boolean checkIfIsFieldAgent(int checkThisId) {
+        boolean isFieldAgent = false;
+        try {
+            String sqlQuestion = "select Agent_ID from Faltagent where Agent_ID = " + checkThisId + ";";
+            String result = idb.fetchSingle(sqlQuestion);
+            if(result != null) {
+                isFieldAgent = true;
+            }
+        }
+        catch(InfException e) {
+            JOptionPane.showMessageDialog(null, "Internal database error!");
+        }
+        return isFieldAgent;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

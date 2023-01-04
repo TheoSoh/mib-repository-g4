@@ -18,7 +18,7 @@ import oru.inf.InfException;
 public class NewAlienPage extends javax.swing.JFrame {
     
     //Fältdeklarationer
-    private static InfDB idb;
+    private InfDB idb;
     private int agentId;
     private String selectedRace;
     

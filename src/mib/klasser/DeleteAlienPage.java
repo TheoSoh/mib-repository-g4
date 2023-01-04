@@ -28,21 +28,8 @@ public class DeleteAlienPage extends javax.swing.JFrame {
         initComponents();
         this.idb = idb;
         this.agentId = agentId;
-        addItemsToCmbAlienId(cmbAlienId);
+        LoginPage.addAlienIdToCmb(cmbAlienId);
         setTitle("Delete an Alien");
-    }
-
-    private void addItemsToCmbAlienId(JComboBox<String> fillThisBox) {
-        try {
-            String sqlQuestion = "select Alien_ID from Alien";
-            ArrayList<String> alienIdList = idb.fetchColumn(sqlQuestion);
-            for(String anAlienId : alienIdList) {
-                fillThisBox.addItem(anAlienId);
-            }
-        }
-        catch(InfException e) {
-            JOptionPane.showMessageDialog(null, "Internal database error!");
-        }
     }
     
     /**

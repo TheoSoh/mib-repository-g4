@@ -17,6 +17,12 @@ public class Start {
     
     private static InfDB idb;
     
+    /**
+     * Denna metod anropas direkt vid körning av systemet.
+     * m.h.a. denna metod kopplar vi upp oss till databasen.
+     * @param args
+     * @throws InfException 
+     */
     public static void main(String[] args) throws InfException 
     {
         try 

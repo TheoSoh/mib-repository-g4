@@ -332,36 +332,44 @@ public class NewAgentPage extends javax.swing.JFrame {
                 String password = txtPassword.getText();
                 String sqlNewAgentQuery = "";
                 
-                if(selectedAdminStatus.equals("No")) {
-                    sqlNewAgentQuery = "insert into Agent "
-                        + "values(" + agentIdInt + ", '" + name + "', '" + phoneNumber + "', curdate(), 'N', '" + password + "', " + selectedArea + ");";
+                if((selectedFieldAgent.equals("Yes")) || (selectedAreaManager.equals("Yes")) && (selectedOfficeManager.equals("Yes"))) {
+                    lblMessage.setText("");
+                    lblErrorMessage.setText("If Office Manager is set to Yes, others must be No!");
                 }
                 else {
-                    sqlNewAgentQuery = "insert into Agent "
-                        + "values(" + agentIdInt + ", '" + name + "', '" + phoneNumber + "', curdate(), 'J', '" + password + "', " + selectedArea + ");";
-                }
-                
-                idb.insert(sqlNewAgentQuery);
-                lblMessage.setText("Successful register!");
-                lblErrorMessage.setText("");
-                
-                if(selectedAreaManager.equals("Yes")) {
-                    String sqlAreaManagerDeleteQuery = "delete from OmradesChef where Omrade = " + selectedAreaToManage + ";";
-                    idb.delete(sqlAreaManagerDeleteQuery);
+                    if(selectedAdminStatus.equals("No")) {
+                        sqlNewAgentQuery = "insert into Agent "
+                            + "values(" + agentIdInt + ", '" + name + "', '" + phoneNumber + "', curdate(), 'N', '" + password + "', " + selectedArea + ");";
+                    }
+                    else {
+                        sqlNewAgentQuery = "insert into Agent "
+                            + "values(" + agentIdInt + ", '" + name + "', '" + phoneNumber + "', curdate(), 'J', '" + password + "', " + selectedArea + ");";
+                    }
                     
-                    String sqlAreaManagerInsertQuery = "insert into OmradesChef values(" + agentIdInt + ", " + selectedAreaToManage + ");";
-                    idb.insert(sqlAreaManagerInsertQuery);
+                    idb.insert(sqlNewAgentQuery);
+                    lblMessage.setText("Successful register!");
+                    lblErrorMessage.setText("");
+                    
+                    if((selectedAreaManager.equals("Yes")) && (selectedFieldAgent.equals("Yes"))) {
+                        String sqlAreaManagerDeleteQuery = "delete from OmradesChef where Omrade = " + selectedAreaToManage + ";";
+                        idb.delete(sqlAreaManagerDeleteQuery);
+                        
+                        String sqlAreaManagerInsertQuery = "insert into OmradesChef values(" + agentIdInt + ", " + selectedAreaToManage + ");";
+                        idb.insert(sqlAreaManagerInsertQuery);
+                        
+                        String sqlFieldAgentQuery = "insert into Faltagent values(" + agentIdInt + ");";
+                        idb.insert(sqlFieldAgentQuery);
+                    }
+                    if((selectedFieldAgent.equals("Yes")) && (selectedAreaManager.equals("No"))) {
+                        String sqlFieldAgentQuery = "insert into Faltagent values(" + agentIdInt + ");";
+                        idb.insert(sqlFieldAgentQuery);
+                    }
+                    if(selectedOfficeManager.equals("Yes")) {
+                        String office = txtOffice.getText();
+                        String sqlOfficeManagerQuery = "insert into Kontorschef values(" + agentIdInt + ", '" + office + "');";
+                        idb.insert(sqlOfficeManagerQuery);
+                    }
                 }
-                if(selectedFieldAgent.equals("Yes")) {
-                    String sqlFieldAgentQuery = "insert into Faltagent values(" + agentIdInt + ");";
-                    idb.insert(sqlFieldAgentQuery);
-                }
-                if(selectedOfficeManager.equals("Yes")) {
-                    String office = txtOffice.getText();
-                    String sqlOfficeManagerQuery = "insert into Kontorschef values(" + agentIdInt + ", '" + office + "');";
-                    idb.insert(sqlOfficeManagerQuery);
-                }
-                
             }
             catch(InfException e) {
                 lblErrorMessage.setText("Wrong format, Agent-ID already exist or Area don't!");

@@ -31,26 +31,10 @@ public class ShowAgentInfoPage extends javax.swing.JFrame {
         initComponents();
         this.idb = idb;
         this.agentId = agentId;
-        addItemsToCmbAgentId();
+        LoginPage.addAgentIdToCmb(cmbAgentId);
         setTitle("Agent information");
     }
-    /**
-     * Denna metod hämtar Agent-ID från Agent-tabellen samt lägger till de redan existerande ID:n som finns till komboboxen.
-     */
-    private void addItemsToCmbAgentId() {
-        try {
-            String sqlQuery = "select Agent_ID from Agent";
-            ArrayList<String> AgentIdList = idb.fetchColumn(sqlQuery);
-            
-            for(String anAgentId : AgentIdList) {
-                cmbAgentId.addItem(anAgentId);
-            }
-        }
-        catch(InfException e) {
-            JOptionPane.showMessageDialog(null, "Internal Database Error!");
-        }
-    }
-    
+     
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

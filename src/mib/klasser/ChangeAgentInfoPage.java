@@ -32,7 +32,7 @@ public class ChangeAgentInfoPage extends javax.swing.JFrame {
         initComponents();
         this.idb = idb;
         this.agentId = agentId;
-        addItemsToCmbAgentId();
+        LoginPage.addAgentIdToCmb(cmbAgentId);
         addItemsToCmbInfoToChange();
         setTitle("Change agent Info");
     }
@@ -53,22 +53,6 @@ public class ChangeAgentInfoPage extends javax.swing.JFrame {
         cmbInfoToChange.addItem(fourthValue);
         cmbInfoToChange.addItem(fifthValue);
         cmbInfoToChange.addItem(sixthValue);
-    }
-    
-    /**
-     * 
-     */
-    private void addItemsToCmbAgentId() {
-        try {
-            String sqlQuestion = "select Agent_ID from Agent";
-            ArrayList<String> agentIdList = idb.fetchColumn(sqlQuestion);
-            for(String anAgentId : agentIdList) {
-                cmbAgentId.addItem(anAgentId);
-            }
-        }
-        catch(InfException e) {
-            JOptionPane.showMessageDialog(null, "Internal database error!");
-        }
     }
     
     /**

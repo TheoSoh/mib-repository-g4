@@ -19,7 +19,7 @@ import oru.inf.InfException;
 public class AdminMenu extends javax.swing.JFrame {
     
     //Variabel deklaration - påbörjas här
-    private static InfDB idb;
+    private InfDB idb;
     private int agentId;
     private String selectedAreaIdCommander;
     //Variabel deklaration - avslutas här
@@ -33,8 +33,8 @@ public class AdminMenu extends javax.swing.JFrame {
         this.agentId = agentId;
         lblAgentId.setText("Your Agent-id: " + agentId);
         setTitle("Admin Menu");
-        addItemsToCmbAreaId(cmbCommanderArea);
-        addItemsToCmbAreaId(cmbShowForArea);
+        LoginPage.addAreaIdToCmb(cmbManagerArea);
+        LoginPage.addAreaIdToCmb(cmbShowForArea);
         Validation.addRaceToCmb(cmbShowByRace);
     }
 
@@ -60,7 +60,7 @@ public class AdminMenu extends javax.swing.JFrame {
         btnAddEquipment = new javax.swing.JButton();
         btnShowAlienInfo = new javax.swing.JButton();
         lblSearchAreaBoss = new javax.swing.JLabel();
-        cmbCommanderArea = new javax.swing.JComboBox<>();
+        cmbManagerArea = new javax.swing.JComboBox<>();
         lblAgentId = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         lblAreaCommander = new javax.swing.JLabel();
@@ -149,11 +149,11 @@ public class AdminMenu extends javax.swing.JFrame {
 
         lblSearchAreaBoss.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         lblSearchAreaBoss.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblSearchAreaBoss.setText("Choose Area-ID below to see who's commander there");
+        lblSearchAreaBoss.setText("Choose Area-ID below to see who's manager there");
 
-        cmbCommanderArea.addActionListener(new java.awt.event.ActionListener() {
+        cmbManagerArea.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbCommanderAreaActionPerformed(evt);
+                cmbManagerAreaActionPerformed(evt);
             }
         });
 
@@ -251,7 +251,7 @@ public class AdminMenu extends javax.swing.JFrame {
                         .addComponent(lblAgentAdminHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(253, 253, 253)
-                        .addComponent(cmbCommanderArea, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(cmbManagerArea, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 68, Short.MAX_VALUE)
@@ -320,7 +320,7 @@ public class AdminMenu extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(lblSearchAreaBoss)
                 .addGap(8, 8, 8)
-                .addComponent(cmbCommanderArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cmbManagerArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblAreaCommander, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -490,8 +490,8 @@ public class AdminMenu extends javax.swing.JFrame {
      * Denna metod visar information om vilken områdeschef som finns i ett område.
      * @param evt 
      */
-    private void cmbCommanderAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCommanderAreaActionPerformed
-        selectedAreaIdCommander = cmbCommanderArea.getSelectedItem().toString();
+    private void cmbManagerAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbManagerAreaActionPerformed
+        selectedAreaIdCommander = cmbManagerArea.getSelectedItem().toString();
         int selectedAreaIdToInt = parseInt(selectedAreaIdCommander);
         String areaBenamning = getCorrectBenamning();
         
@@ -506,7 +506,7 @@ public class AdminMenu extends javax.swing.JFrame {
         catch(InfException e) {
             JOptionPane.showMessageDialog(null, "Internal database error!");
         }
-    }//GEN-LAST:event_cmbCommanderAreaActionPerformed
+    }//GEN-LAST:event_cmbManagerAreaActionPerformed
 
     /**
      * Denna metod stänger ner det nuvarande fönstret och öppnar upp ett nytt.
@@ -564,7 +564,7 @@ public class AdminMenu extends javax.swing.JFrame {
 
     private void btnChangeManagersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeManagersActionPerformed
         dispose();
-        new 
+        new ChangeManagersPage(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnChangeManagersActionPerformed
     
     /**
@@ -585,23 +585,6 @@ public class AdminMenu extends javax.swing.JFrame {
         return correctBenamning;
     }
     
-    /**
-     * Denna metod ger kombinationsrutan de olika föremålen som kan tilldelas.
-     * @param fillThisBox 
-     */
-    private void addItemsToCmbAreaId(JComboBox<String> fillThisBox) {
-        try {
-            String sqlQuestion = "select Omrades_ID from Omrade";
-            ArrayList<String> areaIdList = idb.fetchColumn(sqlQuestion);
-            for(String anAreaId : areaIdList) {
-                fillThisBox.addItem(anAreaId);
-            }
-        }
-        catch(InfException e) {
-            JOptionPane.showMessageDialog(null, "Internal database error!");
-        }
-    }
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddEquipment;
     private javax.swing.JButton btnAddedWhen;
@@ -615,7 +598,7 @@ public class AdminMenu extends javax.swing.JFrame {
     private javax.swing.JButton btnNewAlien;
     private javax.swing.JButton btnShowAgentInfo;
     private javax.swing.JButton btnShowAlienInfo;
-    private javax.swing.JComboBox<String> cmbCommanderArea;
+    private javax.swing.JComboBox<String> cmbManagerArea;
     private javax.swing.JComboBox<String> cmbShowByRace;
     private javax.swing.JComboBox<String> cmbShowForArea;
     private javax.swing.JLabel jLabel1;

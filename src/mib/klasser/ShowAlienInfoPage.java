@@ -18,7 +18,7 @@ import oru.inf.InfException;
 public class ShowAlienInfoPage extends javax.swing.JFrame {
 
     // Fält-deklarationer.
-    private static InfDB idb;
+    private InfDB idb;
     private int agentId;
     private String selectedAlienId;
     
@@ -29,23 +29,8 @@ public class ShowAlienInfoPage extends javax.swing.JFrame {
         initComponents();
         this.idb = idb;
         this.agentId = agentId;
-        addItemsToCmbAlienId();
+        LoginPage.addAlienIdToCmb(cmbAlienId);
         setTitle("Alien information!");
-    }
-    
-    private void addItemsToCmbAlienId() {
-        
-        try {
-            String sqlQuery = "select Alien_ID from Alien";
-            ArrayList<String> AlienIdList = idb.fetchColumn(sqlQuery);
-            
-            for(String anAlienId : AlienIdList) {
-                cmbAlienId.addItem(anAlienId);
-            }
-        }
-        catch(InfException e) {
-            JOptionPane.showMessageDialog(null, "Internal Database Error!");
-        }
     }
     
     /**
