@@ -10,10 +10,13 @@ import oru.inf.InfException;
 
 /**
  *
- * @author Mansa
+ * @author grupp4
  */
 public class NewWeaponPage extends javax.swing.JFrame {
     
+    /**
+     * fältdeklarationer.
+     */
     private InfDB idb;
     private int agentId;
     
@@ -158,7 +161,7 @@ public class NewWeaponPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * 
+     * Denna metod stänger ner fönstret NewWeaponPage och öppnar en ny EquipmentMenu.
      * @param evt 
      */
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
@@ -167,7 +170,8 @@ public class NewWeaponPage extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelActionPerformed
 
     /**
-     * 
+     * Denna metod lägger till nya vapen genom att hämta de värden som är ifyllda i parametrarna till databasen samt
+     * utför en kontroll genom validation-klassen för att kontrollera att alla fält är ifyllda.
      * @param evt 
      */
     private void btnAddWeaponActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddWeaponActionPerformed

@@ -154,7 +154,8 @@ public class NewTechnologyPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * 
+     * Denna metod lägger till ny teknologi-utrustning genom att hämta de värden som är ifyllda i parametrarna till databasen samt
+     * utför en kontroll genom validation-klassen för att kontrollera att alla fält är ifyllda.
      * @param evt 
      */
     private void btnAddTechnologyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddTechnologyActionPerformed
@@ -191,7 +192,7 @@ public class NewTechnologyPage extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddTechnologyActionPerformed
 
     /**
-     * 
+     * Denna metod stänger ner NewTechnologyPage samt öppnar en ny EquipmentMenu.
      * @param evt 
      */
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed

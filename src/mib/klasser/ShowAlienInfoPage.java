@@ -17,6 +17,7 @@ import oru.inf.InfException;
  */
 public class ShowAlienInfoPage extends javax.swing.JFrame {
 
+    // Fält-deklarationer.
     private InfDB idb;
     private int agentId;
     private String selectedAlienId;
@@ -205,6 +206,10 @@ public class ShowAlienInfoPage extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Denna metod är metoden där man genom en kombobox väljer ett Alien-Id och får fram all information om den specifika alien-individen.
+     * @param evt 
+     */
     private void cmbAlienIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAlienIdActionPerformed
         selectedAlienId = cmbAlienId.getSelectedItem().toString();
         
@@ -244,7 +249,11 @@ public class ShowAlienInfoPage extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Internal Database Error!");
         }
     }//GEN-LAST:event_cmbAlienIdActionPerformed
-
+    /**
+     * Denna metod gör att fönstret ShowAlienInfoPage stängs, samt genom ett metodanrop kontrollerar om ID:et som är inloggad har adminstatus eller inte.
+     * Beroende av kontrollen öppnas antingen ett AdminMenu-fönster eller en AgentMenu-fönster.
+     * @param evt 
+     */
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         ShowAlienInfoPage.this.dispose();
         if(checkAdminStatus()) {
@@ -254,7 +263,11 @@ public class ShowAlienInfoPage extends javax.swing.JFrame {
             new AgentMenu(idb, agentId).setVisible(true);
         }
     }//GEN-LAST:event_btnCancelActionPerformed
-    
+    /**
+     * Denna metod hämtar data från databasen genom att hämta all data från de olika tabellerna "Boglodite","Squid" samt "Worm".
+     * Som sedan returnerar information för individerna som finns i databasen.
+     * @return 
+     */
     private String getAliensRace() {
         String race = "";
         
@@ -291,7 +304,10 @@ public class ShowAlienInfoPage extends javax.swing.JFrame {
         }
         return race;
     }
-    
+    /**
+     * Denna metod kontrollerar ifall det aktuella ID:t som är inloggat innehar admin-status.
+     * @return 
+     */
     private boolean checkAdminStatus() {
         boolean isAdmin = false;
         try {

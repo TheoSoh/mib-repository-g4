@@ -13,10 +13,13 @@ import oru.inf.InfException;
 
 /**
  *
- * @author theosohlman
+ * @author Grupp4
  */
 public class ShowAgentInfoPage extends javax.swing.JFrame {
 
+    /**
+     * fältdeklarationer.
+     */
     private InfDB idb;
     private int agentId;
     private String selectedAgentId;
@@ -31,7 +34,9 @@ public class ShowAgentInfoPage extends javax.swing.JFrame {
         addItemsToCmbAgentId();
         setTitle("Agent information");
     }
-    
+    /**
+     * Denna metod hämtar Agent-ID från Agent-tabellen samt lägger till de redan existerande ID:n som finns till komboboxen.
+     */
     private void addItemsToCmbAgentId() {
         try {
             String sqlQuery = "select Agent_ID from Agent";
@@ -205,6 +210,11 @@ public class ShowAgentInfoPage extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Denna metod använder sig av en HashMap och hämtar all information om ett valt ID.
+     * Metoden innehåller även en switch som kontrollerar om den data som hämtas för ett specifikt ID innehar admin-status.
+     * @param evt 
+     */
     private void cmbAgentIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAgentIdActionPerformed
         selectedAgentId = cmbAgentId.getSelectedItem().toString();
         
@@ -238,7 +248,10 @@ public class ShowAgentInfoPage extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Internal Database Error!");
         }
     }//GEN-LAST:event_cmbAgentIdActionPerformed
-
+    /**
+     * Denna metod stänger ner ShowAgentInfoPage och öppnar AdminMenu fönstret igen.
+     * @param evt 
+     */
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         ShowAgentInfoPage.this.dispose();
         new AdminMenu(idb, agentId).setVisible(true);

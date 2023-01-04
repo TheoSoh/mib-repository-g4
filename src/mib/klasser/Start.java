@@ -10,7 +10,7 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 
 /**
- *
+ * Denna metod är start-metoden, vilket gör att våra java-klasser får en databas-uppkoppling samt att LoginPage startar.
  * @author Grupp4
  */
 public class Start {

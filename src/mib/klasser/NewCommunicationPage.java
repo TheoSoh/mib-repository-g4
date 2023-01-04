@@ -13,6 +13,9 @@ import oru.inf.InfException;
  * @author Grupp4
  */
 public class NewCommunicationPage extends javax.swing.JFrame {
+    /**
+     * fältdeklarationer.
+     */
     private InfDB idb;
     private int agentId;
     
@@ -157,7 +160,7 @@ public class NewCommunicationPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     /**
-     * 
+     * Denna metod stänger ner NewCommunicationPage samt öppnar en ny EquipmentMenu.
      * @param evt 
      */
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
@@ -166,7 +169,8 @@ public class NewCommunicationPage extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelActionPerformed
     
     /**
-     * 
+     * Denna metod lägger till ny kommunikationsutrustning genom att hämta de värden som är ifyllda i parametrarna till databasen samt
+     * utför en kontroll genom validation-klassen för att kontrollera att alla fält är ifyllda.
      * @param evt 
      */
     private void btnAddCommunicationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCommunicationActionPerformed

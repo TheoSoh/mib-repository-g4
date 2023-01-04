@@ -13,7 +13,7 @@ import oru.inf.InfException;
 
 /**
  *
- * @author theosohlman
+ * @author Grupp4
  */
 public class NewAgentPage extends javax.swing.JFrame {
     

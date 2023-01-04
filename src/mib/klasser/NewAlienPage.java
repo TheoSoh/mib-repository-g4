@@ -13,15 +13,15 @@ import oru.inf.InfException;
 
 /**
  *
- * @author theosohlman
+ * @author Grupp4
  */
 public class NewAlienPage extends javax.swing.JFrame {
     
-    //HÃ¤r startar deklaration av fÃ¤lt.
+    //Fältdeklarationer
     private InfDB idb;
     private int agentId;
     private String selectedRace;
-    //HÃ¤r slutar deklaration av fÃ¤lt.
+    
     
     /**
      * Creates new form NewAlienPage
@@ -223,7 +223,7 @@ public class NewAlienPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * 
+     * Denna metod lägger till föremål i komboboxen som man sedan kan välja för att ge värdet till en specifik alien.
      */
     private void addItemsToCmbSetRace() {
         String firstRace = "Boglodite";
@@ -233,7 +233,10 @@ public class NewAlienPage extends javax.swing.JFrame {
         cmbSetRace.addItem(secondRace);
         cmbSetRace.addItem(thirdRace);
     }
-    
+    /**
+     * Metoden lägger till föremål i en kombobox.
+     * @param fillThisBox 
+     */
     private void addItemsToCmbAreaId(JComboBox<String> fillThisBox) {
         try {
             String sqlQuestion = "select Omrades_ID from Omrade";
@@ -246,13 +249,16 @@ public class NewAlienPage extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Internal database error!");
         }
     }
-    
+    /**
+     * Metoden lägger till föremål i en kombobox. I detta fall de agent-id:n som finns i databasen.
+     * @param fillThisBox 
+     */
     private void addItemsToCmbAssignAgentId(JComboBox<String> fillThisBox) {
         try {
             String sqlQuestion = "select Agent_ID from Agent";
-            ArrayList<String> areaIdList = idb.fetchColumn(sqlQuestion);
-            for(String anAreaId : areaIdList) {
-                fillThisBox.addItem(anAreaId);
+            ArrayList<String> agentIdList = idb.fetchColumn(sqlQuestion);
+            for(String anAgentId : agentIdList) {
+                fillThisBox.addItem(anAgentId);
             }
         }
         catch(InfException e) {
@@ -261,7 +267,7 @@ public class NewAlienPage extends javax.swing.JFrame {
     }
     
     /**
-     * 
+     * Denna metod stänger ner NewAlienPage och öppnar ett ny agent eller admin-menu beroende av kontrollen.
      * @param evt 
      */
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
@@ -276,7 +282,9 @@ public class NewAlienPage extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelActionPerformed
 
     /**
-     * 
+     * Denna metod kontrollerar genom validation-klassen via metoden "checkFourEmptyFields" att alla text-fält är ifyllda.
+     * Metoden kontrollerar även så att rätt datatyper används.
+     * Sedan gör metoden så att all information som är ifyllt i text-fälten blir tillagda i databasen tillhörande en ny specifik alien.
      * @param evt 
      */
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
