@@ -11,9 +11,7 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 
 /**
- * private String chosenLoginAs;
- * chosenLoginAs.equals("Agent")
- * chosenLoginAs = cmbLoginAs.getSelectedItem().toString();
+ * 
  * @author Grupp4
  */
 public class LoginPage extends javax.swing.JFrame {
@@ -21,7 +19,7 @@ public class LoginPage extends javax.swing.JFrame {
     private static InfDB idb;
     
     /**
-     * Creates new form mittFönster
+     * Creates new form LoginPage.
      */
     public LoginPage(InfDB idb) {
         initComponents();

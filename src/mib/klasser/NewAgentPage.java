@@ -36,6 +36,7 @@ public class NewAgentPage extends javax.swing.JFrame {
         this.idb = idb;
         this.agentId = agentId;
         addItemsToComboBoxes();
+        addItemsToCmbFieldAgent();
         addItemsToCmbAreaId(cmbAreaId);
         addItemsToCmbAreaId(cmbAreaToManage);
         setTitle("Register new Agent!");
@@ -291,12 +292,19 @@ public class NewAgentPage extends javax.swing.JFrame {
         cmbAdminStatus.addItem(secondOption);
         cmbAreaManager.addItem(firstOption);
         cmbAreaManager.addItem(secondOption);
-        cmbFieldAgent.addItem(firstOption);
-        cmbFieldAgent.addItem(secondOption);
         cmbOfficeManager.addItem(firstOption);
         cmbOfficeManager.addItem(secondOption);
     }
     
+    /**
+     * 
+     */
+    private void addItemsToCmbFieldAgent() {
+        String firstOption = "Yes";
+        String secondOption = "No";
+        cmbFieldAgent.addItem(firstOption);
+        cmbFieldAgent.addItem(secondOption);
+    }
     
     /**
      * 
