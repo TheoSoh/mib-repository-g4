@@ -306,14 +306,12 @@ public class ChangeManagersPage extends javax.swing.JFrame {
                 }
             }
             else if((selectedType.equals("Area manager")) && (LoginPage.checkIfIsFieldAgent(selectedAgentId))) {
-                //lägg till i omradeschef
                 String sqlUpdateQuery = "update Omradeschef set Agent_ID = " + selectedAgentId + " where Omrade = " + selectedNewArea + ";";
                 idb.update(sqlUpdateQuery);
                 lblMessage.setText("Now managing area " + selectedNewArea + "!");
                 lblErrorMessage.setText("");
             }
             else if((selectedType.equals("Area manager")) && (LoginPage.checkIfIsOfficeManager(selectedAgentId))) {
-                //ta bort från kontorschef lägg till i fältagent och area manager
                 String sqlDeleteOfficeManagerQuery = "delete from Kontorschef where Agent_ID = " + selectedAgentId;
                 idb.delete(sqlDeleteOfficeManagerQuery);
                 
@@ -326,16 +324,21 @@ public class ChangeManagersPage extends javax.swing.JFrame {
                 lblErrorMessage.setText("");
             }
             else if((selectedType.equals("Field agent")) && (LoginPage.checkIfIsAreaManager(selectedAgentId))) {
-                //ta bort från omradeschef. Lägg till kontroll här.
                 if(LoginPage.checkIfIsAreaManager(selectedNewAgent)) {
                     lblMessage.setText("");
                     lblErrorMessage.setText("New agent already manage an area!");
                 }
                 else {
-                    String sqlUpdateQuery = "update Omradeschef set Agent_ID = " + selectedNewAgent + " where Omrade = " + managedAreaBySelectedAgentId + ";";
-                    idb.update(sqlUpdateQuery);
-                    lblMessage.setText("Agent-ID: " + selectedAgentId + " is now a field agent!");
-                    lblErrorMessage.setText("");
+                    if(selectedAgentId == selectedNewAgent) {
+                    lblMessage.setText("");
+                    lblErrorMessage.setText("Agent cannot manage an area and an office!");
+                    }
+                    else {
+                        String sqlUpdateQuery = "update Omradeschef set Agent_ID = " + selectedNewAgent + " where Omrade = " + managedAreaBySelectedAgentId + ";";
+                        idb.update(sqlUpdateQuery);
+                        lblMessage.setText("Agent-ID: " + selectedAgentId + " is now a field agent!");
+                        lblErrorMessage.setText("");
+                    }
                 }
             }
             else if((selectedType.equals("Field agent")) && (LoginPage.checkIfIsFieldAgent(selectedAgentId))) {
@@ -355,40 +358,48 @@ public class ChangeManagersPage extends javax.swing.JFrame {
             }
             else if((selectedType.equals("Office manager")) && (LoginPage.checkIfIsAreaManager(selectedAgentId))) {
                 //ta bort från fältagent och omradeschef lägg till på kontorschef
-                if(checkForAnOfficeManager()) {
-                    String sqlUpdateAreaManagerQuery = "update Omradeschef set Agent_ID = " + selectedNewAgent + " where Omrade = " + managedAreaBySelectedAgentId + ";";
-                    idb.update(sqlUpdateAreaManagerQuery);
-                    
-                    String sqlDeleteFieldAgent = "delete from Faltagent where Agent_ID = " + selectedAgentId + ";";
-                    idb.delete(sqlDeleteFieldAgent);
-                    
-                    String sqlUpdateOfficeManagerQuery = "update Kontorschef set Agent_ID = " + selectedAgentId + " where Kontorsbeteckning = Örebrokontoret";
-                    idb.update(sqlUpdateOfficeManagerQuery);
-                    
-                    lblMessage.setText("Agent-ID: " + selectedAgentId + " is now the office manager!");
-                    lblErrorMessage.setText("");
+                if(selectedAgentId == selectedNewAgent) {
+                    lblMessage.setText("");
+                    lblErrorMessage.setText("Agent cannot manage an area and an office!");
                 }
                 else {
-                    String sqlInsertOfficeManagerQuery = "insert into Kontorschef values(" + selectedAgentId + ", 'Örebrokontoret');";
-                    idb.insert(sqlInsertOfficeManagerQuery);
-                    
-                    String sqlUpdateAreaManagerQuery = "update Omradeschef set Agent_ID = " + selectedNewAgent + " where Omrade = " + managedAreaBySelectedAgentId + ";";
-                    idb.update(sqlUpdateAreaManagerQuery);
-                    
-                    String sqlDeleteFieldAgent = "delete from Faltagent where Agent_ID = " + selectedAgentId + ";";
-                    idb.delete(sqlDeleteFieldAgent);
-                    lblMessage.setText("Agent-ID: " + selectedAgentId + " is now the office manager!");
-                    lblErrorMessage.setText("");
+                    if(checkForAnOfficeManager()) {
+                        int oldOfficeManagerId = getOfficeManagerId();
+                        String sqlUpdateFieldAgent = "update Faltagent set Agent_ID = " + oldOfficeManagerId + " where Agent_ID = " + selectedAgentId + ";";
+                        idb.delete(sqlUpdateFieldAgent);
+                        
+                        String sqlUpdateAreaManagerQuery = "update Omradeschef set Agent_ID = " + selectedNewAgent + " where Omrade = " + managedAreaBySelectedAgentId + ";";
+                        idb.update(sqlUpdateAreaManagerQuery);
+                        
+                        String sqlUpdateOfficeManagerQuery = "update Kontorschef set Agent_ID = " + selectedAgentId + " where Kontorsbeteckning = Örebrokontoret";
+                        idb.update(sqlUpdateOfficeManagerQuery);
+                        
+                        lblMessage.setText("Agent-ID: " + selectedAgentId + " is now the office manager!");
+                        lblErrorMessage.setText("");
+                    }
+                    else {
+                        String sqlInsertOfficeManagerQuery = "insert into Kontorschef values(" + selectedAgentId + ", 'Örebrokontoret');";
+                        idb.insert(sqlInsertOfficeManagerQuery);
+                        
+                        String sqlUpdateAreaManagerQuery = "update Omradeschef set Agent_ID = " + selectedNewAgent + " where Omrade = " + managedAreaBySelectedAgentId + ";";
+                        idb.update(sqlUpdateAreaManagerQuery);
+                        
+                        String sqlDeleteFieldAgent = "delete from Faltagent where Agent_ID = " + selectedAgentId + ";";
+                        idb.delete(sqlDeleteFieldAgent);
+                        lblMessage.setText("Agent-ID: " + selectedAgentId + " is now the office manager!");
+                        lblErrorMessage.setText("");
+                    }
                 }
             }
             else if((selectedType.equals("Office manager")) && (LoginPage.checkIfIsFieldAgent(selectedAgentId))) {
-                //ta bort från fältagent och lägg till på kontorschef
                 if(checkForAnOfficeManager()) {
-                    String sqlUpdateOfficeManagerQuery = "update Kontorschef set Agent_ID = " + selectedAgentId + " where Kontorsbeteckning = Örebrokontoret";
+                    int oldOfficeManagerId = getOfficeManagerId();
+                    String sqlUpdateFieldAgent = "update Faltagent set Agent_ID = " + oldOfficeManagerId + " where Agent_ID = " + selectedAgentId + ";";
+                    idb.delete(sqlUpdateFieldAgent);
+                    
+                    String sqlUpdateOfficeManagerQuery = "update Kontorschef set Agent_ID = " + selectedAgentId + " where Kontorsbeteckning = 'Örebrokontoret';";
                     idb.update(sqlUpdateOfficeManagerQuery);
                     
-                    String sqlDeleteFieldAgent = "delete from Faltagent where Agent_ID = " + selectedAgentId + ";";
-                    idb.delete(sqlDeleteFieldAgent);
                     lblMessage.setText("Agent-ID: " + selectedAgentId + " is now the office manager!");
                     lblErrorMessage.setText("");
                 }
@@ -482,16 +493,29 @@ public class ChangeManagersPage extends javax.swing.JFrame {
     private boolean checkForAnOfficeManager() {
         boolean managerExist = false;
         try {
-            String sqlQuery = "select Agent_ID from Kontorschef where KontorsBeteckning = Örebrokontoret";
+            String sqlQuery = "select Agent_ID from Kontorschef where KontorsBeteckning = 'Örebrokontoret';";
             String result = idb.fetchSingle(sqlQuery);
             if(result != null) {
                 managerExist = true;
             }
         }
         catch(InfException e) {
-            
+            JOptionPane.showMessageDialog(null, "Internal database error!");
         }
         return managerExist;
+    }
+    
+    private int getOfficeManagerId() {
+        int officeManagerId = 0;
+        try {
+            String sqlQuery = "select Agent_ID from Kontorschef where KontorsBeteckning = 'Örebrokontoret';";
+            String result = idb.fetchSingle(sqlQuery);
+            officeManagerId = parseInt(result);
+        }
+        catch(InfException e) {
+            JOptionPane.showMessageDialog(null, "Internal database error!");
+        }
+        return officeManagerId;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
