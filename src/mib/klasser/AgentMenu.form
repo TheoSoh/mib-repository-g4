@@ -74,27 +74,35 @@
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="lblAliensInArea" max="32767" attributes="0"/>
-                                  <Component id="btnChangeInfo" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="btnNewAlien" alignment="1" pref="165" max="32767" attributes="0"/>
-                                  <Component id="cmbShowForArea" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="btnSignOut" min="-2" pref="80" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="lblAliensInArea" max="32767" attributes="0"/>
+                                          <Component id="btnChangeInfo" alignment="1" max="32767" attributes="0"/>
+                                          <Component id="btnNewAlien" alignment="1" pref="165" max="32767" attributes="0"/>
+                                          <Component id="cmbShowForArea" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="jScrollPane1" min="-2" pref="220" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
-                              <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="cmbShowByRace" min="-2" pref="165" max="-2" attributes="0"/>
+                                  <Component id="btnAddedWhen" min="-2" pref="165" max="-2" attributes="0"/>
+                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="btnShowAlienInfo" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="lblAliensByRace" alignment="0" min="-2" pref="165" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="jScrollPane2" min="-2" pref="220" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="jScrollPane1" min="-2" pref="220" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="cmbShowByRace" min="-2" pref="165" max="-2" attributes="0"/>
-                          <Component id="btnAddedWhen" min="-2" pref="165" max="-2" attributes="0"/>
-                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="btnShowAlienInfo" alignment="0" max="32767" attributes="0"/>
-                              <Component id="lblAliensByRace" alignment="0" min="-2" pref="165" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="jScrollPane2" min="-2" pref="220" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                   </Group>
@@ -108,7 +116,10 @@
               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
               <Component id="lblAgentAdminHeader" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-              <Component id="lblAgentId" min="-2" pref="20" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="lblAgentId" min="-2" pref="20" max="-2" attributes="0"/>
+                  <Component id="btnSignOut" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="lblAgent" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -330,5 +341,13 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JButton" name="btnSignOut">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Sign out"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSignOutActionPerformed"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>

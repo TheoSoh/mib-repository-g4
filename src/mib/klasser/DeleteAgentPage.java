@@ -5,8 +5,6 @@
 package mib.klasser;
 
 import static java.lang.Integer.parseInt;
-import java.util.ArrayList;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
@@ -214,7 +212,7 @@ public class DeleteAgentPage extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-        DeleteAgentPage.this.dispose();
+        dispose();
         new AdminMenu(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnCancelActionPerformed
     /**

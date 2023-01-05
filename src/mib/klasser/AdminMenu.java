@@ -7,7 +7,6 @@ package mib.klasser;
 import static java.lang.Integer.parseInt;
 import java.util.ArrayList;
 import java.util.HashMap;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
@@ -77,6 +76,7 @@ public class AdminMenu extends javax.swing.JFrame {
         btnShowAgentInfo = new javax.swing.JButton();
         btnChangeAgentInfo = new javax.swing.JButton();
         btnChangeManagers = new javax.swing.JButton();
+        btnSignOut = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -223,6 +223,13 @@ public class AdminMenu extends javax.swing.JFrame {
             }
         });
 
+        btnSignOut.setText("Sign out");
+        btnSignOut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSignOutActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -264,21 +271,24 @@ public class AdminMenu extends javax.swing.JFrame {
                         .addComponent(lblAlienVal, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(208, 208, 208))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(lblAliensInArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnChangeInfo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnNewAlien, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(cmbShowForArea, 0, 165, Short.MAX_VALUE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(65, 65, 65)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cmbShowByRace, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnAddedWhen, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(btnShowAlienInfo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblAliensByRace, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnSignOut, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(lblAliensInArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btnChangeInfo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btnNewAlien, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(cmbShowForArea, 0, 165, Short.MAX_VALUE))
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(65, 65, 65)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cmbShowByRace, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnAddedWhen, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(btnShowAlienInfo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(lblAliensByRace, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(48, 48, 48))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(208, 208, 208)
@@ -312,7 +322,9 @@ public class AdminMenu extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addComponent(lblAgentAdminHeader)
                 .addGap(10, 10, 10)
-                .addComponent(lblAgentId, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblAgentId, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSignOut))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblAgent)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -376,7 +388,7 @@ public class AdminMenu extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnNewAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewAlienActionPerformed
-        AdminMenu.this.dispose();
+        dispose();
         new NewAlienPage(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnNewAlienActionPerformed
 
@@ -385,7 +397,7 @@ public class AdminMenu extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnChangeInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeInfoActionPerformed
-        AdminMenu.this.dispose();
+        dispose();
         new ChangeAlienInfoPage(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnChangeInfoActionPerformed
 
@@ -464,7 +476,7 @@ public class AdminMenu extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnAddedWhenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddedWhenActionPerformed
-        AdminMenu.this.dispose();
+        dispose();
         new AddedBetweenDatePage(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnAddedWhenActionPerformed
 
@@ -473,7 +485,7 @@ public class AdminMenu extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnShowAlienInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowAlienInfoActionPerformed
-        AdminMenu.this.dispose();
+        dispose();
         new ShowAlienInfoPage(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnShowAlienInfoActionPerformed
 
@@ -482,7 +494,7 @@ public class AdminMenu extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnAddEquipmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddEquipmentActionPerformed
-        AdminMenu.this.dispose();
+        dispose();
         new EquipmentMenu(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnAddEquipmentActionPerformed
 
@@ -513,7 +525,7 @@ public class AdminMenu extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnNewAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewAgentActionPerformed
-        AdminMenu.this.dispose();
+        dispose();
         new NewAgentPage(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnNewAgentActionPerformed
 
@@ -522,7 +534,7 @@ public class AdminMenu extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnDeleteAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteAgentActionPerformed
-        AdminMenu.this.dispose();
+        dispose();
         new DeleteAgentPage(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnDeleteAgentActionPerformed
 
@@ -531,7 +543,7 @@ public class AdminMenu extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnShowAgentInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowAgentInfoActionPerformed
-        AdminMenu.this.dispose();
+        dispose();
         new ShowAgentInfoPage(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnShowAgentInfoActionPerformed
 
@@ -540,7 +552,7 @@ public class AdminMenu extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnDeleteEquipmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteEquipmentActionPerformed
-        AdminMenu.this.dispose();
+        dispose();
         new DeleteEquipmentPage(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnDeleteEquipmentActionPerformed
 
@@ -549,7 +561,7 @@ public class AdminMenu extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnDeleteAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteAlienActionPerformed
-        AdminMenu.this.dispose();
+        dispose();
         new DeleteAlienPage(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnDeleteAlienActionPerformed
 
@@ -558,7 +570,7 @@ public class AdminMenu extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnChangeAgentInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeAgentInfoActionPerformed
-        AdminMenu.this.dispose();
+        dispose();
         new ChangeAgentInfoPage(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnChangeAgentInfoActionPerformed
 
@@ -566,6 +578,11 @@ public class AdminMenu extends javax.swing.JFrame {
         dispose();
         new ChangeManagersPage(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnChangeManagersActionPerformed
+
+    private void btnSignOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignOutActionPerformed
+        dispose();
+        new LoginPage(idb).setVisible(true);
+    }//GEN-LAST:event_btnSignOutActionPerformed
     
     /**
      * Denna metod hämtar ut ett områdes benämning.
@@ -598,6 +615,7 @@ public class AdminMenu extends javax.swing.JFrame {
     private javax.swing.JButton btnNewAlien;
     private javax.swing.JButton btnShowAgentInfo;
     private javax.swing.JButton btnShowAlienInfo;
+    private javax.swing.JButton btnSignOut;
     private javax.swing.JComboBox<String> cmbManagerArea;
     private javax.swing.JComboBox<String> cmbShowByRace;
     private javax.swing.JComboBox<String> cmbShowForArea;

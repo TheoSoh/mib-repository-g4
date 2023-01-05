@@ -311,7 +311,7 @@ public class NewAgentPage extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-        NewAgentPage.this.dispose();
+        dispose();
         new AdminMenu(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnCancelActionPerformed
 

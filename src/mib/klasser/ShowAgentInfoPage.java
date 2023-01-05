@@ -5,7 +5,6 @@
 package mib.klasser;
 
 import static java.lang.Integer.parseInt;
-import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
 import oru.inf.InfDB;
@@ -237,7 +236,7 @@ public class ShowAgentInfoPage extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-        ShowAgentInfoPage.this.dispose();
+        dispose();
         new AdminMenu(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnCancelActionPerformed
     

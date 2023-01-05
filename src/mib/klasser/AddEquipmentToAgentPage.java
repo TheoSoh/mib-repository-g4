@@ -198,7 +198,7 @@ public class AddEquipmentToAgentPage extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-        AddEquipmentToAgentPage.this.dispose();
+        dispose();
         new EquipmentMenu(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnCancelActionPerformed
     

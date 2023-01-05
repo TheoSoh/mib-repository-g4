@@ -68,6 +68,7 @@ public class AgentMenu extends javax.swing.JFrame {
         txtAreaAliens = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtAreaAliensByRace = new javax.swing.JTextArea();
+        btnSignOut = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -161,6 +162,13 @@ public class AgentMenu extends javax.swing.JFrame {
         txtAreaAliensByRace.setRows(5);
         jScrollPane2.setViewportView(txtAreaAliensByRace);
 
+        btnSignOut.setText("Sign out");
+        btnSignOut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSignOutActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -205,22 +213,27 @@ public class AgentMenu extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(lblAliensInArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnChangeInfo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnNewAlien, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
-                                    .addComponent(cmbShowForArea, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(65, 65, 65))
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(btnSignOut, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cmbShowByRace, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnAddedWhen, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(btnShowAlienInfo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblAliensByRace, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(lblAliensInArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(btnChangeInfo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(btnNewAlien, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
+                                            .addComponent(cmbShowForArea, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGap(65, 65, 65))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cmbShowByRace, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnAddedWhen, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(btnShowAlienInfo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(lblAliensByRace, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(48, 48, 48))))
         );
         layout.setVerticalGroup(
@@ -229,7 +242,9 @@ public class AgentMenu extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addComponent(lblAgentAdminHeader)
                 .addGap(10, 10, 10)
-                .addComponent(lblAgentId, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblAgentId, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSignOut))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblAgent)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -275,7 +290,7 @@ public class AgentMenu extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnNewAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewAlienActionPerformed
-        AgentMenu.this.dispose();
+        dispose();
         new NewAlienPage(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnNewAlienActionPerformed
 
@@ -284,7 +299,7 @@ public class AgentMenu extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnChangeInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeInfoActionPerformed
-        AgentMenu.this.dispose();
+        dispose();
         new ChangeAlienInfoPage(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnChangeInfoActionPerformed
 
@@ -363,7 +378,7 @@ public class AgentMenu extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnAddedWhenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddedWhenActionPerformed
-        AgentMenu.this.dispose();
+        dispose();
         new AddedBetweenDatePage(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnAddedWhenActionPerformed
 
@@ -372,7 +387,7 @@ public class AgentMenu extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnShowAlienInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowAlienInfoActionPerformed
-        AgentMenu.this.dispose();
+        dispose();
         new ShowAlienInfoPage(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnShowAlienInfoActionPerformed
 
@@ -381,7 +396,7 @@ public class AgentMenu extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnAddEquipmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddEquipmentActionPerformed
-        AgentMenu.this.dispose();
+        dispose();
         new EquipmentMenu(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnAddEquipmentActionPerformed
 
@@ -406,6 +421,11 @@ public class AgentMenu extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Internal database error!");
         }
     }//GEN-LAST:event_cmbManagerAreaActionPerformed
+
+    private void btnSignOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignOutActionPerformed
+        dispose();
+        new LoginPage(idb).setVisible(true);
+    }//GEN-LAST:event_btnSignOutActionPerformed
 
     /**
      * Denna metod hämtar ut ett områdes benämning.
@@ -448,6 +468,7 @@ public class AgentMenu extends javax.swing.JFrame {
     private javax.swing.JButton btnChangeInfo;
     private javax.swing.JButton btnNewAlien;
     private javax.swing.JButton btnShowAlienInfo;
+    private javax.swing.JButton btnSignOut;
     private javax.swing.JComboBox<String> cmbManagerArea;
     private javax.swing.JComboBox<String> cmbShowByRace;
     private javax.swing.JComboBox<String> cmbShowForArea;

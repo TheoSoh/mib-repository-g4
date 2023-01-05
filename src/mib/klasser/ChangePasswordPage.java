@@ -218,7 +218,7 @@ public class ChangePasswordPage extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-        ChangePasswordPage.this.dispose();
+        dispose();
         new LoginPage(idb).setVisible(true);
     }//GEN-LAST:event_btnCancelActionPerformed
     /**

@@ -240,7 +240,7 @@ public class ShowAlienInfoPage extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-        ShowAlienInfoPage.this.dispose();
+        dispose();
         if(LoginPage.checkAdminStatus(agentId)) {
             new AdminMenu(idb, agentId).setVisible(true);
         }

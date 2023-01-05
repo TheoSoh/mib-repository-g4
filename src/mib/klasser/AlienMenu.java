@@ -58,6 +58,7 @@ public class AlienMenu extends javax.swing.JFrame {
         lblShowPhoneNumber = new javax.swing.JLabel();
         lblArea = new javax.swing.JLabel();
         lblShowArea = new javax.swing.JLabel();
+        btnSignOut = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -80,19 +81,21 @@ public class AlienMenu extends javax.swing.JFrame {
         lblArea.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblArea.setText("Area:");
 
+        btnSignOut.setText("Sign out");
+        btnSignOut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSignOutActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblAlienId, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(190, 190, 190)
-                        .addComponent(lblAlienHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(190, 190, 190)
+                .addComponent(lblAlienHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(190, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 159, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -110,14 +113,22 @@ public class AlienMenu extends javax.swing.JFrame {
                             .addComponent(lblShowPhoneNumber, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lblShowArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(145, 145, 145))))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblAlienId, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSignOut, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(57, 57, 57))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addComponent(lblAlienHeader)
-                .addGap(10, 10, 10)
-                .addComponent(lblAlienId, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblAlienId, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSignOut))
                 .addGap(18, 18, 18)
                 .addComponent(lblCommanderInfoHeader)
                 .addGap(18, 18, 18)
@@ -137,6 +148,11 @@ public class AlienMenu extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSignOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignOutActionPerformed
+        dispose();
+        new LoginPage(idb).setVisible(true);
+    }//GEN-LAST:event_btnSignOutActionPerformed
     
     /**
      * Denna metod hämtar vilken plats en alien befinner sig på via alien-id.
@@ -196,6 +212,7 @@ public class AlienMenu extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSignOut;
     private javax.swing.JLabel lblAlienHeader;
     private javax.swing.JLabel lblAlienId;
     private javax.swing.JLabel lblArea;

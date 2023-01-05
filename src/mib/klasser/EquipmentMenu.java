@@ -141,7 +141,7 @@ public class EquipmentMenu extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-        EquipmentMenu.this.dispose();
+        dispose();
         if(LoginPage.checkAdminStatus(agentId)) {
             new AdminMenu(idb, agentId).setVisible(true);
         }
@@ -155,7 +155,7 @@ public class EquipmentMenu extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnTeknikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTeknikActionPerformed
-        EquipmentMenu.this.dispose();
+        dispose();
         new NewTechnologyPage(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnTeknikActionPerformed
     
@@ -164,7 +164,7 @@ public class EquipmentMenu extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnVapenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVapenActionPerformed
-        EquipmentMenu.this.dispose();
+        dispose();
         new NewWeaponPage(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnVapenActionPerformed
     
@@ -173,7 +173,7 @@ public class EquipmentMenu extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnKommunikationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKommunikationActionPerformed
-        EquipmentMenu.this.dispose();
+        dispose();
         new NewCommunicationPage(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnKommunikationActionPerformed
     
@@ -182,7 +182,7 @@ public class EquipmentMenu extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnAddEquipmentToAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddEquipmentToAgentActionPerformed
-        EquipmentMenu.this.dispose();
+        dispose();
         new AddEquipmentToAgentPage(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnAddEquipmentToAgentActionPerformed
     

@@ -200,7 +200,7 @@ public class DeleteAlienPage extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-        DeleteAlienPage.this.dispose();
+        dispose();
         new AdminMenu(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnCancelActionPerformed
     /**
