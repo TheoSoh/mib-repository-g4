@@ -151,7 +151,7 @@ public class EquipmentMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelActionPerformed
     
     /**
-     * 
+     * Denna metod stänger ner "EquipmentMenu" samt öppnar ett nytt "NewTechnologyPage" fönster.
      * @param evt 
      */
     private void btnTeknikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTeknikActionPerformed
@@ -160,7 +160,7 @@ public class EquipmentMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTeknikActionPerformed
     
     /**
-     * 
+     * Denna metod stänger ner "EquipmentMenu" samt öppnar ett nytt "NewWeaponPage" fönster.
      * @param evt 
      */
     private void btnVapenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVapenActionPerformed
@@ -169,7 +169,7 @@ public class EquipmentMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVapenActionPerformed
     
     /**
-     * 
+     * Denna metod stänger ner "EquipmentMenu" samt öppnar ett nytt "NewCommunicationPage" fönster.
      * @param evt 
      */
     private void btnKommunikationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKommunikationActionPerformed
@@ -178,7 +178,7 @@ public class EquipmentMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnKommunikationActionPerformed
     
     /**
-     * 
+     * Denna metod stänger ner "EquipmentMenu" samt öppnar ett nytt "AddEquipmentToAgentPage" fönster.
      * @param evt 
      */
     private void btnAddEquipmentToAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddEquipmentToAgentActionPerformed

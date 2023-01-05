@@ -209,12 +209,18 @@ public class ChangeManagersPage extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Denna metod stänger ner det akruella fönstret samt öppnar en ny "AdminMenu".
+     * @param evt 
+     */
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         dispose();
         new AdminMenu(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnCancelActionPerformed
-
+    /**
+     * Denna metod kontrollerar ifall en agent redan är av en specifik typ. Annars skall det gå att tilldela agenten en ny typ.
+     * @param evt 
+     */
     private void cmbAgentIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAgentIdActionPerformed
         String anAgentId = cmbAgentId.getSelectedItem().toString();
         selectedAgentId = parseInt(anAgentId);
@@ -224,9 +230,13 @@ public class ChangeManagersPage extends javax.swing.JFrame {
             managedAreaBySelectedAgentId = checkCurrentAreaManaged(selectedAgentId);
         }
         
-        if(((selectedType.equals("Field agent"))  || (selectedType.equals("Office manager"))) && (LoginPage.checkIfIsAreaManager(selectedAgentId))) {
+        if((selectedType.equals("Field agent"))  || (selectedType.equals("Office manager")) && (LoginPage.checkIfIsAreaManager(selectedAgentId))) {
             lblSelectNewAgentId.setVisible(true);
             cmbNewAgentId.setVisible(true);
+        }
+        else if(LoginPage.checkIfIsOfficeManager(selectedAgentId)) {
+            lblSelectNewAgentId.setVisible(false);
+            cmbNewAgentId.setVisible(false);
         }
         
         try {
@@ -238,26 +248,36 @@ public class ChangeManagersPage extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Internal database error!");
         }
     }//GEN-LAST:event_cmbAgentIdActionPerformed
-
+    /**
+     * Denna metod kontrollerar om vilken typ av agent agenten är utav och om det går att tilldela agenten en ny typ.
+     * @param evt 
+     */
     private void cmbAgentTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAgentTypeActionPerformed
         selectedType = cmbAgentType.getSelectedItem().toString();
         lblManageArea.setVisible(false);
         cmbAreaId.setVisible(false);
-        lblSelectNewAgentId.setVisible(false);
-        cmbNewAgentId.setVisible(false);
-        
-        if((selectedType.equals("Area manager")) && (LoginPage.checkIfIsAreaManager(selectedAgentId))) {
-            lblManageArea.setVisible(true);
-            cmbAreaId.setVisible(true);
+        //Kolla med visable (syns i början) - 
+        if((selectedType.equals("Field agent")) && (LoginPage.checkIfIsAreaManager(selectedAgentId))) {
             lblSelectNewAgentId.setVisible(true);
             cmbNewAgentId.setVisible(true);
         }
-        else if(selectedType.equals("Area manager")) {
+        else if((selectedType.equals("Office manager")) && (LoginPage.checkIfIsAreaManager(selectedAgentId))) {
+            lblSelectNewAgentId.setVisible(true);
+            cmbNewAgentId.setVisible(true);
+        }
+        
+        if(selectedType.equals("Area manager")) {
             lblManageArea.setVisible(true);
             cmbAreaId.setVisible(true);
+            lblSelectNewAgentId.setVisible(false);
+            cmbNewAgentId.setVisible(false);
         }
     }//GEN-LAST:event_cmbAgentTypeActionPerformed
-
+    /**
+     * Denna metod sätter agentens typ till en ny typ samt uppdaterar informationen till databasen.
+     * Metoden ger även ett felmeddelande om agenten redan är utav samma typ.
+     * @param evt 
+     */
     private void btnSetTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSetTypeActionPerformed
         try {
             if((selectedType.equals("Area manager")) && (LoginPage.checkIfIsAreaManager(selectedAgentId))) {
@@ -299,11 +319,17 @@ public class ChangeManagersPage extends javax.swing.JFrame {
                 lblErrorMessage.setText("");
             }
             else if((selectedType.equals("Field agent")) && (LoginPage.checkIfIsAreaManager(selectedAgentId))) {
-                //ta bort från omradeschef
-                String sqlUpdateQuery = "update Omradeschef set Agent_ID = " + selectedNewAgent + " where Omrade = " + managedAreaBySelectedAgentId + ";";
-                idb.update(sqlUpdateQuery);
-                lblMessage.setText("Agent-ID: " + selectedAgentId + " is now a field agent!");
-                lblErrorMessage.setText("");
+                //ta bort från omradeschef. Lägg till kontroll här.
+                if(LoginPage.checkIfIsAreaManager(selectedNewAgent)) {
+                    lblMessage.setText("");
+                    lblErrorMessage.setText("New agent already manage an area!");
+                }
+                else {
+                    String sqlUpdateQuery = "update Omradeschef set Agent_ID = " + selectedNewAgent + " where Omrade = " + managedAreaBySelectedAgentId + ";";
+                    idb.update(sqlUpdateQuery);
+                    lblMessage.setText("Agent-ID: " + selectedAgentId + " is now a field agent!");
+                    lblErrorMessage.setText("");
+                }
             }
             else if((selectedType.equals("Field agent")) && (LoginPage.checkIfIsFieldAgent(selectedAgentId))) {
                 //felmeddelande
@@ -380,17 +406,25 @@ public class ChangeManagersPage extends javax.swing.JFrame {
             lblErrorMessage.setText("Try again with different values!");
         }
     }//GEN-LAST:event_btnSetTypeActionPerformed
-
+    /**
+     * I denna metod väljer man area id.
+     * @param evt 
+     */
     private void cmbAreaIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAreaIdActionPerformed
         String anAreaId = cmbAreaId.getSelectedItem().toString();
         selectedNewArea = parseInt(anAreaId);
     }//GEN-LAST:event_cmbAreaIdActionPerformed
-
+    /**
+     * I denna metod väljer man vilken agent man skall ändra info om.
+     * @param evt 
+     */
     private void cmbNewAgentIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbNewAgentIdActionPerformed
         String anAgentId = cmbNewAgentId.getSelectedItem().toString();
         selectedNewAgent = parseInt(anAgentId);
     }//GEN-LAST:event_cmbNewAgentIdActionPerformed
-    
+    /**
+     * Denna metod lägger till föremål (värden) i en kombobox.
+     */
     private void addItemsToCmbManagerType() {
         String firstItem = "Field agent";
         String secondItem = "Area manager";
@@ -399,7 +433,11 @@ public class ChangeManagersPage extends javax.swing.JFrame {
         cmbAgentType.addItem(secondItem);
         cmbAgentType.addItem(thirdItem);
     }
-    
+    /**
+     * Denna metod kontrollerar vilken plats som en agent är verksam i.
+     * @param checkThisAgentsManagedArea
+     * @return 
+     */
     private int checkCurrentAreaManaged(int checkThisAgentsManagedArea) {
         int managingArea = 0;
         try {
@@ -412,7 +450,11 @@ public class ChangeManagersPage extends javax.swing.JFrame {
         }
         return managingArea;
     }
-    
+    /**
+     * Denna metod kontrollerar vilken agent som är verksam i en viss plats.
+     * @param thisAreaId
+     * @return 
+     */
     private int checkAgentIdForAnArea(int thisAreaId) {
         int agentIdForThisArea = 0;
         try {
@@ -425,7 +467,10 @@ public class ChangeManagersPage extends javax.swing.JFrame {
         }
         return agentIdForThisArea;
     }
-    
+    /**
+     * Denna metod kontrollerar om en agent är kontorschef.
+     * @return 
+     */
     private boolean checkForAnOfficeManager() {
         boolean managerExist = false;
         try {

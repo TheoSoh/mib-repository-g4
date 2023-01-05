@@ -372,7 +372,7 @@ public class AdminMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * Denna metod stänger ner det nuvarande fönstret och öppnar upp ett nytt.
+     * Denna metod stänger ner det nuvarande fönstret och öppnar upp ett nytt (NewAlienPage).
      * @param evt 
      */
     private void btnNewAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewAlienActionPerformed
@@ -381,7 +381,7 @@ public class AdminMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNewAlienActionPerformed
 
     /**
-     * Denna metod stänger ner det nuvarande fönstret och öppnar upp ett nytt.
+     * Denna metod stänger ner det nuvarande fönstret och öppnar upp ett nytt (ChangeAlienInfoPage).
      * @param evt 
      */
     private void btnChangeInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeInfoActionPerformed
@@ -390,7 +390,7 @@ public class AdminMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnChangeInfoActionPerformed
 
     /**
-     * Denna metod visar vilka aliens med ett visst Id finns på vilken plats.
+     * Denna metod visar vilka aliens med ett visst Id på vilken plats dom finns.
      * @param evt 
      */
     private void cmbShowForAreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbShowForAreaActionPerformed
@@ -460,7 +460,7 @@ public class AdminMenu extends javax.swing.JFrame {
     }
     
     /**
-     * Denna metod stänger ner det nuvarande fönstret och öppnar upp ett nytt.
+     * Denna metod stänger ner det nuvarande fönstret och öppnar upp ett nytt (AddedBetweenDatePage).
      * @param evt 
      */
     private void btnAddedWhenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddedWhenActionPerformed
@@ -469,7 +469,7 @@ public class AdminMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddedWhenActionPerformed
 
     /**
-     * Denna metod stänger ner det nuvarande fönstret och öppnar upp ett nytt.
+     * Denna metod stänger ner det nuvarande fönstret och öppnar upp ett nytt (ShowAlienInfoPage).
      * @param evt 
      */
     private void btnShowAlienInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowAlienInfoActionPerformed
@@ -478,7 +478,7 @@ public class AdminMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnShowAlienInfoActionPerformed
 
     /**
-     * Denna metod stänger ner det nuvarande fönstret och öppnar upp ett nytt.
+     * Denna metod stänger ner det nuvarande fönstret och öppnar upp ett nytt (EquipmentMenu).
      * @param evt 
      */
     private void btnAddEquipmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddEquipmentActionPerformed
@@ -509,7 +509,7 @@ public class AdminMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbManagerAreaActionPerformed
 
     /**
-     * Denna metod stänger ner det nuvarande fönstret och öppnar upp ett nytt.
+     * Denna metod stänger ner det nuvarande fönstret och öppnar upp ett nytt (NewAgentPage).
      * @param evt 
      */
     private void btnNewAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewAgentActionPerformed
@@ -518,7 +518,7 @@ public class AdminMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNewAgentActionPerformed
 
     /**
-     * Denna metod stänger ner det nuvarande fönstret och öppnar upp ett nytt.
+     * Denna metod stänger ner det nuvarande fönstret och öppnar upp ett nytt (DeleteAgentPage).
      * @param evt 
      */
     private void btnDeleteAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteAgentActionPerformed
@@ -527,7 +527,7 @@ public class AdminMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDeleteAgentActionPerformed
 
     /**
-     * Denna metod stänger ner det nuvarande fönstret och öppnar upp ett nytt.
+     * Denna metod stänger ner det nuvarande fönstret och öppnar upp ett nytt (ShowAgentInfoPage).
      * @param evt 
      */
     private void btnShowAgentInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowAgentInfoActionPerformed
@@ -536,7 +536,7 @@ public class AdminMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnShowAgentInfoActionPerformed
 
     /**
-     * Denna metod stänger ner det nuvarande fönstret och öppnar upp ett nytt.
+     * Denna metod stänger ner det nuvarande fönstret och öppnar upp ett nytt (DeleteEquipmentPage).
      * @param evt 
      */
     private void btnDeleteEquipmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteEquipmentActionPerformed
@@ -545,7 +545,7 @@ public class AdminMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDeleteEquipmentActionPerformed
 
     /**
-     * Denna metod stänger ner det nuvarande fönstret och öppnar upp ett nytt.
+     * Denna metod stänger ner det nuvarande fönstret och öppnar upp ett nytt (DeleteAlienPage).
      * @param evt 
      */
     private void btnDeleteAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteAlienActionPerformed
@@ -554,7 +554,7 @@ public class AdminMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDeleteAlienActionPerformed
 
     /**
-     * Denna metod stänger ner det nuvarande fönstret och öppnar upp ett nytt.
+     * Denna metod stänger ner det nuvarande fönstret och öppnar upp ett nytt (ChangeAgentInfoPage).
      * @param evt 
      */
     private void btnChangeAgentInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeAgentInfoActionPerformed

@@ -42,7 +42,7 @@ public class ChangeAlienInfoPage extends javax.swing.JFrame {
     }
     
     /**
-     * 
+     * Denna metod lägger till föremål (värden) till komboboxen.
      */
     private void addItemsToCmbInfoToChange() {
         String firstValue = "Registrationdate";
@@ -278,7 +278,8 @@ public class ChangeAlienInfoPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * 
+     * Denna meetod gör så att man kan ändra information om en redan existerande alien. Detta genom ett antal validations-metoder.
+     * Validations-metoderna kontrollerar så att godkända värden förts in samt "uppdaterar" de värden som bytts till den enskilda alien.
      * @param evt 
      */
     private void btnSetNewRaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSetNewRaceActionPerformed
@@ -327,7 +328,7 @@ public class ChangeAlienInfoPage extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSetNewRaceActionPerformed
 
     /**
-     * 
+     * Denna metod hämtar ut rasen på alien beroende på alien-Id.
      * @return 
      */
     private String getAliensRace() {
@@ -368,7 +369,8 @@ public class ChangeAlienInfoPage extends javax.swing.JFrame {
     }
     
     /**
-     * 
+     * Denna metod innehåller flera metoder från validation, som kontrollerar att de paramterar som skall fyllas i inte är tomma, samt uppdaterar
+     * den nya informationen till en specifik alien i databasen.
      * @param evt 
      */
     private void btnChangeInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeInfoActionPerformed
@@ -414,7 +416,8 @@ public class ChangeAlienInfoPage extends javax.swing.JFrame {
     }//GEN-LAST:event_btnChangeInfoActionPerformed
     
     /**
-     * 
+     * I denna metod används en switch för att välja ett föremål ur komboboxen samt ersätter strängarnas namn från olika språk.
+     *
      * @return 
      */
     private String getCorrectString() {
@@ -443,7 +446,7 @@ public class ChangeAlienInfoPage extends javax.swing.JFrame {
     }
     
     /**
-     * 
+     * Denna metod stänger fönstret samt öppnar ett nytt beroende av om id:t man är inloggad med har admin-status eller inte.
      * @param evt 
      */
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
@@ -457,7 +460,7 @@ public class ChangeAlienInfoPage extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelActionPerformed
 
     /**
-     * 
+     * I denna metod väljer man en ras ur komboboxen som uppdaterar alienen med en ny ras samt ändrar specifika värden kopplade till en ras.
      * @param evt 
      */
     private void cmbNewRaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbNewRaceActionPerformed
@@ -477,7 +480,7 @@ public class ChangeAlienInfoPage extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbNewRaceActionPerformed
 
     /**
-     * 
+     * I denna metod väljer man för vilket ID man vill ändra information.
      * @param evt 
      */
     private void cmbValueAlienIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbValueAlienIdActionPerformed
@@ -485,7 +488,7 @@ public class ChangeAlienInfoPage extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbValueAlienIdActionPerformed
 
     /**
-     * 
+     * I denna metod väljer man vilken ny ras man ska ge Id:t.
      * @param evt 
      */
     private void cmbRaceAlienIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbRaceAlienIdActionPerformed

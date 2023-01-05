@@ -11,7 +11,7 @@ import oru.inf.InfException;
 
 /**
  *
- * @author jonathandroh
+ * @author Grupp4
  */
 public class ChangePasswordPage extends javax.swing.JFrame {
     
@@ -150,7 +150,10 @@ public class ChangePasswordPage extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Metoden ändrar lösenordet hos en agent alternativt alien i databasen om ID:t, gammal lösenord samt ett nytt lösenord är inmatat.
+     * @param evt 
+     */
     private void btnChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeActionPerformed
         if(Validation.checkEmptyFields(txtId, txtOldPassword, txtNewPassword)) {
             lblErrorMessage.setText("Please enter a username, old password and new password!");
@@ -210,12 +213,17 @@ public class ChangePasswordPage extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnChangeActionPerformed
-
+    /**
+     * Denna metod stänger ner det nuvarande fönstret samt öppnar en ny "LoginPage".
+     * @param evt 
+     */
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         ChangePasswordPage.this.dispose();
         new LoginPage(idb).setVisible(true);
     }//GEN-LAST:event_btnCancelActionPerformed
-    
+    /**
+     * Denna metod lägger till föremål (värden) i komboboxen.
+     */
     private void addTypes() {
         String agent = "Agent";
         String alien = "Alien";

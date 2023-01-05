@@ -12,10 +12,12 @@ import oru.inf.InfException;
 
 /**
  *
- * @author theosohlman
+ * @author Grupp4
  */
 public class DeleteEquipmentPage extends javax.swing.JFrame {
-
+    /**
+     * Fältdeklaration.
+     */
     private InfDB idb;
     private int agentId;
     private int selectedEquipmentId;
@@ -144,7 +146,9 @@ public class DeleteEquipmentPage extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Denna metod loopar igenom all utrustning med id samt lägger till dessa till komboboxen.
+     */
     private void addItemsToCmbEquipmentId() {
         cmbEquipmentId.removeAllItems();   
         
@@ -159,7 +163,10 @@ public class DeleteEquipmentPage extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Internal database error!");
         }
     }
-    
+    /**
+     * I denna metod väljer man vilket id man vill ta bort (utrustning).
+     * @param evt 
+     */
     private void cmbEquipmentIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEquipmentIdActionPerformed
         String chosenEquipmentId = cmbEquipmentId.getSelectedItem().toString();
         selectedEquipmentId = parseInt(chosenEquipmentId);
@@ -173,7 +180,11 @@ public class DeleteEquipmentPage extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Internal database error!");
         }
     }//GEN-LAST:event_cmbEquipmentIdActionPerformed
-
+    /**
+     * I denna metod tar man bort all information om en specifik utrustning som har det valda id:t.
+     * vilket kan vara från olika tabeller, t.ex. teknik eller vapen.
+     * @param evt 
+     */
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         try {
             if(checkIfEquipmentIsAssigned()) {
@@ -204,12 +215,18 @@ public class DeleteEquipmentPage extends javax.swing.JFrame {
             lblErrorMessage.setText("Something went wrong!");
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
-
+    /**
+     * denna metod stänger det aktuella fönstret samt öppnar ett nytt "AdminMenu" fönster.
+     * @param evt 
+     */
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         DeleteEquipmentPage.this.dispose();
         new AdminMenu(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnCancelActionPerformed
-
+    /**
+     * DEnna metod kontrollerar om en utrustning är kvitterad av en agent.
+     * @return 
+     */
     private boolean checkIfEquipmentIsAssigned() {
         boolean isAssigned = false;
         try {
@@ -224,7 +241,10 @@ public class DeleteEquipmentPage extends javax.swing.JFrame {
         }
         return isAssigned;
     }
-    
+    /**
+     * Denna metod kontrollerar om den valda utrustningen är av typen teknologi.
+     * @return 
+     */
     private boolean checkIfEquipmentIsTechnology() {
         boolean isTech = false;
         
@@ -241,7 +261,10 @@ public class DeleteEquipmentPage extends javax.swing.JFrame {
         }
         return isTech;
     }
-    
+   /**
+    * Denna metod kontrollerar om den valda utrustningen är av typen vapen.
+    * @return 
+    */ 
     private boolean checkIfEquipmentIsWeapon() {
         boolean isWeapon = false;
         

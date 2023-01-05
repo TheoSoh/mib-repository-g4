@@ -12,7 +12,7 @@ import oru.inf.InfException;
 
 /**
  * @author Grupp4
- * Klasens fält
+ * Klassens fält
  */
 public class AddedBetweenDatePage extends javax.swing.JFrame {
 
@@ -155,7 +155,7 @@ public class AddedBetweenDatePage extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelActionPerformed
     
     /**
-     * Denna metod bekräftar ifall de ifyllda värderna visar ett resultat.
+     * Denna metod bekräftar ifall de ifyllda värderna visar ett resultat, vilket kan vara flera olika individer.
      * @param evt 
      */
     private void btnConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmActionPerformed

@@ -138,6 +138,9 @@ public class AlienMenu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
+    /**
+     * Denna metod hämtar vilken plats en alien befinner sig på via alien-id.
+     */
     private void checkPosition() {
         try {
             String sqlQuery = "select Plats from Alien where Alien_ID = " + alienId;
@@ -148,7 +151,9 @@ public class AlienMenu extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Internal database error!");
         }
     }
-    
+    /**
+     * Denna metod kollar vilket område alien befinner sig i beroende av vilket id alienen har.
+     */
     private void checkArea() {
         try {
             String sqlAreaIdQuery = "select Finns_I from Plats where Plats_ID = " + positionId;
@@ -159,7 +164,9 @@ public class AlienMenu extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Internal database error!");
         }
     }
-    
+    /**
+     * Denna metod hämtar vilken områdesschef som är ansvarar för området (beroende av Alien-id).
+     */
     private void checkMyAreaCommander() {
         try {
             String sqlAgentIdQuery = "select Agent_ID from Omradeschef where Omrade = " + areaId;
@@ -172,7 +179,7 @@ public class AlienMenu extends javax.swing.JFrame {
     }
     
     /**
-     * 
+     * Denna metod sätter fälten för namn och telefonnummer för den agent som ansvarar för området.
      */
     private void setLabels() {
         try {

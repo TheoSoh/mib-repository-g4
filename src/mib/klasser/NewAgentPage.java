@@ -283,7 +283,7 @@ public class NewAgentPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * 
+     * Denna metod lägger till föremål (värden) i komboboxen.
      */
     private void addItemsToComboBoxes() {
         String firstOption = "No";
@@ -297,7 +297,7 @@ public class NewAgentPage extends javax.swing.JFrame {
     }
     
     /**
-     * 
+     * Denna metod lägger till föremål (värden) i komboboxen.
      */
     private void addItemsToCmbFieldAgent() {
         String firstOption = "Yes";
@@ -307,7 +307,7 @@ public class NewAgentPage extends javax.swing.JFrame {
     }
     
     /**
-     * 
+     * Denna metod stänger det aktuella fönstret samt öppnar ett nytt "AdminMenu" fönster. 
      * @param evt 
      */
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
@@ -316,7 +316,8 @@ public class NewAgentPage extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelActionPerformed
 
     /**
-     * 
+     * Denna metod använder sig av en metod från validation, som kontrollerar att alla fält som måste vara ifyllda är ifyllda.
+     * samt lägger till en ny agent i databasen.
      * @param evt 
      */
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
@@ -382,13 +383,17 @@ public class NewAgentPage extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegisterActionPerformed
     
     /**
-     * 
+     * I denna metod tilldelar man den nya agenten admin-status eller inte.
      * @param evt 
      */
     private void cmbAdminStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAdminStatusActionPerformed
         selectedAdminStatus = cmbAdminStatus.getSelectedItem().toString();
     }//GEN-LAST:event_cmbAdminStatusActionPerformed
-
+    /**
+     * I denna metod väljer man genom komboboxen om en agent ska vara områdeschef eller inte, om man är det kommer ett valalternativ presenteras för att
+     * tilldela den nya agenten ett område.
+     * @param evt 
+     */
     private void cmbAreaManagerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAreaManagerActionPerformed
         selectedAreaManager = cmbAreaManager.getSelectedItem().toString();
         
@@ -401,11 +406,18 @@ public class NewAgentPage extends javax.swing.JFrame {
             lblAreaToManage.setVisible(true);
         }
     }//GEN-LAST:event_cmbAreaManagerActionPerformed
-
+    /**
+     * I denna metod tilldelar man den nya ageneten fältagent-status eller inte.
+     * @param evt 
+     */
     private void cmbFieldAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbFieldAgentActionPerformed
         selectedFieldAgent = cmbFieldAgent.getSelectedItem().toString();
     }//GEN-LAST:event_cmbFieldAgentActionPerformed
-
+    /**
+     * I denna metod väljer man genom komboboxen om en agent ska vara kontorschef eller inte, om man är det kommer ett valalternativ presenteras för att
+     * tilldela den nya agenten ett kontor.
+     * @param evt 
+     */
     private void cmbOfficeManagerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbOfficeManagerActionPerformed
         selectedOfficeManager = cmbOfficeManager.getSelectedItem().toString();
         
@@ -418,17 +430,26 @@ public class NewAgentPage extends javax.swing.JFrame {
             lblOffice.setVisible(true);
         }
     }//GEN-LAST:event_cmbOfficeManagerActionPerformed
-
+    /**
+     * I denna metod tilldelar man agenten vilket område den skall vara verksam i som chef.
+     * @param evt 
+     */
     private void cmbAreaToManageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAreaToManageActionPerformed
         String selectedAreaToManageString = cmbAreaToManage.getSelectedItem().toString();
         selectedAreaToManage = parseInt(selectedAreaToManageString);
     }//GEN-LAST:event_cmbAreaToManageActionPerformed
-
+    /**
+     * I denna metod tilldelar man agenten ett områdes-id.
+     * @param evt 
+     */
     private void cmbAreaIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAreaIdActionPerformed
         String selectedAreaString = cmbAreaId.getSelectedItem().toString();
         selectedArea = parseInt(selectedAreaString);
     }//GEN-LAST:event_cmbAreaIdActionPerformed
-    
+    /**
+     * I denna metod läggs de områdes-id som finns till i komboboxen.
+     * @param fillThisBox 
+     */
     private void addItemsToCmbAreaId(JComboBox<String> fillThisBox) {
         try {
             String sqlQuestion = "select Omrades_ID from Omrade";

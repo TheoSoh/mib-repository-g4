@@ -13,10 +13,12 @@ import oru.inf.InfException;
 
 /**
  *
- * @author theosohlman
+ * @author Grupp4
  */
 public class DeleteAgentPage extends javax.swing.JFrame {
-
+    /**
+     * fältdeklaration.
+     */
     private InfDB idb;
     private int agentId;
     private int selectedAgentId;
@@ -147,7 +149,10 @@ public class DeleteAgentPage extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * I denna metod väljer man vilket id man skall ta bort, det vill säga vilken agent genom att agentens namn presenteras.
+     * @param evt 
+     */
     private void cmbAgentIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAgentIdActionPerformed
         selectedAgentIdString = cmbAgentId.getSelectedItem().toString();
         selectedAgentId = parseInt(selectedAgentIdString);
@@ -169,7 +174,10 @@ public class DeleteAgentPage extends javax.swing.JFrame {
             cmbNewAreaManager.setVisible(true);
         }
     }//GEN-LAST:event_cmbAgentIdActionPerformed
-
+    /**
+     * I denna metod tas all information om en agent bort via det inmatade id:t.
+     * @param evt 
+     */
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         try {
             
@@ -201,17 +209,26 @@ public class DeleteAgentPage extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Internal database error!");
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
-
+    /**
+     * Denna metod stänger det aktuella fönstret samt öppnar ett nytt "AdminMenu".
+     * @param evt 
+     */
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         DeleteAgentPage.this.dispose();
         new AdminMenu(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnCancelActionPerformed
-
+    /**
+     * Denna metod gör att man kan välja en ny områdeschef.
+     * @param evt 
+     */
     private void cmbNewAreaManagerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbNewAreaManagerActionPerformed
         String selectedNewAreaManagerString = cmbNewAreaManager.getSelectedItem().toString();
         selectedNewAreaManager = parseInt(selectedNewAreaManagerString);
     }//GEN-LAST:event_cmbNewAreaManagerActionPerformed
-    
+    /**
+     * Denna metod kontrollerar om en agent har utrustning.
+     * @return 
+     */
     private boolean checkIfAgentHasEquipment() {
         boolean hasEquipment = false;
         try {

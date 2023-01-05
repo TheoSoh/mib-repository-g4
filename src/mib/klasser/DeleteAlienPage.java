@@ -13,10 +13,12 @@ import oru.inf.InfException;
 
 /**
  *
- * @author theosohlman
+ * @author Grupp4
  */
 public class DeleteAlienPage extends javax.swing.JFrame {
-
+    /**
+     * Fältdeklaration.
+     */
     private InfDB idb;
     private int agentId;
     private int selectedAlienId;
@@ -146,7 +148,10 @@ public class DeleteAlienPage extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * I denna metod väljer man vilket ID som man vill ta bort (alien).
+     * @param evt 
+     */
     private void cmbAlienIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAlienIdActionPerformed
         String selectedAlienIdString = cmbAlienId.getSelectedItem().toString();
         selectedAlienId = parseInt(selectedAlienIdString);
@@ -161,7 +166,10 @@ public class DeleteAlienPage extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_cmbAlienIdActionPerformed
-
+    /**
+     * I denna metod tas all information om en alien bort via det inmatade id:t.
+     * @param evt 
+     */
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         try {
             if(checkIfAlienIsBoglodite()) {
@@ -187,12 +195,18 @@ public class DeleteAlienPage extends javax.swing.JFrame {
             lblErrorMessage.setText("Something went wrong!");
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
-
+    /**
+     * Denna metod stänger det aktuella fönstret samt öppnar ett nytt "AdminMenu" fönster.
+     * @param evt 
+     */
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         DeleteAlienPage.this.dispose();
         new AdminMenu(idb, agentId).setVisible(true);
     }//GEN-LAST:event_btnCancelActionPerformed
-
+    /**
+     * Denna metod kontrollerar om det inmatade id:t är av rasen "Boglodite".
+     * @return 
+     */
     private boolean checkIfAlienIsBoglodite() {
         boolean isBoglodite = false;
         
@@ -208,7 +222,10 @@ public class DeleteAlienPage extends javax.swing.JFrame {
         }
         return isBoglodite;
     }
-    
+    /**
+     * Denna metod kontrollerar om det inmatade id:t är av rasen "Squid".
+     * @return 
+     */
     private boolean checkIfAlienIsSquid() {
         boolean isSquid = false;
         

@@ -38,7 +38,7 @@ public class ChangeAgentInfoPage extends javax.swing.JFrame {
     }
     
     /**
-     * 
+     * Denna metod fyller en kombobox med föremål (värden).
      */
     private void addItemsToCmbInfoToChange() {
         String firstValue = "Name";
@@ -183,6 +183,9 @@ public class ChangeAgentInfoPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     /**
+     * Denna metod kallar på en metod från validations-klassen som kontrollerar om fältet där man ska skriva in ett nytt värde är tomt.
+     * I metoden kontrolleras vilket föremål som väljs i komboboxen och värdet som förs in i "txtNewValue" uppdateras för agenten.
+     * sedan sätts en text om det lyckades eller inte.
      * 
      * @param evt 
      */
@@ -261,7 +264,7 @@ public class ChangeAgentInfoPage extends javax.swing.JFrame {
     }//GEN-LAST:event_btnChangeActionPerformed
     
     /**
-     * 
+     * Denna metod stänger ner fönstret samt öppnar ett nytt, i detta fall "AdminMenu"
      * @param evt 
      */
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
@@ -270,7 +273,7 @@ public class ChangeAgentInfoPage extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelActionPerformed
 
     /**
-     * 
+     * Med denna metod kan man välja vilken specifik agent man vill ändra info om.
      * @param evt 
      */
     private void cmbAgentIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAgentIdActionPerformed
