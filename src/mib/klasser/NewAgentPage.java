@@ -337,6 +337,10 @@ public class NewAgentPage extends javax.swing.JFrame {
                     lblMessage.setText("");
                     lblErrorMessage.setText("If Office Manager is set to Yes, others must be No!");
                 }
+                else if((selectedFieldAgent.equals("No")) || (selectedAreaManager.equals("No")) && (selectedOfficeManager.equals("No"))) {
+                    lblMessage.setText("");
+                    lblErrorMessage.setText("New agents must be atleast be a field agent!");
+                }
                 else {
                     if(selectedAdminStatus.equals("No")) {
                         sqlNewAgentQuery = "insert into Agent "
