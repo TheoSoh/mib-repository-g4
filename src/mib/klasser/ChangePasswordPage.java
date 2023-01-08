@@ -155,7 +155,7 @@ public class ChangePasswordPage extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeActionPerformed
-        if(Validation.checkEmptyFields(txtId, txtOldPassword, txtNewPassword)) {
+        if(Validation.checkEmptyTxtPassFields(txtId, txtOldPassword, txtNewPassword)) {
             lblErrorMessage.setText("Please enter a username, old password and new password!");
         }
         else if(Validation.checkCmbBoxType(cmbChooseType)) {

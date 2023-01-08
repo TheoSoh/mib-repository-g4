@@ -357,6 +357,25 @@ public class LoginPage extends javax.swing.JFrame {
         return isFieldAgent;
     }
     
+    /**
+     * Denna metod kontrollerar om en agent är kontorschef.
+     * @return 
+     */
+    public static boolean checkForAnOfficeManager() {
+        boolean managerExist = false;
+        try {
+            String sqlQuery = "select Agent_ID from Kontorschef where KontorsBeteckning = 'Örebrokontoret';";
+            String result = idb.fetchSingle(sqlQuery);
+            if(result != null) {
+                managerExist = true;
+            }
+        }
+        catch(InfException e) {
+            JOptionPane.showMessageDialog(null, "Internal database error!");
+        }
+        return managerExist;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnChangePassword;
     private javax.swing.JButton btnLogin;

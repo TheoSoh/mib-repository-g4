@@ -303,13 +303,14 @@ public class NewAlienPage extends javax.swing.JFrame {
                 String selectedAgentId = cmbAssignAgentId.getSelectedItem().toString();
                 int assignedAgentId = parseInt(selectedAgentId);
                 String Ammount = txtAmmount.getText();
-                String sqlNewAlienQuery = "insert into Alien "
-                        + "values(" + alienId + ", curdate(), '" + password + "',"
-                        + " '" + name + "', '" + phoneNumber + "', " + area + ", " + assignedAgentId + ");";
-                idb.insert(sqlNewAlienQuery);
                 
-                if(!Validation.checkStringSelectedRace(selectedRace)) {
+                if(!Validation.checkIfNewRaceIsWorm(selectedRace)) {
                     if(Validation.checkIfTxtFieldIsOfInt(txtAmmount)) {
+                        String sqlNewAlienQuery = "insert into Alien "
+                            + "values(" + alienId + ", curdate(), '" + password + "', '"
+                                + name + "', '" + phoneNumber + "', " + area + ", " + assignedAgentId + ");";
+                        idb.insert(sqlNewAlienQuery);
+                        
                         int AmmountToInt = parseInt(Ammount);
                         String sqlSetRaceQuery = "insert into " + selectedRace + " values(" + alienId + ", " + AmmountToInt + ");";
                         idb.insert(sqlSetRaceQuery);
@@ -318,11 +319,16 @@ public class NewAlienPage extends javax.swing.JFrame {
                     }
                     else {
                         lblMessage.setText("");
-                        lblErrorMessage.setText("Arms/Boogies has to be correct format!");
+                        lblErrorMessage.setText("Arms/Boogies has to be a number!");
                     }
                     
                 }
-                else {
+                else if (Validation.checkIfNewRaceIsWorm(selectedRace)){
+                    String sqlNewAlienQuery = "insert into Alien "
+                        + "values(" + alienId + ", curdate(), '" + password + "', '"
+                            + name + "', '" + phoneNumber + "', " + area + ", " + assignedAgentId + ");";
+                    idb.insert(sqlNewAlienQuery);
+                    
                     String sqlSetRaceQuery = "insert into " + selectedRace + " values(" + alienId + ");";
                     idb.insert(sqlSetRaceQuery);
                     lblMessage.setText("Successful register!");

@@ -71,8 +71,6 @@ public class NewAgentPage extends javax.swing.JFrame {
         cmbFieldAgent = new javax.swing.JComboBox<>();
         cmbOfficeManager = new javax.swing.JComboBox<>();
         lblOfficeManager = new javax.swing.JLabel();
-        lblOffice = new javax.swing.JLabel();
-        txtOffice = new javax.swing.JTextField();
         cmbAreaToManage = new javax.swing.JComboBox<>();
         cmbAreaManager = new javax.swing.JComboBox<>();
         lblAreaManager = new javax.swing.JLabel();
@@ -143,8 +141,6 @@ public class NewAgentPage extends javax.swing.JFrame {
 
         lblOfficeManager.setText("Office Mananger:");
 
-        lblOffice.setText("Name of Office:");
-
         cmbAreaToManage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbAreaToManageActionPerformed(evt);
@@ -210,14 +206,12 @@ public class NewAgentPage extends javax.swing.JFrame {
                                     .addComponent(lblFieldAgent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(lblPhoneNumber, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(lblArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblOfficeManager, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblOffice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(lblOfficeManager, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(txtTelefon)
                                     .addComponent(cmbFieldAgent, javax.swing.GroupLayout.Alignment.LEADING, 0, 90, Short.MAX_VALUE)
                                     .addComponent(cmbOfficeManager, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtOffice, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(cmbAreaId, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(40, 40, 40)
@@ -249,18 +243,16 @@ public class NewAgentPage extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblPassword)
-                            .addComponent(lblFieldAgent)
-                            .addComponent(cmbFieldAgent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblOfficeManager)
+                            .addComponent(cmbOfficeManager, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblAdminStatus)
                             .addComponent(cmbAdminStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmbOfficeManager, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblOfficeManager))
+                            .addComponent(lblFieldAgent)
+                            .addComponent(cmbFieldAgent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblOffice)
-                            .addComponent(txtOffice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cmbAreaManager, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblAreaManager))
                         .addGap(27, 27, 27)
@@ -333,11 +325,15 @@ public class NewAgentPage extends javax.swing.JFrame {
                 String password = txtPassword.getText();
                 String sqlNewAgentQuery = "";
                 
-                if((selectedFieldAgent.equals("Yes")) || (selectedAreaManager.equals("Yes")) && (selectedOfficeManager.equals("Yes"))) {
+                if((selectedFieldAgent.equals("Yes")) && (selectedOfficeManager.equals("Yes"))) {
                     lblMessage.setText("");
-                    lblErrorMessage.setText("If Office Manager is set to Yes, others must be No!");
+                    lblErrorMessage.setText("The office manager can't be a field agent!");
                 }
-                else if((selectedFieldAgent.equals("No")) || (selectedAreaManager.equals("No")) && (selectedOfficeManager.equals("No"))) {
+                else if((selectedAreaManager.equals("Yes")) && (selectedOfficeManager.equals("Yes"))) {
+                    lblMessage.setText("");
+                    lblErrorMessage.setText("The office manager can't be area manager!");
+                }
+                else if((selectedFieldAgent.equals("No")) && (selectedAreaManager.equals("No")) && (selectedOfficeManager.equals("No"))) {
                     lblMessage.setText("");
                     lblErrorMessage.setText("New agents must be atleast be a field agent!");
                 }
@@ -346,7 +342,7 @@ public class NewAgentPage extends javax.swing.JFrame {
                         sqlNewAgentQuery = "insert into Agent "
                             + "values(" + agentIdInt + ", '" + name + "', '" + phoneNumber + "', curdate(), 'N', '" + password + "', " + selectedArea + ");";
                     }
-                    else {
+                    else if (selectedAdminStatus.equals("Yes")) {
                         sqlNewAgentQuery = "insert into Agent "
                             + "values(" + agentIdInt + ", '" + name + "', '" + phoneNumber + "', curdate(), 'J', '" + password + "', " + selectedArea + ");";
                     }
@@ -355,7 +351,7 @@ public class NewAgentPage extends javax.swing.JFrame {
                     lblMessage.setText("Successful register!");
                     lblErrorMessage.setText("");
                     
-                    if((selectedAreaManager.equals("Yes")) && (selectedFieldAgent.equals("Yes"))) {
+                    if(selectedAreaManager.equals("Yes")) {
                         String sqlAreaManagerDeleteQuery = "delete from OmradesChef where Omrade = " + selectedAreaToManage + ";";
                         idb.delete(sqlAreaManagerDeleteQuery);
                         
@@ -365,24 +361,27 @@ public class NewAgentPage extends javax.swing.JFrame {
                         String sqlFieldAgentQuery = "insert into Faltagent values(" + agentIdInt + ");";
                         idb.insert(sqlFieldAgentQuery);
                     }
-                    if((selectedFieldAgent.equals("Yes")) && (selectedAreaManager.equals("No"))) {
+                    else if((selectedFieldAgent.equals("Yes")) && (selectedAreaManager.equals("No"))) {
                         String sqlFieldAgentQuery = "insert into Faltagent values(" + agentIdInt + ");";
                         idb.insert(sqlFieldAgentQuery);
                     }
-                    if(selectedOfficeManager.equals("Yes")) {
-                        String office = txtOffice.getText();
-                        String sqlOfficeManagerQuery = "insert into Kontorschef values(" + agentIdInt + ", '" + office + "');";
-                        idb.insert(sqlOfficeManagerQuery);
+                    else if(selectedOfficeManager.equals("Yes")) {
+                        if(LoginPage.checkForAnOfficeManager()) {
+                            String sqlDeleteOfficeManagerQuery = "delete from Kontorschef;";
+                            idb.delete(sqlDeleteOfficeManagerQuery);
+                        }
+                        String sqlInsertOfficeManagerQuery = "insert into Kontorschef values(" + agentIdInt + ", 'Örebrokontoret');";
+                        idb.insert(sqlInsertOfficeManagerQuery);
                     }
                 }
             }
             catch(InfException e) {
-                lblErrorMessage.setText("Wrong format, Agent-ID already exist or Area don't!");
+                lblErrorMessage.setText("Wrong ID format or Agent-ID already exist!");
             }
         }
         else {
             lblMessage.setText("");
-            lblErrorMessage.setText("Wrong format!");
+            lblErrorMessage.setText("Agent-ID must be a number!");
         }
     }//GEN-LAST:event_btnRegisterActionPerformed
     
@@ -404,10 +403,13 @@ public class NewAgentPage extends javax.swing.JFrame {
         if(selectedAreaManager.equals("No")) {
             cmbAreaToManage.setVisible(false);
             lblAreaToManage.setVisible(false);
+            cmbFieldAgent.setEnabled(true);
         }
         else {
             cmbAreaToManage.setVisible(true);
             lblAreaToManage.setVisible(true);
+            cmbFieldAgent.setSelectedItem("Yes");
+            cmbFieldAgent.setEnabled(false);
         }
     }//GEN-LAST:event_cmbAreaManagerActionPerformed
     /**
@@ -424,15 +426,6 @@ public class NewAgentPage extends javax.swing.JFrame {
      */
     private void cmbOfficeManagerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbOfficeManagerActionPerformed
         selectedOfficeManager = cmbOfficeManager.getSelectedItem().toString();
-        
-        if(selectedOfficeManager.equals("No")) {
-            txtOffice.setVisible(false);
-            lblOffice.setVisible(false);
-        }
-        else {
-            txtOffice.setVisible(true);
-            lblOffice.setVisible(true);
-        }
     }//GEN-LAST:event_cmbOfficeManagerActionPerformed
     /**
      * I denna metod tilldelar man agenten vilket område den skall vara verksam i som chef.
@@ -486,13 +479,11 @@ public class NewAgentPage extends javax.swing.JFrame {
     private javax.swing.JLabel lblMessage;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblNewAlienHeader;
-    private javax.swing.JLabel lblOffice;
     private javax.swing.JLabel lblOfficeManager;
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblPhoneNumber;
     private javax.swing.JTextField txtAgentId;
     private javax.swing.JTextField txtName;
-    private javax.swing.JTextField txtOffice;
     private javax.swing.JTextField txtPassword;
     private javax.swing.JTextField txtTelefon;
     // End of variables declaration//GEN-END:variables

@@ -261,7 +261,6 @@ public class ChangeManagersPage extends javax.swing.JFrame {
      */
     private void cmbAgentTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAgentTypeActionPerformed
         selectedType = cmbAgentType.getSelectedItem().toString();
-        //Kolla med visable (syns i början) - 
         lblSelectNewAgentId.setVisible(false);
         cmbNewAgentId.setVisible(false);
         lblManageArea.setVisible(false);
@@ -369,7 +368,7 @@ public class ChangeManagersPage extends javax.swing.JFrame {
                     lblErrorMessage.setText("New agent already manage an area!");
                 }
                 else {
-                    if(checkForAnOfficeManager()) {
+                    if(LoginPage.checkForAnOfficeManager()) {
                         if(LoginPage.checkIfIsOfficeManager(selectedNewAgent)) {
                             String sqlUpdateFieldAgent = "update Faltagent set Agent_ID = " + selectedNewAgent + " where Agent_ID = " + selectedAgentId + ";";
                             idb.update(sqlUpdateFieldAgent);
@@ -414,7 +413,7 @@ public class ChangeManagersPage extends javax.swing.JFrame {
                 }
             }
             else if((selectedType.equals("Office manager")) && (LoginPage.checkIfIsFieldAgent(selectedAgentId))) {
-                if(checkForAnOfficeManager()) {
+                if(LoginPage.checkForAnOfficeManager()) {
                     int oldOfficeManagerId = getOfficeManagerId();
                     
                     String sqlUpdateFieldAgent = "update Faltagent set Agent_ID = " + oldOfficeManagerId + " where Agent_ID = " + selectedAgentId + ";";
@@ -521,25 +520,6 @@ public class ChangeManagersPage extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Internal database error!");
         }
         return agentIdForThisArea;
-    }
-    
-    /**
-     * Denna metod kontrollerar om en agent är kontorschef.
-     * @return 
-     */
-    private boolean checkForAnOfficeManager() {
-        boolean managerExist = false;
-        try {
-            String sqlQuery = "select Agent_ID from Kontorschef where KontorsBeteckning = 'Örebrokontoret';";
-            String result = idb.fetchSingle(sqlQuery);
-            if(result != null) {
-                managerExist = true;
-            }
-        }
-        catch(InfException e) {
-            JOptionPane.showMessageDialog(null, "Internal database error!");
-        }
-        return managerExist;
     }
     
     /**

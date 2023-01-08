@@ -34,7 +34,7 @@ public class Validation {
     
     /**
      * Denna metod kontrollerar om ett specifikt textfält är tomt.
-     * @param firstFieldToCheck
+     * @param txtFieldToCheck
      * @return 
      */
     public static boolean checkEmptyTxtField(JTextField txtFieldToCheck) {
@@ -56,7 +56,7 @@ public class Validation {
      * @param thirdFieldToCheck
      * @return 
      */
-    public static boolean checkEmptyFields(JTextField firstFieldToCheck, JPasswordField secondFieldToCheck, JPasswordField thirdFieldToCheck) {
+    public static boolean checkEmptyTxtPassFields(JTextField firstFieldToCheck, JPasswordField secondFieldToCheck, JPasswordField thirdFieldToCheck) {
         boolean emptyTextField = false;
         
         if((firstFieldToCheck.getText().isEmpty()) || (secondFieldToCheck.getText().isEmpty()) || (thirdFieldToCheck.getText().isEmpty())) {
@@ -132,7 +132,7 @@ public class Validation {
     
     /**
      * Denna metod kontrollerar så att textfältet är ifyllt med datatypen int.
-     * @param checkThisString
+     * @param checkThisTxtField
      * @return 
      */
     public static boolean checkIfTxtFieldIsOfInt(JTextField checkThisTxtField) {
@@ -145,16 +145,16 @@ public class Validation {
     }
     
     /**
-     * Denna metod kontrollerar att en specifik sträng är lika som den sträng som sitter i kontrollen.
-     * @param checkThisString
+     * Metoden kontrollerar den inkommande parametern och returnerar en boolean.
+     * @param selectedNewRace
      * @return 
      */
-    public static boolean checkStringSelectedRace(String checkThisString) {
-        boolean raceIsWorm = false;
-        if(checkThisString.equals("Worm")) {
-            raceIsWorm = true;
+    public static boolean checkIfNewRaceIsWorm(String selectedNewRace) {
+        boolean isWorm = false;
+        if(selectedNewRace.equals("Worm")) {
+            isWorm = true;
         }
-        return raceIsWorm;
+        return isWorm;
     }
     
     /**
