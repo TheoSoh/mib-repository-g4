@@ -305,23 +305,28 @@ public class NewAlienPage extends javax.swing.JFrame {
                 String Ammount = txtAmmount.getText();
                 
                 if(!Validation.checkIfNewRaceIsWorm(selectedRace)) {
-                    if(Validation.checkIfTxtFieldIsOfInt(txtAmmount)) {
-                        String sqlNewAlienQuery = "insert into Alien "
-                            + "values(" + alienId + ", curdate(), '" + password + "', '"
-                                + name + "', '" + phoneNumber + "', " + area + ", " + assignedAgentId + ");";
-                        idb.insert(sqlNewAlienQuery);
-                        
-                        int AmmountToInt = parseInt(Ammount);
-                        String sqlSetRaceQuery = "insert into " + selectedRace + " values(" + alienId + ", " + AmmountToInt + ");";
-                        idb.insert(sqlSetRaceQuery);
-                        lblMessage.setText("Successful register!");
-                        lblErrorMessage.setText("");
-                    }
-                    else {
+                    if(Validation.checkEmptyTxtField(txtAmmount)) {
                         lblMessage.setText("");
                         lblErrorMessage.setText("Arms/Boogies has to be a number!");
                     }
-                    
+                    else {
+                        if(Validation.checkIfTxtFieldIsOfInt(txtAmmount)) {
+                            String sqlNewAlienQuery = "insert into Alien "
+                                + "values(" + alienId + ", curdate(), '" + password + "', '"
+                                    + name + "', '" + phoneNumber + "', " + area + ", " + assignedAgentId + ");";
+                            idb.insert(sqlNewAlienQuery);
+                            
+                            int AmmountToInt = parseInt(Ammount);
+                            String sqlSetRaceQuery = "insert into " + selectedRace + " values(" + alienId + ", " + AmmountToInt + ");";
+                            idb.insert(sqlSetRaceQuery);
+                            lblMessage.setText("Successful register!");
+                            lblErrorMessage.setText("");
+                        }
+                        else {
+                            lblMessage.setText("");
+                            lblErrorMessage.setText("Arms/Boogies has to be a number!");
+                        }
+                    }
                 }
                 else if (Validation.checkIfNewRaceIsWorm(selectedRace)){
                     String sqlNewAlienQuery = "insert into Alien "
