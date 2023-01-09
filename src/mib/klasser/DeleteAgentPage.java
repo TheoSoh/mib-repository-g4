@@ -53,6 +53,8 @@ public class DeleteAgentPage extends javax.swing.JFrame {
         btnCancel = new javax.swing.JButton();
         cmbNewAreaManager = new javax.swing.JComboBox<>();
         lblNewAreaManager = new javax.swing.JLabel();
+        lblErrorMessage = new javax.swing.JLabel();
+        lblSuccessMessage = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -94,6 +96,14 @@ public class DeleteAgentPage extends javax.swing.JFrame {
         lblNewAreaManager.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblNewAreaManager.setText("New Area Manager:");
 
+        lblErrorMessage.setFont(new java.awt.Font("Helvetica Neue", 0, 12)); // NOI18N
+        lblErrorMessage.setForeground(new java.awt.Color(255, 0, 0));
+        lblErrorMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        lblSuccessMessage.setFont(new java.awt.Font("Helvetica Neue", 0, 12)); // NOI18N
+        lblSuccessMessage.setForeground(new java.awt.Color(0, 255, 0));
+        lblSuccessMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -110,12 +120,20 @@ public class DeleteAgentPage extends javax.swing.JFrame {
                             .addComponent(lblAgentId, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lblNewAreaManager, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cmbAgentId, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblShowAgentName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmbNewAreaManager, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(80, 80, 80))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cmbAgentId, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblShowAgentName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(80, 80, 80))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(cmbNewAreaManager, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblSuccessMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(40, 40, 40))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(lblErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36)
                         .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -137,11 +155,13 @@ public class DeleteAgentPage extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmbNewAreaManager, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNewAreaManager))
+                    .addComponent(lblNewAreaManager)
+                    .addComponent(lblSuccessMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDelete)
-                    .addComponent(btnCancel))
+                    .addComponent(btnCancel)
+                    .addComponent(lblErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(25, 25, 25))
         );
 
@@ -185,23 +205,31 @@ public class DeleteAgentPage extends javax.swing.JFrame {
             }
             
             if(LoginPage.checkIfIsAreaManager(selectedAgentId)) {
-                String sqlUpdateAreaManagerQuery = "update Omradeschef set "
-                        + "Agent_ID = " + selectedNewAreaManager + " where Agent_ID = " + selectedAgentId + ";";
-                idb.update(sqlUpdateAreaManagerQuery);
+                if(LoginPage.checkIfIsAreaManager(selectedNewAreaManager)) {
+                    lblSuccessMessage.setText("");
+                    lblErrorMessage.setText("New agent is already area manager!");
+                }
+                else {
+                    String sqlUpdateAreaManagerQuery = "update Omradeschef set "
+                            + "Agent_ID = " + selectedNewAreaManager + " where Agent_ID = " + selectedAgentId + ";";
+                    idb.update(sqlUpdateAreaManagerQuery);
+                    
+                    String sqlDeleteFieldAgentQuery = "delete from Faltagent where Agent_ID = " + selectedAgentId;
+                    idb.delete(sqlDeleteFieldAgentQuery);
+                    
+                    deleteAgent();
+                }
             }
-            
-            if(LoginPage.checkIfIsOfficeManager(selectedAgentId)) {
+            else if(LoginPage.checkIfIsOfficeManager(selectedAgentId)) {
                 String sqlDeleteOfficeManagerQuery = "delete from Kontorschef where Agent_ID = " + selectedAgentId;
                 idb.delete(sqlDeleteOfficeManagerQuery);
+                deleteAgent();
             }
-            
-            if(LoginPage.checkIfIsFieldAgent(selectedAgentId)) {
+            else if(LoginPage.checkIfIsFieldAgent(selectedAgentId)) {
                 String sqlDeleteFieldAgentQuery = "delete from Faltagent where Agent_ID = " + selectedAgentId;
                 idb.delete(sqlDeleteFieldAgentQuery);
+                deleteAgent();
             }
-            
-            String sqlDeleteQuery = "delete from Agent where Agent_ID = " + selectedAgentId;
-            idb.delete(sqlDeleteQuery);
         }
         catch(InfException e) {
             JOptionPane.showMessageDialog(null, "Internal database error!");
@@ -223,6 +251,19 @@ public class DeleteAgentPage extends javax.swing.JFrame {
         String selectedNewAreaManagerString = cmbNewAreaManager.getSelectedItem().toString();
         selectedNewAreaManager = parseInt(selectedNewAreaManagerString);
     }//GEN-LAST:event_cmbNewAreaManagerActionPerformed
+    
+    private void deleteAgent() {
+        try {
+            String sqlDeleteQuery = "delete from Agent where Agent_ID = " + selectedAgentId;
+            idb.delete(sqlDeleteQuery);
+            lblSuccessMessage.setText("Success!");
+            lblErrorMessage.setText("");
+        }
+        catch(InfException e) {
+            JOptionPane.showMessageDialog(null, "Internal database error!");
+        }
+    }
+    
     /**
      * Denna metod kontrollerar om en agent har utrustning.
      * @return 
@@ -250,7 +291,9 @@ public class DeleteAgentPage extends javax.swing.JFrame {
     private javax.swing.JLabel lblAgentId;
     private javax.swing.JLabel lblAgentName;
     private javax.swing.JLabel lblDeleteAgentHeader;
+    private javax.swing.JLabel lblErrorMessage;
     private javax.swing.JLabel lblNewAreaManager;
     private javax.swing.JLabel lblShowAgentName;
+    private javax.swing.JLabel lblSuccessMessage;
     // End of variables declaration//GEN-END:variables
 }
