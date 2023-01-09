@@ -92,7 +92,7 @@ public class NewAlienPage extends javax.swing.JFrame {
 
         lblPhoneNumber.setText("Phone number:");
 
-        lblArea.setText("Area:");
+        lblArea.setText("Position:");
 
         lblAssignAgent.setText("Assign Agent-ID:");
 
@@ -150,10 +150,10 @@ public class NewAlienPage extends javax.swing.JFrame {
                                     .addComponent(txtPassword)
                                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(58, 58, 58)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblPhoneNumber)
-                                    .addComponent(lblArea)
-                                    .addComponent(lblAssignAgent))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(lblAssignAgent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblPhoneNumber, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(txtPhoneNumber)

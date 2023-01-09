@@ -164,16 +164,18 @@ public class ChangeManagersPage extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblManageArea)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cmbAreaId, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblSelectNewAgentId, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmbNewAgentId, 0, 81, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(16, 16, 16))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(lblManageArea)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cmbAreaId, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(lblSelectNewAgentId, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cmbNewAgentId, 0, 86, Short.MAX_VALUE)
+                .addGap(10, 10, 10))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -288,23 +290,8 @@ public class ChangeManagersPage extends javax.swing.JFrame {
     private void btnSetTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSetTypeActionPerformed
         try {
             if((selectedType.equals("Area manager")) && (LoginPage.checkIfIsAreaManager(selectedAgentId))) {
-                if(managedAreaBySelectedAgentId == selectedNewArea) {
-                    lblMessage.setText("");
-                    lblErrorMessage.setText("This Agent is already managing this area!");
-                }
-                else {
-                    int newAreasAgentId = checkAgentIdForAnArea(selectedNewArea);
-                    
-                    String sqlFirstSwapQuery = "update Omradeschef set Agent_ID = " + newAreasAgentId + " where Omrade = " + managedAreaBySelectedAgentId + ";";
-                    idb.update(sqlFirstSwapQuery);
-                    
-                    String sqlSecondSwapQuery = "update Omradeschef set Agent_ID = " + selectedAgentId + " where Omrade = " + selectedNewArea;
-                    idb.update(sqlSecondSwapQuery);
-                    
-                    
-                    successfulChange();
-                    lblErrorMessage.setText("");
-                }
+                lblMessage.setText("");
+                lblErrorMessage.setText("This agent is already managing an area!");
             }
             else if((selectedType.equals("Area manager")) && (LoginPage.checkIfIsFieldAgent(selectedAgentId))) {
                 String sqlUpdateQuery = "update Omradeschef set Agent_ID = " + selectedAgentId + " where Omrade = " + selectedNewArea + ";";
